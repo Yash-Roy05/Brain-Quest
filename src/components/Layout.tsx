@@ -1,0 +1,19 @@
+import Header from "./Header.tsx";
+import Footer from "./Footer.tsx";
+import { Outlet } from "react-router-dom";
+
+export default function Layout() {
+  return (
+    <div className="min-h-screen flex flex-col">
+
+      <Header />
+
+      <main className="flex-1 bg-gradient-to-r from-green-400 to-blue-500">
+        <Outlet />
+      </main>
+
+      <Footer />
+
+    </div>
+  );
+}
