@@ -70,7 +70,7 @@ export default function DifferenceGame() {
   return (
     <PageWrapper>
       
-      <div className="min-h-screen bg-gradient-to-b from-sky-300 via-blue-200 to-green-300 flex items-center justify-center p-4 md:p-10 relative overflow-x-hidden">
+      <div className="min-h-screen pb-28 bg-gradient-to-b from-sky-300 via-blue-200 to-green-300 flex items-center justify-center p-4 md:p-10 relative overflow-x-hidden">
 
         {/* ☁ Clouds */}
         <div className="absolute top-10 left-10 w-32 h-16 bg-white rounded-full opacity-60"></div>

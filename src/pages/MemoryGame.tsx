@@ -93,7 +93,7 @@ export default function MemoryGame() {
   return (
     <PageWrapper>
 
-      <div className="min-h-screen bg-gradient-to-b from-pink-300 to-yellow-200 flex items-center justify-center p-6">
+      <div className="min-h-screen pb-28 bg-gradient-to-b from-pink-300 to-yellow-200 flex items-center justify-center p-6">
 
         <div className="bg-white rounded-3xl shadow-2xl p-8 w-full max-w-2xl text-center">
 

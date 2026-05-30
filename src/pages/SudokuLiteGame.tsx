@@ -111,6 +111,7 @@ export default function SudokuLiteGame() {
 
   return (
     <PageWrapper>
+      <div className="min-h-screen overflow-x-hidden">
       {/* 🎉 Win Popup */}
       {won && (
         <div className="fixed inset-0 bg-black/60 flex items-center justify-center z-50">
@@ -131,8 +132,8 @@ export default function SudokuLiteGame() {
         </div>
       )}
 
-      <div className="min-h-screen bg-gradient-to-b from-purple-400 via-blue-300 to-cyan-200 flex items-center justify-center p-6">
-        <div className="bg-white rounded-[40px] shadow-2xl p-8 w-full max-w-2xl text-center">
+      <div className="min-h-screen pb-32 bg-gradient-to-b from-purple-400 via-blue-300 to-cyan-200 flex items-center justify-center p-6">
+        <div className="bg-white rounded-[40px] shadow-2xl p-4 md:p-8 w-full max-w-2xl text-center">
           {/* Title */}
           <h1 className="text-5xl font-black text-purple-700 mb-4">
             Sudoku Lite 🔢
@@ -180,7 +181,12 @@ export default function SudokuLiteGame() {
                 const isFixed = originalGrid[rowIndex][colIndex] !== 0;
 
                 return (
-                  <div key={`${rowIndex}-${colIndex}`} className="w-20 h-20">
+                  <div
+                    key={`${rowIndex}-${colIndex}`}
+                    className="w-14 h-14
+sm:w-16 sm:h-16
+md:w-20 md:h-20"
+                  >
                     {isFixed ? (
                       // 🔒 Fixed Cell
                       <div className="w-full h-full bg-purple-400 rounded-2xl flex items-center justify-center text-3xl font-black text-white shadow-lg">
@@ -227,8 +233,8 @@ export default function SudokuLiteGame() {
               </div>
             </div>
           )}
-
         </div>
+      </div>
       </div>
     </PageWrapper>
   );

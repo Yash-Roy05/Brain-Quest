@@ -28,7 +28,7 @@ export default function Dashboard() {
 
   return (
     <PageWrapper>
-      <div className="min-h-[250px] pb-40 relative overflow-hidden bg-gradient-to-b from-sky-300 via-blue-400 to-green-300 p-6 min-h-[250px]">
+      <div className="min-h-[250px] pb-40 relative overflow-hidden bg-gradient-to-b from-sky-300 via-blue-400 to-green-300 p-6 min-h-[250px] pb-28">
         {/* 👤 User Info */}
         <div className="bg-white rounded-3xl shadow-2xl p-4 md:p-8 w-full max-w-7xl px-4 md:px-8 mx-auto mb-8">
           {/* Avatar + Welcome */}

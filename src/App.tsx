@@ -17,6 +17,7 @@ import SudokuLiteGame from "./pages/SudokuLiteGame.tsx";
 import ReflexTapGame from "./pages/ReflexTapGame.tsx";
 import Games from "./pages/Games.tsx";
 import Missions from "./pages/Missions.tsx";
+import Loading from "./pages/Loading.tsx";
 
 function App() {
   return (
@@ -40,6 +41,7 @@ function App() {
           <Route path="/reflex-tap" element={<ReflexTapGame />} />
           <Route path="/games" element={<Games />} />
           <Route path="/missions" element={<Missions />} />
+          <Route path="/loading" element={<Loading />} />
         </Route>
       </Routes>
     </BrowserRouter>
