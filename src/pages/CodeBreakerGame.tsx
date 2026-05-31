@@ -12,6 +12,11 @@ export default function CodeBreakerGame() {
 
   const { setUser, addCoins, addXP } = useUser();
 
+  // 🎉 Result Screen
+  const [showResult, setShowResult] = useState(false);
+
+  // add coins and xp on win
+
   // 🔐 Secret Code
   const [secretCode, setSecretCode] = useState("");
 
