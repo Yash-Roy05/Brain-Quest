@@ -47,7 +47,7 @@ export default function SudokuLiteGame() {
   const navigate = useNavigate();
   const { addCoins, addXP } = useUser();
 
-  // ✍ Input Change
+  // ✍ Input Change  
   const handleChange = (row: number, col: number, value: string) => {
     const number = Number(value);
 

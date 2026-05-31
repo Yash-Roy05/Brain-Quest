@@ -8,6 +8,9 @@ type User = {
   level: number;
   completedMissions: number[];
   avatar: string;
+
+  streak: number;
+  lastLoginDate: string;
 };
 
 type UserContextType = {
@@ -16,6 +19,7 @@ type UserContextType = {
   addCoins: (amount: number) => void;
   addXP: (amount: number) => void;
   completeMission: (missionId: number) => void;
+  checkDailyStreak: () => void;
 };
 
 const UserContext = createContext<UserContextType | null>(null);
@@ -35,6 +39,9 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
           level: 1,
           completedMissions: [],
           avatar: "🐼",
+
+          streak: 0,
+          lastLoginDate: "",
         };
   });
 
@@ -65,12 +72,54 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
   };
 
   // ✅ Complete Mission
-  const completeMission = (missionId: number) => {
+  // 🔥 Daily Streak
+const checkDailyStreak = () => {
+  const today = new Date().toDateString();
+
+  if (user.lastLoginDate === today) {
+    return;
+  }
+
+  const yesterday = new Date();
+  yesterday.setDate(yesterday.getDate() - 1);
+
+  if (
+    user.lastLoginDate ===
+    yesterday.toDateString()
+  ) {
+    const reward = Math.min(
+      (user.streak + 1) * 10,
+      100
+    );
+
     setUser((prev) => ({
       ...prev,
-      completedMissions: [...prev.completedMissions, missionId],
+      streak: prev.streak + 1,
+      lastLoginDate: today,
+      coins: prev.coins + reward,
     }));
-  };
+  } else {
+    setUser((prev) => ({
+      ...prev,
+      streak: 1,
+      lastLoginDate: today,
+      coins: prev.coins + 10,
+    }));
+  }
+};
+
+// ✅ Complete Mission
+const completeMission = (
+  missionId: number
+) => {
+  setUser((prev) => ({
+    ...prev,
+    completedMissions: [
+      ...prev.completedMissions,
+      missionId,
+    ],
+  }));
+};
 
   return (
     <UserContext.Provider
@@ -80,6 +129,7 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
         addCoins,
         addXP,
         completeMission,
+        checkDailyStreak,
       }}
     >
       {children}

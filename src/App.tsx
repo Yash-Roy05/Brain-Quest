@@ -22,29 +22,34 @@ import Loading from "./pages/Loading.tsx";
 function App() {
   return (
     <BrowserRouter>
-      <Routes>
-        {/* 🔥 Layout Route */}
-        <Route path="/" element={<Layout />}>
-          {/* Pages */}
-          <Route index element={<Welcome />} />
-          <Route path="profile" element={<Profile />} />
-          <Route path="dashboard" element={<Dashboard />} />
-          <Route path="result" element={<Result />} />
-          <Route path="/memory-game" element={<MemoryGame />} />
-          <Route path="/difference-game" element={<DifferenceGame />} />
-          <Route path="/dragdrop-game" element={<DragDropGame />} />
-          <Route path="/speedmath-game" element={<SpeedMathGame />} />
-          <Route path="/wordpuzzle-game" element={<WordPuzzleGame />} />
-          <Route path="/pattern-memory" element={<PatternMemoryGame />} />
-          <Route path="/code-breaker" element={<CodeBreakerGame />} />
-          <Route path="/sudoku-lite" element={<SudokuLiteGame />} />
-          <Route path="/reflex-tap" element={<ReflexTapGame />} />
-          <Route path="/games" element={<Games />} />
-          <Route path="/missions" element={<Missions />} />
-          <Route path="/loading" element={<Loading />} />
-        </Route>
-      </Routes>
-    </BrowserRouter>
+  <Routes>
+
+    {/* Pages WITHOUT Header/Footer */}
+    <Route path="/" element={<Welcome />} />
+    <Route path="/loading" element={<Loading />} />
+    <Route path="/Profile" element={<Profile />} />
+
+    {/* All Other Pages WITH Header/Footer */}
+    <Route element={<Layout />}>
+      <Route path="profile" element={<Profile />} />
+      <Route path="dashboard" element={<Dashboard />} />
+      <Route path="result" element={<Result />} />
+      <Route path="memory-game" element={<MemoryGame />} />
+      <Route path="difference-game" element={<DifferenceGame />} />
+      <Route path="dragdrop-game" element={<DragDropGame />} />
+      <Route path="speedmath-game" element={<SpeedMathGame />} />
+      <Route path="wordpuzzle-game" element={<WordPuzzleGame />} />
+      <Route path="pattern-memory" element={<PatternMemoryGame />} />
+      <Route path="code-breaker" element={<CodeBreakerGame />} />
+      <Route path="sudoku-lite" element={<SudokuLiteGame />} />
+      <Route path="reflex-tap" element={<ReflexTapGame />} />
+      <Route path="games" element={<Games />} />
+      <Route path="missions" element={<Missions />} />
+      <Route path="loading" element={<Loading />} />
+    </Route>
+
+  </Routes>
+</BrowserRouter>
   );
 }
 

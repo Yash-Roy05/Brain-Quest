@@ -3,6 +3,7 @@ import { useUser } from "../context/UserContext.tsx";
 import { missions } from "../data/missions.ts";
 import { motion } from "framer-motion";
 import PageWrapper from "../components/PageWrapper.tsx";
+import { useEffect } from "react";
 
 type Question = {
   question: string;
@@ -20,7 +21,11 @@ type Mission = {
 export default function Dashboard() {
   const navigate = useNavigate();
 
-  const { user } = useUser();
+  useEffect(() => {
+    checkDailyStreak();
+  }, []);
+
+  const { user, checkDailyStreak } = useUser();
 
   const userMissions = (missions[user.age] || []).filter(
     (mission: Mission) => !user.completedMissions.includes(mission.id),
@@ -36,7 +41,7 @@ export default function Dashboard() {
             <div className="text-5xl text-3xl md:text-6xl">{user.avatar}</div>
 
             <h1 className="text-2xl md:text-4xl font-bold text-gray-800">
-              Welcome, {user.name} 
+              Welcome, {user.name}
             </h1>
           </div>
 
@@ -61,6 +66,22 @@ export default function Dashboard() {
               <h2 className="text-2xl md:text-3xl font-bold">{user.xp}</h2>
 
               <p>XP ⚡</p>
+            </div>
+
+            {/* Daily Streak */}
+            <div
+              className="
+bg-orange-500
+text-white
+rounded-3xl
+p-4
+shadow-xl
+mb-4
+"
+            >
+              <h2 className="text-xl font-black">🔥 Daily Streak</h2>
+
+              <p className="text-3xl font-black">{user.streak} Days</p>
             </div>
 
             {/* Level */}
