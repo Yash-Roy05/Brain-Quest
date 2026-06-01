@@ -1,143 +1,130 @@
-import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useUser } from "../context/UserContext.tsx";
 import PageWrapper from "../components/PageWrapper.tsx";
 
 export default function Profile() {
-
   const navigate = useNavigate();
 
-  const { setUser } = useUser();
+  const { user } = useUser();
 
-  // 🧍 Avatar List
-  const avatars = [
-    "🐼",
-    "🦊",
-    "🦁",
-    "🐸",
-    "🐵",
-    "🐯",
-  ];
-
-  const [name, setName] = useState("");
-  const [age, setAge] = useState("");
-
-  // ⭐ Selected Avatar
-  const [avatar, setAvatar] = useState("🐼");
-
-  const handleStart = () => {
-
-    if (!name || !age) {
-      alert("Please enter all details ❗");
-      return;
-    }
-
-    setUser({
-      name,
-      age,
-      coins: 0,
-      xp: 0,
-      level: 1,
-      completedMissions: [],
-      avatar,
-    });
-
-    navigate("/dashboard");
-
-  };
+  const currentLevelXP = user.xp % 50;
+  const progress = (currentLevelXP / 50) * 100;
 
   return (
     <PageWrapper>
+        
+  <div className="min-h-screen bg-gradient-to-b from-blue-400 via-purple-300 to-pink-300 p-4 md:p-8 ">
+    
+    <div className="max-w-4xl mx-auto pb-36">
 
-      <div className="flex items-center justify-center py-10 px-4 bg-gradient-to-r from-blue-400 to-purple-500 min-h-[80vh] pb-28 ">
+      {/* Profile Card */}
+      <div className="bg-white rounded-[35px] shadow-2xl p-8 text-center mb-6">
 
-        <div className="bg-white rounded-3xl shadow-2xl p-6 md:p-10 w-full max-w-xl text-center">
+        <div className="text-7xl mb-4">
+          {user.avatar}
+        </div>
 
-          {/* Title */}
-          <h1 className="text-2xl md:text-4xl font-bold text-center mb-6">
-            Create Your Profile 
-          </h1>
+        <h1 className="text-3xl md:text-4xl font-black text-gray-800">
+          {user.name}
+        </h1>
 
-          <p className="text-gray-500 mb-8 text-lg">
-            Start your learning adventure 
-          </p>
+        <p className="text-lg text-gray-500 mt-2">
+          Age Group: {user.age}
+        </p>
 
-          {/* Name Input */}
-          <input
-            type="text"
-            placeholder="Enter Your Name"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            className="w-full border-2 border-gray-200 rounded-2xl p-3 md:p-4 text-base md:text-lg mb-5 focus:outline-none focus:border-purple-500"
-          />
+      </div>
 
-          {/* Age Group */}
-          <select
-            value={age}
-            onChange={(e) => setAge(e.target.value)}
-            className="w-full border-2 border-gray-200 rounded-2xl p-3 md:p-4 text-base md:text-lg mb-8 focus:outline-none focus:border-purple-500"
-          >
+      {/* Stats */}
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
 
-            <option value="">
-              Select Age Group
-            </option>
-
-            <option value="8-10">
-              8-10
-            </option>
-
-            <option value="11-13">
-              11-13
-            </option>
-
-            <option value="14-15">
-              14-15
-            </option>
-
-          </select>
-
-          {/* 🧍 Avatar Selection */}
-          <div className="mb-8">
-
-            <h2 className="text-lg md:text-xl font-bold mb-4 text-center">
-              Choose Your Avatar 
-            </h2>
-
-            <div className="flex justify-center gap-3 flex-wrap">
-
-              {avatars.map((item) => (
-
-                <button
-                  key={item}
-                  type="button"
-                  onClick={() => setAvatar(item)}
-                  className={`text-4xl p-3 rounded-2xl transition duration-300 ${
-                    avatar === item
-                      ? "bg-blue-500 scale-110"
-                      : "bg-gray-100 hover:bg-gray-200"
-                  }`}
-                >
-                  {item}
-                </button>
-
-              ))}
-
-            </div>
-
+        <div className="bg-white rounded-3xl shadow-xl p-5 text-center">
+          <div className="text-3xl">🪙</div>
+          <div className="font-black text-2xl">
+            {user.coins}
           </div>
+          <div className="text-gray-500">
+            Coins
+          </div>
+        </div>
 
-          {/* Start Button */}
-          <button
-            onClick={handleStart}
-            className="w-full bg-yellow-400 hover:bg-yellow-500 hover:scale-105 active:scale-95 transition duration-300 text-lg md:text-xl font-bold py-3 md:py-4 rounded-2xl"
-          >
-            Start Adventure 
-          </button>
+        <div className="bg-white rounded-3xl shadow-xl p-5 text-center">
+          <div className="text-3xl">⚡</div>
+          <div className="font-black text-2xl">
+            {user.xp}
+          </div>
+          <div className="text-gray-500">
+            XP
+          </div>
+        </div>
+
+        <div className="bg-white rounded-3xl shadow-xl p-5 text-center">
+          <div className="text-3xl">🏆</div>
+          <div className="font-black text-2xl">
+            {user.level}
+          </div>
+          <div className="text-gray-500">
+            Level
+          </div>
+        </div>
+
+        <div className="bg-white rounded-3xl shadow-xl p-5 text-center">
+          <div className="text-3xl">🔥</div>
+          <div className="font-black text-2xl">
+            {user.streak}
+          </div>
+          <div className="text-gray-500">
+            Streak
+          </div>
+        </div>
+
+      </div>
+
+      {/* XP Progress */}
+      <div className="bg-white rounded-3xl shadow-xl p-6 mb-6">
+
+        <div className="flex justify-between mb-3 font-bold">
+
+          <span>Level Progress 🚀</span>
+
+          <span>{Math.floor(progress)}%</span>
+
+        </div>
+
+        <div className="w-full h-5 bg-gray-200 rounded-full overflow-hidden">
+
+          <div
+            className="h-5 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 rounded-full transition-all duration-500"
+            style={{
+              width: `${progress}%`,
+            }}
+          />
 
         </div>
 
       </div>
 
-    </PageWrapper>
+      {/* Mission Progress */}
+      <div className="bg-white rounded-3xl shadow-xl p-6 text-center mb-0">
+
+        <h2 className="text-2xl font-black mb-3">
+
+          Missions Completed
+
+        </h2>
+
+        <div className="text-4xl font-black text-green-600">
+
+          {user.completedMissions.length}
+
+        </div>
+
+      </div>
+
+
+    </div>
+
+  </div>
+
+   </PageWrapper>
   );
 }

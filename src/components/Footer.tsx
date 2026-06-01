@@ -52,7 +52,7 @@ export default function Footer() {
         </button>
 
         <button
-          onClick={() => navigate("/profile")}
+          onClick={() => navigate("/Profile")}
           className="flex flex-col items-center text-cyan-600 font-bold"
         >
           <span className="text-2xl">👤</span>

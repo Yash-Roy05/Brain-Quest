@@ -7,7 +7,7 @@ export default function Loading() {
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      navigate("/profile");
+      navigate("/create-profile");
     }, 2500);
 
     return () => clearTimeout(timer);

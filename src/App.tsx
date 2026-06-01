@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Layout from "./components/Layout.tsx";
 
 import Welcome from "./pages/Welcome.tsx";
+import CreateProfile from "./pages/CreateProfile.tsx";
 import Profile from "./pages/Profile.tsx";
 import Dashboard from "./pages/Dashboard.tsx";
 import Result from "./pages/Result.tsx";
@@ -27,11 +28,12 @@ function App() {
     {/* Pages WITHOUT Header/Footer */}
     <Route path="/" element={<Welcome />} />
     <Route path="/loading" element={<Loading />} />
-    <Route path="/Profile" element={<Profile />} />
+    <Route path="/create-profile" element={<CreateProfile />} />
 
     {/* All Other Pages WITH Header/Footer */}
     <Route element={<Layout />}>
-      <Route path="profile" element={<Profile />} />
+      <Route path="create-profile" element={<CreateProfile />} />
+      <Route path="/profile" element={<Profile />} />
       <Route path="dashboard" element={<Dashboard />} />
       <Route path="result" element={<Result />} />
       <Route path="memory-game" element={<MemoryGame />} />
