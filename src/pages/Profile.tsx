@@ -6,7 +6,7 @@ import { useState } from "react";
 export default function Profile() {
   const navigate = useNavigate();
 
-const [isSaving, setIsSaving] = useState(false);
+  const [isSaving, setIsSaving] = useState(false);
 
   const { user, setUser } = useUser();
 
@@ -19,22 +19,28 @@ const [isSaving, setIsSaving] = useState(false);
   const [newName, setNewName] = useState(user.name);
   const [newAvatar, setNewAvatar] = useState(user.avatar);
 
+  // about us
+  const [showAbout, setShowAbout] = useState(false);
+
+  // contact us
+  const [showContact, setShowContact] = useState(false);
+
   const avatars = ["🐼", "🦊", "🦁", "🐸", "🐵", "🐯"];
 
-const handleSaveProfile = () => {
-  setIsSaving(true);
+  const handleSaveProfile = () => {
+    setIsSaving(true);
 
-  setTimeout(() => {
-    setUser((prev) => ({
-      ...prev,
-      name: newName,
-      avatar: newAvatar,
-    }));
+    setTimeout(() => {
+      setUser((prev) => ({
+        ...prev,
+        name: newName,
+        avatar: newAvatar,
+      }));
 
-    setIsSaving(false);
-    setShowEditProfile(false);
-  }, 1000);
-};
+      setIsSaving(false);
+      setShowEditProfile(false);
+    }, 1000);
+  };
 
   return (
     <PageWrapper>
@@ -170,23 +176,38 @@ const handleSaveProfile = () => {
                 👤 Edit Profile
               </button>
 
-              <button className="w-full text-left p-4 rounded-2xl bg-gray-100">
+              <button
+                onClick={() => alert("🔥 DAILY STREAK feature coming soon!")}
+                className="w-full text-left p-4 rounded-2xl bg-gray-100"
+              >
                 🔥 Streak Details
               </button>
 
-              <button className="w-full text-left p-4 rounded-2xl bg-gray-100">
+              <button
+                onClick={() => alert(" ACHIEVEMENTS feature coming soon!")}
+                className="w-full text-left p-4 rounded-2xl bg-gray-100"
+              >
                 🏆 Achievements
               </button>
 
-              <button className="w-full text-left p-4 rounded-2xl bg-gray-100">
+              <button
+                onClick={() => alert("DARK MODE feature coming soon!")}
+                className="w-full text-left p-4 rounded-2xl bg-gray-100"
+              >
                 🌙 Dark Mode
               </button>
 
-              <button className="w-full text-left p-4 rounded-2xl bg-gray-100">
+              <button
+                onClick={() => setShowAbout(true)}
+                className="w-full text-left p-4 rounded-2xl bg-gray-100"
+              >
                 ℹ️ About Brain Quest
               </button>
 
-              <button className="w-full text-left p-4 rounded-2xl bg-gray-100">
+              <button
+                onClick={() => setShowContact(true)}
+                className="w-full text-left p-4 rounded-2xl bg-gray-100"
+              >
                 📩 Contact Us
               </button>
             </div>
@@ -234,6 +255,66 @@ const handleSaveProfile = () => {
                 className="w-full bg-green-500 text-white py-3 rounded-2xl font-bold"
               >
                 {isSaving ? "Saving..." : "Save Changes"}
+              </button>
+            </div>
+          </div>
+        </>
+      )}
+
+      {showAbout && (
+        <>
+          <div
+            className="fixed inset-0 bg-black/40 z-50"
+            onClick={() => setShowAbout(false)}
+          />
+
+          <div className="fixed inset-0 flex items-center justify-center z-50 p-4">
+            <div className="bg-white rounded-3xl p-8 max-w-md w-full shadow-2xl text-center">
+              <div className="text-5xl mb-4">🧠</div>
+
+              <h2 className="text-2xl font-black mb-4">About Brain Quest</h2>
+
+              <p className="text-gray-600">
+                Brain Quest is a fun learning platform designed to improve
+                memory, focus, logic, and problem-solving skills through
+                interactive games.
+              </p>
+
+              <button
+                onClick={() => setShowAbout(false)}
+                className="mt-6 bg-blue-500 text-white px-6 py-3 rounded-2xl font-bold"
+              >
+                Close
+              </button>
+            </div>
+          </div>
+        </>
+      )}
+
+      {showContact && (
+        <>
+          <div
+            className="fixed inset-0 bg-black/40 z-50"
+            onClick={() => setShowContact(false)}
+          />
+
+          <div className="fixed inset-0 flex items-center justify-center z-50 p-4">
+            <div className="bg-white rounded-3xl p-8 max-w-md w-full shadow-2xl text-center">
+              <div className="text-5xl mb-4">📩</div>
+
+              <h2 className="text-2xl font-black mb-4">Contact Us</h2>
+
+              <p className="text-gray-600 mb-2">
+                Email: support@brainquest.com
+              </p>
+
+              <p className="text-gray-600">Instagram: @brainquest</p>
+
+              <button
+                onClick={() => setShowContact(false)}
+                className="mt-6 bg-blue-500 text-white px-6 py-3 rounded-2xl font-bold"
+              >
+                Close
               </button>
             </div>
           </div>
