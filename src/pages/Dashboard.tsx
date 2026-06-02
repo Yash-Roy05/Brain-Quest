@@ -27,6 +27,10 @@ export default function Dashboard() {
 
   const { user, checkDailyStreak } = useUser();
 
+  const currentXP = user.xp % 50;
+
+  const xpProgress = (currentXP / 50) * 100;
+
   const userMissions = (missions[user.age] || []).filter(
     (mission: Mission) => !user.completedMissions.includes(mission.id),
   );
@@ -37,19 +41,22 @@ export default function Dashboard() {
         {/* 👤 User Info */}
         <div className="bg-white rounded-3xl shadow-2xl p-4 md:p-8 w-full max-w-7xl px-4 md:px-8 mx-auto mb-8">
           {/* Avatar + Welcome */}
-          <div className="flex items-center justify-center gap-4 md:gap-8 mb-4 flex-wrap">
-            <div className="text-5xl text-3xl md:text-6xl">{user.avatar}</div>
+          <div className="bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 rounded-3xl p-6 text-white mb-6">
+            <div className="flex items-center gap-4">
+              <div className="text-6xl">{user.avatar}</div>
 
-            <h1 className="text-2xl md:text-4xl font-bold text-gray-800">
-              Welcome, {user.name}
-            </h1>
-          </div>
+              <div>
+                <h1 className="text-3xl md:text-4xl font-black">
+                  Welcome Back, {user.name} 👋
+                </h1>
 
-          {/* Age Group */}
-          <div className="mt-2 mb-6 text-center">
-            <p className="text-gray-600 text-lg font-medium">
-              Age Group: {user.age}
-            </p>
+                <p className="text-lg opacity-90">
+                  Level {user.level} Explorer 🚀
+                </p>
+
+                <p className="opacity-80">Age Group: {user.age}</p>
+              </div>
+            </div>
           </div>
 
           {/* Stats */}
@@ -68,36 +75,33 @@ export default function Dashboard() {
               <p>XP ⚡</p>
             </div>
 
-            {/* Daily Streak */}
-            <div
-              className="
-bg-orange-500
-text-white
-rounded-3xl
-p-4
-shadow-xl
-mb-4
-"
-            >
-              <h2 className="text-xl font-black">🔥 Daily Streak</h2>
-
-              <p className="text-3xl font-black">{user.streak} Days</p>
-            </div>
-
             {/* Level */}
             <div className="bg-purple-100 p-4 rounded-2xl text-center">
               <h2 className="text-2xl md:text-3xl font-bold">{user.level}</h2>
 
               <p>Level 🎮</p>
             </div>
+
+            {/* Daily Streak */}
+            <div className="bg-purple-100 p-4 rounded-2xl text-center">
+              <h3 className="text-2xl md:text-3xl font-bold">
+                🔥 Daily Streak
+              </h3>
+
+              <p className="text-gray-500">Coming Soon</p>
+            </div>
           </div>
         </div>
 
         {/* 🎯 Missions */}
         <div className="max-w-6xl mx-auto">
-          <h2 className="text-2xl md:text-3xl font-bold text-white mb-6 text-center">
-            Available Missions 🎯
+          <h2 className="text-2xl md:text-3xl font-bold text-white mb-2 text-center">
+            Available Missions 
           </h2>
+
+          <p className="text-center text-white/90 mb-6 text-sm md:text-lg">
+            Complete missions and earn rewards
+          </p>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8">
             {userMissions.map((mission: Mission) => (
