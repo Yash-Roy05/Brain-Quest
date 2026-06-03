@@ -41,18 +41,14 @@ export default function Dashboard() {
         {/* 👤 User Info */}
         <div className="bg-white rounded-3xl shadow-2xl p-4 md:p-8 w-full max-w-7xl px-4 md:px-8 mx-auto mb-8">
           {/* Avatar + Welcome */}
-          <div className="bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 rounded-3xl p-6 text-white mb-6">
+          <div className=" rounded-3xl p-6 text-black mb-6">
             <div className="flex items-center gap-4">
               <div className="text-6xl">{user.avatar}</div>
 
               <div>
                 <h1 className="text-3xl md:text-4xl font-black">
-                  Welcome Back, {user.name} 👋
+                  Welcome, {user.name}
                 </h1>
-
-                <p className="text-lg opacity-90">
-                  Level {user.level} Explorer 🚀
-                </p>
 
                 <p className="opacity-80">Age Group: {user.age}</p>
               </div>
@@ -60,26 +56,21 @@ export default function Dashboard() {
           </div>
 
           {/* Stats */}
-          <div className="grid grid-cols-1 md:grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8 mt-6">
-            {/* Coins */}
-            <div className="bg-yellow-100 p-4 md:p-8 rounded-2xl text-center">
-              <h2 className="text-2xl md:text-3xl font-bold">{user.coins}</h2>
-
-              <p>Coins 🪙</p>
-            </div>
-
-            {/* XP */}
-            <div className="bg-green-100 p-4 rounded-2xl text-center">
-              <h2 className="text-2xl md:text-3xl font-bold">{user.xp}</h2>
-
-              <p>XP ⚡</p>
-            </div>
-
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-6">
             {/* Level */}
-            <div className="bg-purple-100 p-4 rounded-2xl text-center">
+            <div className="bg-green-100 p-4 rounded-2xl text-center">
               <h2 className="text-2xl md:text-3xl font-bold">{user.level}</h2>
 
-              <p>Level 🎮</p>
+              <p>Level</p>
+            </div>
+
+            {/* Missions Completed */}
+            <div className="bg-blue-100 p-4 rounded-2xl text-center">
+              <h2 className="text-2xl md:text-3xl font-bold">
+                {user.completedMissions.length}
+              </h2>
+
+              <p>Missions</p>
             </div>
 
             {/* Daily Streak */}
@@ -96,7 +87,7 @@ export default function Dashboard() {
         {/* 🎯 Missions */}
         <div className="max-w-6xl mx-auto">
           <h2 className="text-2xl md:text-3xl font-bold text-white mb-2 text-center">
-            Available Missions 
+            Available Missions
           </h2>
 
           <p className="text-center text-white/90 mb-6 text-sm md:text-lg">
@@ -126,18 +117,6 @@ export default function Dashboard() {
                 <h3 className="text-xl md:text-2xl font-bold text-gray-800 mb-3">
                   {mission.title}
                 </h3>
-
-                {/* Quiz */}
-                {mission.type === "quiz" && mission.questions && (
-                  <p className="text-gray-600 mb-2">
-                    {mission.questions.length} Questions 🧠
-                  </p>
-                )}
-
-                {/* Activity */}
-                {mission.type === "activity" && (
-                  <p className="text-gray-600 mb-2">Real-world challenge 🌍</p>
-                )}
 
                 <p className="font-semibold text-lg mb-4">
                   Reward: {mission.reward} 🪙
