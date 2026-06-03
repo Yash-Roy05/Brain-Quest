@@ -1,234 +1,157 @@
+import { useState } from "react";
 import { useUser } from "../context/UserContext.tsx";
 
 export default function Missions() {
   const { user } = useUser();
 
-  const missions = [
-    {
-      title: "Play 3 Games",
-      progress: 80,
-      reward: 100,
-      completed: false,
-      emoji: "🎮",
-      color: "from-pink-400 to-rose-500",
-    },
+  const [showAll, setShowAll] = useState(false);
 
-    {
-      title: "Earn 500 XP",
-      progress: 50,
-      reward: 200,
-      completed: false,
-      emoji: "⚡",
-      color: "from-cyan-400 to-blue-500",
-    },
+  const totalMissions = 12;
 
-    {
-      title: "Complete Sudoku",
-      progress: 100,
-      reward: 300,
-      completed: true,
-      emoji: "🧠",
-      color: "from-purple-400 to-fuchsia-500",
-    },
+  const completedMissions = user.completedMissions.length;
 
-    {
-      title: "Win 5 Times",
-      progress: 30,
-      reward: 150,
-      completed: false,
-      emoji: "🏆",
-      color: "from-orange-400 to-pink-500",
-    },
+  const remainingMissions = totalMissions - completedMissions;
+
+  const progress = (completedMissions / totalMissions) * 100;
+
+  const activeMissions = [
+    "🎮 Play 3 Games",
+    "⚡ Earn 500 XP",
+    "🏆 Win 5 Times",
+    "🧠 Complete Quiz",
+    "🔥 7 Day Streak",
+    "⭐ Reach Level 5",
+    "🎯 Earn 1000 Coins",
   ];
+
+  const visibleMissions = showAll ? activeMissions : activeMissions.slice(0, 3);
 
   return (
     <div className="min-h-screen px-4 py-6 pb-40">
-      {/* Title */}
-      <div className="text-center mb-8">
-        <h1
-          className="
-          text-4xl
-          md:text-5xl
-          font-black
-          text-yellow-600
-        "
-        >
-          🏆 Missions
-        </h1>
+      <div className="max-w-5xl mx-auto">
+        {/* Header */}
+        <div className="text-center mb-8">
+          <h1 className="text-4xl md:text-5xl font-black text-gray-800">
+            Missions
+          </h1>
 
-        <p
-          className="
-          text-gray-600
-          font-semibold
-          mt-2
-          text-sm
-          md:text-lg
-        "
-        >
-          Complete missions & collect rewards 🚀
-        </p>
-      </div>
-
-      {/* User Rewards */}
-      <div
-        className="
-        bg-white
-        rounded-[30px]
-        shadow-2xl
-        p-5
-        mb-8
-        flex
-        justify-around
-        items-center
-      "
-      >
-        <div className="text-center">
-          <div className="text-3xl">🪙</div>
-
-          <div
-            className="
-            font-black
-            text-xl
-            text-yellow-600
-          "
-          >
-            {user.coins}
-          </div>
-
-          <div className="text-sm font-bold">Coins</div>
+          <p className="text-gray-700 mt-4 text-lg font-semibold">
+            Track your learning progress
+          </p>
         </div>
 
-        <div className="text-center">
-          <div className="text-3xl">⚡</div>
+        {/* Stats */}
+        <div className="grid grid-cols-3 gap-4 mb-8">
+          <div className="bg-white rounded-3xl shadow-lg p-4 text-center">
+            <h2 className="text-2xl font-black">{totalMissions}</h2>
 
-          <div
-            className="
-            font-black
-            text-xl
-            text-cyan-600
-          "
-          >
-            {user.xp}
+            <p className="text-gray-500 text-sm">Total</p>
           </div>
 
-          <div className="text-sm font-bold">XP</div>
-        </div>
-      </div>
+          <div className="bg-white rounded-3xl shadow-lg p-4 text-center">
+            <h2 className="text-2xl font-black text-green-600">
+              {completedMissions}
+            </h2>
 
-      {/* Missions */}
-      <div className="space-y-6">
-        {missions.map((mission, index) => (
-          <div
-            key={index}
-            className={`
-              bg-gradient-to-r
-              ${mission.color}
-              rounded-[30px]
-              p-5
-              shadow-2xl
-              text-white
-              relative
-              overflow-hidden
-            `}
-          >
-            {/* Glow */}
+            <p className="text-gray-500 text-sm">Completed</p>
+          </div>
+
+          <div className="bg-white rounded-3xl shadow-lg p-4 text-center">
+            <h2 className="text-2xl font-black text-orange-500">
+              {remainingMissions}
+            </h2>
+
+            <p className="text-gray-500 text-sm">Remaining</p>
+          </div>
+        </div>
+
+        {/* Progress */}
+        <div className="bg-white rounded-3xl shadow-lg p-4 mb-8">
+          <div className="flex justify-between mb-3 font-bold">
+            <span>Overall Progress</span>
+
+            <span>
+              {completedMissions}/{totalMissions}
+            </span>
+          </div>
+
+          <div className="w-full h-3 bg-gray-200 rounded-full overflow-hidden">
             <div
-              className="
-              absolute
-              -top-10
-              -right-10
-              w-32
-              h-32
-              bg-white/20
-              rounded-full
-              blur-3xl
-            "
+              className="h-3 bg-blue-500 rounded-full transition-all duration-500"
+              style={{
+                width: `${progress}%`,
+              }}
             />
-
-            <div className="relative z-10">
-              {/* Top */}
-              <div
-                className="
-                flex
-                justify-between
-                items-center
-                mb-4
-              "
-              >
-                <div>
-                  <h2
-                    className="
-                    text-2xl
-                    font-black
-                  "
-                  >
-                    {mission.emoji} {mission.title}
-                  </h2>
-
-                  <p
-                    className="
-                    font-semibold
-                    text-white/90
-                    mt-1
-                  "
-                  >
-                    Reward: 🪙 {mission.reward}
-                  </p>
-                </div>
-
-                {mission.completed ? (
-                  <div
-                    className="
-                    bg-green-500
-                    px-4
-                    py-2
-                    rounded-2xl
-                    font-black
-                  "
-                  >
-                    ✅ Done
-                  </div>
-                ) : (
-                  <div
-                    className="
-                    bg-white/20
-                    px-4
-                    py-2
-                    rounded-2xl
-                    font-black
-                  "
-                  >
-                    {mission.progress}%
-                  </div>
-                )}
-              </div>
-
-              {/* Progress */}
-              <div
-                className="
-                w-full
-                h-5
-                bg-white/20
-                rounded-full
-                overflow-hidden
-              "
-              >
-                <div
-                  className="
-                    h-5
-                    bg-white
-                    rounded-full
-                    transition-all
-                    duration-700
-                  "
-                  style={{
-                    width: `${mission.progress}%`,
-                  }}
-                />
-              </div>
-            </div>
           </div>
-        ))}
+        </div>
+
+        {/* Active Missions */}
+        <div className="bg-white rounded-3xl shadow-lg p-4 mb-6">
+          <h2 className="text-xl font-black mb-4">Active Missions</h2>
+
+          <div className="grid md:grid-cols-3 gap-4">
+            {visibleMissions.map((mission, index) => (
+              <div
+                key={index}
+                className="
+    bg-gray-100
+    rounded-2xl
+    p-5
+    cursor-pointer
+    transition-all
+    duration-300
+    hover:scale-105
+    hover:shadow-xl
+    hover:bg-white
+    border
+    border-transparent
+    hover:border-blue-300
+  "
+              >
+                {mission}
+              </div>
+            ))}
+          </div>
+
+          <div className="text-center mt-5">
+            <button
+              onClick={() => setShowAll(!showAll)}
+              className="
+      bg-blue-500
+      hover:bg-blue-600
+      hover:scale-105
+      transition
+      text-white
+      font-bold
+      px-6
+      py-3
+      rounded-2xl
+    "
+            >
+              {showAll ? "Show Less" : "View All Missions"}
+            </button>
+          </div>
+        </div>
+
+        {/* Completed */}
+        <div className="bg-white rounded-3xl shadow-lg p-4">
+          <h2 className="text-xl font-black mb-3">Completed</h2>
+
+          <div
+            className="
+bg-gray-50
+border
+border-gray-200
+rounded-3xl
+p-4
+shadow-sm
+hover:shadow-lg
+transition
+"
+          >
+            ✅ {completedMissions} Missions Completed
+          </div>
+        </div>
       </div>
     </div>
   );
