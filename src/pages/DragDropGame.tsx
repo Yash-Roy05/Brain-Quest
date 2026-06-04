@@ -564,7 +564,7 @@ export default function DragDropGame() {
               }}
               className="bg-cyan-200 h-28 md:h-40 rounded-3xl flex items-center justify-center text-5xl md:text-7xl shadow-2xl hover:scale-105 transition duration-300"
             >
-              ❄️
+              🧊
             </div>
 
             {/* Jungle */}
