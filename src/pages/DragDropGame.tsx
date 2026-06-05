@@ -211,7 +211,7 @@ export default function DragDropGame() {
         <Confetti />
       )}
 
-      <div className="min-h-screen pb-28 overflow-x-hidden bg-gradient-to-b from-sky-300 via-blue-200 to-green-300 p-4 md:p-6 flex items-center justify-center">
+      <div className="min-h-screen pb-28 md:pb-40 overflow-x-hidden bg-gradient-to-b from-sky-300 via-blue-200 to-green-300 p-4 md:p-6 flex items-center justify-center">
 
         <div className="bg-white rounded-[30px] md:rounded-[40px] shadow-2xl p-4 md:p-10 w-full max-w-6xl">
 

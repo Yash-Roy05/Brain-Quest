@@ -1,6 +1,5 @@
 import { motion } from "framer-motion";
 
-
 export default function PageWrapper({
   children,
 }: {
@@ -8,22 +7,21 @@ export default function PageWrapper({
 }) {
   return (
     <motion.div
-
       initial={{
-        opacity: 0,
-        scale: 0.98,
-      }}
-
+  opacity: 0,
+  y: 20,
+}}
       animate={{
-        opacity: 1,
-        scale: 1,
+  opacity: 1,
+  y: 0,
+}}
+      exit={{
+        opacity: 0,
+        x: -50,
       }}
-
       transition={{
-        duration: 0.3,
-        ease: "easeOut",
-      }}
-
+  duration: 0.25,
+}}
     >
       {children}
     </motion.div>

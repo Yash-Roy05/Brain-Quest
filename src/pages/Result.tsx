@@ -106,7 +106,7 @@ export default function Result() {
                 🎯 Quiz Result
               </h1>
 
-             <h2 className="text-xl md:text-2xl font-semibold text-gray-700">
+              <h2 className="text-xl md:text-2xl font-semibold text-gray-700">
                 {mission.title}
               </h2>
             </div>

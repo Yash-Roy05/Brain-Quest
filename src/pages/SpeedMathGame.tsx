@@ -87,9 +87,9 @@ export default function SpeedMathGame() {
   };
 
   // 🚀 First Question
-useEffect(() => {
-  generateQuestion();
-}, []);
+  useEffect(() => {
+    generateQuestion();
+  }, []);
 
   // ⏱ Timer
   useEffect(() => {

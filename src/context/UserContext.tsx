@@ -10,7 +10,7 @@ type User = {
   avatar: string;
 
   streak: number;
-  lastLoginDate: string;
+  lastLoginDate: string;  
 };
 
 type UserContextType = {
