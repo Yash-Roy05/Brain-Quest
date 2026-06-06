@@ -18,6 +18,7 @@ export default function Profile() {
   const [showEditProfile, setShowEditProfile] = useState(false);
   const [newName, setNewName] = useState(user.name);
   const [newAvatar, setNewAvatar] = useState(user.avatar);
+  const [newAge, setNewAge] = useState(user.age);
 
   // about us
   const [showAbout, setShowAbout] = useState(false);
@@ -35,6 +36,7 @@ export default function Profile() {
         ...prev,
         name: newName,
         avatar: newAvatar,
+        age: newAge,
       }));
 
       setIsSaving(false);
@@ -45,7 +47,7 @@ export default function Profile() {
   return (
     <PageWrapper>
       <div className="min-h-screen bg-gradient-to-b from-blue-400 via-purple-300 to-pink-300 p-4 md:p-8 ">
-        <div className="max-w-4xl mx-auto pb-36">
+        <div className="max-w-4xl mx-auto pb-14 ">
           {/* Profile Card */}
 
           <div className="relative bg-white rounded-[35px] shadow-2xl p-8 text-center mb-6">
@@ -224,9 +226,16 @@ export default function Profile() {
 
           <div className="fixed inset-0 flex items-center justify-center z-50 p-4">
             <div className="bg-white rounded-3xl shadow-2xl p-6 w-full max-w-md">
-              <h2 className="text-2xl font-black mb-6 text-center">
-                Edit Profile
-              </h2>
+              <div className="flex justify-between items-center mb-6">
+                <h2 className="text-2xl font-black">Edit Profile</h2>
+
+                <button
+                  onClick={() => setShowEditProfile(false)}
+                  className="text-2xl"
+                >
+                  ✕
+                </button>
+              </div>
 
               <input
                 type="text"
@@ -234,6 +243,18 @@ export default function Profile() {
                 onChange={(e) => setNewName(e.target.value)}
                 className="w-full border-2 border-gray-200 rounded-2xl p-3 mb-6"
               />
+
+              <select
+                value={newAge}
+                onChange={(e) => setNewAge(e.target.value)}
+                className="w-full border-2 border-gray-200 rounded-2xl p-3 mb-6"
+              >
+                <option value="8-10">8-10 Years</option>
+
+                <option value="11-13">11-13 Years</option>
+
+                <option value="14-15">14-15 Years</option>
+              </select>
 
               <div className="flex justify-center gap-3 flex-wrap mb-6">
                 {avatars.map((avatar) => (
