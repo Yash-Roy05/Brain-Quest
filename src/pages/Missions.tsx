@@ -115,7 +115,7 @@ export default function Missions() {
             ))}
           </div>
 
-          <div className="text-center mt-4 md:mt-0">
+          <div className="text-center mt-4 md:mt-4">
             <button
               onClick={() => setShowAll(!showAll)}
               className="

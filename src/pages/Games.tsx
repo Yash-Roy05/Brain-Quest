@@ -59,30 +59,20 @@ export default function Games() {
   ];
 
   return (
-    <div className="min-h-screen px-4 py-6 pb-40">
+    <div className="min-h-screen px-6 py-6 pb-4 pt-2 md:pb-4 md:pt-4">
       {/* Title */}
-      <div className="text-center mb-8">
-        <h1
-          className="
-          text-4xl
-          md:text-5xl
-          font-black
-        "
-        >
-          Games Zone
-        </h1>
+      <div className="text-center mb-5 md:mb-6">
+        <div className="text-center">
+          <h1 className="text-4xl md:text-5xl font-black text-gray-800 ">
+            Game Zone
+          </h1>
+        </div>
 
-        <p
-          className="
-          text-gray-700
-          font-semibold
-          mt-2
-          text-sm
-          md:text-lg
-        "
-        >
-          Play games & earn rewards
-        </p>
+        <div className="text-center mb-3 md:mb-2">
+          <p className="text-gray-700 mt-2 text-lg font-semibold">
+            Play games & earn rewards
+          </p>
+        </div>
       </div>
 
       {/* Cards */}
@@ -92,7 +82,9 @@ export default function Games() {
         grid-cols-1
         sm:grid-cols-2
         lg:grid-cols-3
-        gap-6
+        gap-4
+        md:gap-4
+        mb-20
       "
       >
         {games.map((game, index) => (
@@ -114,9 +106,10 @@ duration-300
             <div
               className="
     w-16
-h-16
+    h-16
     mx-auto
-    mb-4
+    mb-3 
+    md:mb-3
     rounded-full
     bg-blue-50
     flex
@@ -134,7 +127,8 @@ h-16
     text-xl
     font-black
     text-gray-800
-    mb-3
+    mb-3 
+    md:mb-3
     text-center
   "
             >
@@ -159,7 +153,7 @@ h-16
             </div>
 
             {/* Reward */}
-            <div className="text-gray-500 mb-5 text-center">
+            <div className="text-gray-500 mb-3 md:mb-3 text-center">
               Reward • {game.reward} Coins
             </div>
 
@@ -178,7 +172,7 @@ h-16
   hover:scale-105
 "
             >
-              Play Now 🚀
+              Play Now
             </button>
           </div>
         ))}
