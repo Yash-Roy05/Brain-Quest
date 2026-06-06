@@ -37,16 +37,16 @@ export default function Dashboard() {
 
   return (
     <PageWrapper>
-      <div className="min-h-[250px] pb-40 relative overflow-hidden bg-gradient-to-b from-sky-300 via-blue-400 to-green-300 p-6 min-h-[250px] pb-28">
+      <div className="min-h-[250px] pb-40 relative overflow-hidden bg-gradient-to-b from-sky-300 via-blue-400 to-green-300 p-6 min-h-[250px] pb-24 pt-4 md:pb-24 md:pt-5">                
         {/* 👤 User Info */}
-        <div className="bg-white rounded-3xl shadow-2xl p-4 md:p-8 w-full max-w-7xl px-4 md:px-8 mx-auto mb-8">
+        <div className="bg-white rounded-3xl shadow-2xl p-5 md:p-5 w-full max-w-7xl px-4 md:px-8 mx-auto mb-4 md:mb-4">
           {/* Avatar + Welcome */}
-          <div className=" rounded-3xl p-6 text-black mb-6">
-            <div className="flex items-center gap-4">
-              <div className="text-6xl">{user.avatar}</div>
+          <div className=" rounded-3xl p-6 text-black mb-0">
+            <div className="flex items-center gap-2 md:gap-2">
+              <div className="text-6xl ">{user.avatar}</div>
 
               <div>
-                <h1 className="text-3xl md:text-4xl font-black">
+                <h1 className="text-3xl md:text-4xl font-black mb-0">
                   Welcome, {user.name}
                 </h1>
 
@@ -56,7 +56,7 @@ export default function Dashboard() {
           </div>
 
           {/* Stats */}
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-6">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 mt-0 md:gap-2 md:mt-0">
             {/* Level */}
             <div className="bg-green-100 p-4 rounded-2xl text-center">
               <h2 className="text-2xl md:text-3xl font-bold">{user.level}</h2>
@@ -86,13 +86,17 @@ export default function Dashboard() {
 
         {/* 🎯 Missions */}
         <div className="max-w-6xl mx-auto">
-          <h2 className="text-2xl md:text-3xl font-bold text-white mb-2 text-center">
+          <div className="text-center">
+          <h1 className="text-3xl md:text-2xl font-black text-gray-800 ">
             Available Missions
-          </h2>
+          </h1>
+        </div>
 
-          <p className="text-center text-white/90 mb-6 text-sm md:text-lg">
+          <div className="text-center mb-3 md:mb-4">
+          <p className="text-gray-700 mt-0 text-lg font-semibold">
             Complete missions and earn rewards
           </p>
+        </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8">
             {userMissions.map((mission: Mission) => (
@@ -174,7 +178,7 @@ export default function Dashboard() {
                   }}
                   className="w-full bg-green-500 hover:bg-green-600 text-white py-3 rounded-xl text-base md:text-lg font-semibold transition duration-300"
                 >
-                  Start Mission 🚀
+                  Start Mission 
                 </motion.button>
               </motion.div>
             ))}
