@@ -46,67 +46,65 @@ export default function Profile() {
 
   return (
     <PageWrapper>
-      <div className="min-h-screen bg-gradient-to-b from-blue-400 via-purple-300 to-pink-300 p-4 md:p-8 ">
-        <div className="max-w-4xl mx-auto pb-14 ">
+      <div className="min-h-screen bg-gradient-to-b from-blue-400 via-purple-300 to-pink-300 px-4 pt-4 pb-6 md:px-8 md:pt-4 md:pb-8">
+        <div className="max-w-4xl mx-auto pb-16 md:pb-14">
           {/* Profile Card */}
 
-          <div className="relative bg-white rounded-[35px] shadow-2xl p-8 text-center mb-6">
-            <div className="text-7xl mb-4">{user.avatar}</div>
+          <div className="relative bg-white rounded-[35px] shadow-2xl px-8 py-5 text-center mb-4 md:mb-4">
+            <div className="text-7xl mb-2">{user.avatar}</div>
 
             <button
               onClick={() => setShowSettings(true)}
-              className="
-    absolute
-    top-5
-    left-4
-    bg-gray-100
-    hover:bg-gray-200
-    p-3
-    rounded-full
-    text-xl
-  "
-            >
+              className="absolute top-5 left-4 bg-gray-100 hover:bg-gray-200 p-3 rounded-full text-xl">
               ⚙️
             </button>
 
-            <h1 className="text-3xl md:text-4xl font-black text-gray-800">
+            <h1 className="text-3xl md:text-4xl font-black text-gray-800 mb-1">
               {user.name}
             </h1>
 
-            <p className="text-lg text-gray-500 mt-2">Age Group: {user.age}</p>
+            <p className="text-lg text-gray-500 mb-1">Age Group: {user.age}</p>
           </div>
 
           {/* Stats */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-2 mb-4 md:mb-4">
             <div className="bg-white rounded-3xl shadow-xl p-5 text-center">
-              <div className="text-3xl">🪙</div>
+              <div className="w-16 h-16 mx-auto mb-2 rounded-full bg-yellow-100 flex items-center justify-center text-3xl">
+  🪙
+</div>
               <div className="font-black text-2xl">{user.coins}</div>
               <div className="text-gray-500">Coins</div>
             </div>
 
             <div className="bg-white rounded-3xl shadow-xl p-5 text-center">
-              <div className="text-3xl">⚡</div>
+              <div className="w-16 h-16 mx-auto mb-2 rounded-full bg-blue-100 flex items-center justify-center text-3xl">
+  ⚡
+</div>
               <div className="font-black text-2xl">{user.xp}</div>
               <div className="text-gray-500">XP</div>
             </div>
 
             <div className="bg-white rounded-3xl shadow-xl p-5 text-center">
-              <div className="text-3xl">🏆</div>
+              <div className="w-16 h-16 mx-auto mb-2 rounded-full bg-orange-100 flex items-center justify-center text-3xl">
+  🏆
+</div>
               <div className="font-black text-2xl">{user.level}</div>
               <div className="text-gray-500">Level</div>
             </div>
 
             <div className="bg-white rounded-3xl shadow-xl p-5 text-center">
-              <div className="text-3xl">🔥</div>
+              <div className="w-16 h-16 mx-auto mb-2 rounded-full bg-red-100 flex items-center justify-center text-3xl">
+  🔥
+</div>
               <div className="font-black text-2xl">{user.streak}</div>
               <div className="text-gray-500">Streak</div>
             </div>
           </div>
 
           {/* XP Progress */}
-          <div className="bg-white rounded-3xl shadow-xl p-6 mb-6">
+          <div className="bg-white rounded-3xl shadow-xl p-6 mb-4 md:mb-4">
             <div className="flex justify-between mb-3 font-bold">
-              <span>Level Progress 🚀</span>
+              <span>Level Progress</span>
 
               <span>{Math.floor(progress)}%</span>
             </div>
@@ -122,7 +120,7 @@ export default function Profile() {
           </div>
 
           {/* Mission Progress */}
-          <div className="bg-white rounded-3xl shadow-xl p-6 text-center mb-0">
+          <div className="bg-white rounded-3xl shadow-xl p-6 text-center mb-0 md:mb-0">
             <h2 className="text-2xl font-black mb-3">Missions Completed</h2>
 
             <div className="text-4xl font-black text-green-600">
