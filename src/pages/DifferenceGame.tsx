@@ -69,10 +69,11 @@ export default function DifferenceGame() {
 
   return (
     <PageWrapper>
-      // 🎉 Result Modal
+      
+      
       {showResult && (
         <div className="fixed inset-0 bg-black/70 flex items-center justify-center z-50 p-4">
-          <div className="bg-white rounded-[30px] p-8 text-center shadow-2xl w-full max-w-md animate-[popup_0.4s_ease-out]">
+          <div className="bg-white rounded-[30px] p-4 md:p-8 text-center shadow-2xl w-full max-w-md animate-[popup_0.4s_ease-out]">
             <div className="text-7xl mb-4">🏆</div>
 
             <h1 className="text-4xl font-black text-purple-700 mb-4">
