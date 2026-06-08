@@ -44,6 +44,9 @@ export default function PatternMemoryGame() {
   // 🎨 Colors
   const colors = ["red", "green", "blue", "yellow"];
 
+  // 💔 Game over
+  const [showGameOver, setShowGameOver] = useState(false);
+
   // ⏱ Timer
   useEffect(() => {
     if (showResult) return;
@@ -143,7 +146,7 @@ export default function PatternMemoryGame() {
 
   // 🎉 Win Condition
   useEffect(() => {
-    if (level > 7 && !showResult) {
+    if (level > 7 && !showResult && !showGameOver) {
       let coins = 100;
 
       let xp = 50;
@@ -183,22 +186,41 @@ export default function PatternMemoryGame() {
   // 💔 Game Over
   useEffect(() => {
     if (hearts === 0) {
-      alert("Game Over 😢");
-
-      navigate("/dashboard");
+      setShowGameOver(true);
     }
   }, [hearts]);
 
   return (
     <>
+      {showGameOver && (
+        <div className="fixed inset-0 bg-black/70 flex items-center justify-center z-50 p-4">
+          <div className="bg-white rounded-[40px] p-10 text-center shadow-2xl w-[90%] max-w-md">
+            <div className="text-7xl mb-4">😢</div>
+
+            <h1 className="text-5xl font-black text-red-600 mb-4">GAME OVER</h1>
+
+            <p className="text-xl font-bold text-gray-600 mb-6">
+              Better luck next time!
+            </p>
+
+            <button
+              onClick={() => navigate("/dashboard")}
+              className="bg-red-500 hover:bg-red-600 text-white px-8 py-4 rounded-2xl text-xl font-bold"
+            >
+              Back To Dashboard
+            </button>
+          </div>
+        </div>
+      )}
+
       {/* 🎉 Result Screen */}
       {showResult && (
         <div className="fixed inset-0 bg-black/60 flex items-center justify-center z-50">
           <div className="bg-white rounded-[40px] p-10 text-center shadow-2xl w-[90%] max-w-md animate-[popup_0.4s_ease]">
             <div className="text-7xl mb-4">🏆</div>
 
-            <h1 className="text-5xl font-black text-purple-700 mb-6">
-              YOU WIN!
+            <h1 className="text-5xl font-black text-purple-700 mb-2">
+              MISSION COMPLETED!
             </h1>
 
             <div className="text-2xl font-bold text-blue-600 mb-3">
@@ -217,7 +239,7 @@ export default function PatternMemoryGame() {
               onClick={() => navigate("/dashboard")}
               className="bg-purple-500 hover:bg-purple-600 text-white px-8 py-4 rounded-2xl text-xl font-bold hover:scale-105 transition duration-300"
             >
-              Continue 🚀
+              Continue
             </button>
           </div>
         </div>
@@ -227,36 +249,35 @@ export default function PatternMemoryGame() {
         {showResult && <Confetti />}
 
         <div className="min-h-screen pb-28 bg-gradient-to-b from-indigo-400 via-purple-400 to-pink-300 flex items-center justify-center p-6 relative overflow-hidden">
-          
           {/* Main Card */}
           <div className="bg-white rounded-[40px] shadow-2xl p-8 md:p-10 w-full max-w-3xl text-center relative z-10">
             {/* Title */}
-            <h1 className="text-5xl font-black text-purple-700 mb-4">
-              Memory Master 🧠
+            <h1 className="text-4xl md:text-6xl font-black text-purple-700 mb-2">
+              Memory Master
             </h1>
             {/* Hearts */}
-            <div className="text-4xl mb-4">{"❤️".repeat(hearts)}</div>
+            <div className="text-4xl mb-2">{"❤️".repeat(hearts)}</div>
             {/* Level */}
             <div className="text-2xl font-bold text-blue-600 mb-2">
               Level: {level}
             </div>
             {/* Difficulty */}
-            <div className="text-lg font-bold text-red-500 mb-4">
+            <div className="text-lg font-bold text-red-500 mb-2">
               Difficulty:{" "}
               {level <= 2 ? "Easy 😊" : level <= 4 ? "Medium 😎" : "Hard 🔥"}
             </div>
             {/* Time */}
-            <div className="text-2xl font-bold text-orange-500 mb-6">
+            <div className="text-2xl font-bold text-orange-500 mb-4">
               ⏱ Time: {time}s
             </div>
             {/* Status */}
-            <div className="text-2xl font-bold text-purple-700 mb-8">
+            <div className="text-3xl md:text-3xl font-bold text-purple-700 mb-3 pt-3">
               {showPattern ? "Watch Carefully 👀" : "Your Turn 🎯"}
             </div>
             {/* Progress */}
             <div className="mb-8">
               <div className="flex justify-between text-sm font-bold mb-2">
-                <span>Progress 🚀</span>
+                <span>Progress </span>
 
                 <span>{level - 1}/7</span>
               </div>
@@ -280,7 +301,7 @@ export default function PatternMemoryGame() {
                     setReplayTrigger((prev) => prev + 1);
                   }
                 }}
-                className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-xl font-bold text-sm shadow-lg hover:scale-105 transition duration-300"
+                className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-3 rounded-xl font-bold text-sm shadow-lg hover:scale-105 transition duration-300 mb-4"
               >
                 🔄 Replay
               </button>

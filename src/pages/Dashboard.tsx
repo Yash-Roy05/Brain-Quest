@@ -37,7 +37,7 @@ export default function Dashboard() {
 
   return (
     <PageWrapper>
-      <div className="min-h-[250px] pb-40 relative overflow-hidden bg-gradient-to-b from-sky-300 via-blue-400 to-green-300 p-6 min-h-[250px] pb-24 pt-4 md:pb-24 md:pt-5">                
+      <div className="min-h-[250px] pb-40 relative overflow-hidden bg-gradient-to-b from-sky-300 via-blue-400 to-green-300 p-6 min-h-[250px] pb-20 pt-4 md:pb-24 md:pt-5">
         {/* 👤 User Info */}
         <div className="bg-white rounded-3xl shadow-2xl p-5 md:p-5 w-full max-w-7xl px-4 md:px-8 mx-auto mb-4 md:mb-4">
           {/* Avatar + Welcome */}
@@ -87,102 +87,115 @@ export default function Dashboard() {
         {/* 🎯 Missions */}
         <div className="max-w-6xl mx-auto">
           <div className="text-center">
-          <h1 className="text-3xl md:text-2xl font-black text-gray-800 ">
-            Available Missions
-          </h1>
-        </div>
+            <h1 className="text-3xl md:text-2xl font-black text-gray-800 ">
+              Available Missions
+            </h1>
+          </div>
 
           <div className="text-center mb-3 md:mb-4">
-          <p className="text-gray-700 mt-0 text-lg font-semibold">
-            Complete missions and earn rewards
-          </p>
-        </div>
+            <p className="text-gray-700 mt-0 text-lg font-semibold">
+              Complete missions and earn rewards
+            </p>
+          </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8">
-            {userMissions.map((mission: Mission) => (
-              <motion.div
-                key={mission.id}
-                initial={{
-                  opacity: 0,
-                  y: 50,
-                }}
-                animate={{
-                  opacity: 1,
-                  y: 0,
-                }}
-                transition={{
-                  duration: 0.5,
-                }}
-                whileHover={{
-                  scale: 1.05,
-                }}
-                className="bg-white rounded-3xl shadow-xl p-6"
-              >
-                <h3 className="text-xl md:text-2xl font-bold text-gray-800 mb-3">
-                  {mission.title}
-                </h3>
-
-                <p className="font-semibold text-lg mb-4">
-                  Reward: {mission.reward} 🪙
-                </p>
-
-                <motion.button
+          {userMissions.length > 0 ? (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8">
+              {userMissions.map((mission: Mission) => (
+                <motion.div
+                  key={mission.id}
+                  initial={{
+                    opacity: 0,
+                    y: 50,
+                  }}
+                  animate={{
+                    opacity: 1,
+                    y: 0,
+                  }}
+                  transition={{
+                    duration: 0.5,
+                  }}
                   whileHover={{
                     scale: 1.05,
                   }}
-                  whileTap={{
-                    scale: 0.9,
-                  }}
-                  onClick={() => {
-                    if (mission.type === "quiz") {
-                      navigate("/mission", {
-                        state: mission,
-                      });
-                    } else if (mission.type === "memory") {
-                      navigate("/memory-game", {
-                        state: mission,
-                      });
-                    } else if (mission.type === "difference") {
-                      navigate("/difference-game", {
-                        state: mission,
-                      });
-                    } else if (mission.type === "dragdrop") {
-                      navigate("/dragdrop-game", {
-                        state: mission,
-                      });
-                    } else if (mission.type === "word") {
-                      navigate("/wordpuzzle-game", {
-                        state: mission,
-                      });
-                    } else if (mission.type === "pattern") {
-                      navigate("/pattern-memory", {
-                        state: mission,
-                      });
-                    } else if (mission.type === "codebreaker") {
-                      navigate("/code-breaker", {
-                        state: mission,
-                      });
-                    } else if (mission.type === "sudoku") {
-                      navigate("/sudoku-lite");
-                    } else if (mission.type === "reflex-tap") {
-                      navigate("/reflex-tap");
-                    } else if (mission.type === "speedmath") {
-                      navigate("/speedmath-game", {
-                        state: mission,
-                      });
-                    } else if (mission.type === "activity") {
-                      navigate("/mission", {
-                        state: mission,
-                      });
-                    }
-                  }}
-                  className="w-full bg-green-500 hover:bg-green-600 text-white py-3 rounded-xl text-base md:text-lg font-semibold transition duration-300"
+                  className="bg-white rounded-3xl shadow-xl p-6"
                 >
-                  Start Mission 
-                </motion.button>
-              </motion.div>
-            ))}
-          </div>
+                  <h3 className="text-xl md:text-2xl font-bold text-gray-800 mb-3">
+                    {mission.title}
+                  </h3>
+
+                  <p className="font-semibold text-lg mb-4">
+                    Reward: {mission.reward} 🪙
+                  </p>
+
+                  <motion.button
+                    whileHover={{
+                      scale: 1.05,
+                    }}
+                    whileTap={{
+                      scale: 0.9,
+                    }}
+                    onClick={() => {
+                      if (mission.type === "quiz") {
+                        navigate("/mission", {
+                          state: mission,
+                        });
+                      } else if (mission.type === "memory") {
+                        navigate("/memory-game", {
+                          state: mission,
+                        });
+                      } else if (mission.type === "difference") {
+                        navigate("/difference-game", {
+                          state: mission,
+                        });
+                      } else if (mission.type === "dragdrop") {
+                        navigate("/dragdrop-game", {
+                          state: mission,
+                        });
+                      } else if (mission.type === "word") {
+                        navigate("/wordpuzzle-game", {
+                          state: mission,
+                        });
+                      } else if (mission.type === "pattern") {
+                        navigate("/pattern-memory", {
+                          state: mission,
+                        });
+                      } else if (mission.type === "codebreaker") {
+                        navigate("/code-breaker", {
+                          state: mission,
+                        });
+                      } else if (mission.type === "sudoku") {
+                        navigate("/sudoku-lite");
+                      } else if (mission.type === "reflex-tap") {
+                        navigate("/reflex-tap");
+                      } else if (mission.type === "speedmath") {
+                        navigate("/speedmath-game", {
+                          state: mission,
+                        });
+                      } else if (mission.type === "activity") {
+                        navigate("/mission", {
+                          state: mission,
+                        });
+                      }
+                    }}
+                    className="w-full bg-green-500 hover:bg-green-600 text-white py-3 rounded-xl text-base md:text-lg font-semibold transition duration-300"
+                  >
+                    Start Mission
+                  </motion.button>
+                </motion.div>
+              ))}
+            </div>
+          ) : (
+            <div className="bg-white rounded-3xl shadow-xl p-10 text-center max-w-2xl mx-auto mt-3 md:mt-4 ">
+              <h2 className="text-3xl font-bold text-purple-700 mb-3">
+                More Missions Coming Soon!
+              </h2>
+
+              <p className="text-gray-600 text-lg">
+                You completed all available missions. New challenges will be
+                added soon.
+              </p>
+            </div>
+          )}
         </div>
       </div>
     </PageWrapper>

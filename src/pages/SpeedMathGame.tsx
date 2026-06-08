@@ -24,6 +24,13 @@ export default function SpeedMathGame() {
   const [combo, setCombo] = useState(0);
   const [message, setMessage] = useState("");
 
+  // WIN & GAME OVER CARDS
+  const [showWinCard, setShowWinCard] = useState(false);
+  const [showGameOverCard, setShowGameOverCard] = useState(false);
+
+  const [finalCoins, setFinalCoins] = useState(0);
+  const [finalXP, setFinalXP] = useState(0);
+
   // 🎯 Current Question
   const [question, setQuestion] = useState({
     num1: 5,
@@ -93,6 +100,7 @@ export default function SpeedMathGame() {
 
   // ⏱ Timer
   useEffect(() => {
+    if (showGameOverCard || showWinCard) return;
     if (timeLeft > 0) {
       const timer = setTimeout(() => {
         setTimeLeft((prev) => prev - 1);
@@ -100,44 +108,41 @@ export default function SpeedMathGame() {
 
       return () => clearTimeout(timer);
     } else {
-      alert("Time Over ⏰");
-
-      navigate("/dashboard");
+      setShowGameOverCard(true);
     }
   }, [timeLeft]);
 
   // 🎉 Win
   useEffect(() => {
     if (score >= 70) {
-      addCoins(80);
+      const coins = 80;
+      const xp = 40;
 
-      addXP(40);
+      addCoins(coins);
+      addXP(xp);
+
+      setFinalCoins(coins);
+      setFinalXP(xp);
 
       setUser((prev) => ({
         ...prev,
-
         completedMissions: [...prev.completedMissions, 201],
       }));
 
-      setTimeout(() => {
-        alert("Speed Math Complete 🎉");
-
-        navigate("/dashboard");
-      }, 1200);
+      setShowWinCard(true);
     }
   }, [score]);
 
   // 💔 Game Over
   useEffect(() => {
     if (hearts === 0) {
-      alert("Game Over 😢");
-
-      navigate("/dashboard");
+      setShowGameOverCard(true);
     }
   }, [hearts]);
 
   // ✅ Check Answer
   const checkAnswer = (selected: number) => {
+    if (showGameOverCard || showWinCard) return;
     if (selected === question.answer) {
       navigator.vibrate?.(100);
 
@@ -164,22 +169,70 @@ export default function SpeedMathGame() {
 
   return (
     <PageWrapper>
+      {showWinCard && (
+        <div className="fixed inset-0 bg-black/70 flex items-center justify-center z-50 p-4">
+          <div className="bg-white rounded-[30px] p-6 md:p-8 text-center shadow-2xl w-full max-w-md animate-[popup_0.4s_ease-out]">
+            <div className="text-7xl mb-4">🏆</div>
+
+            <h1 className="text-4xl font-black text-purple-700 mb-4">
+              YOU WIN!
+            </h1>
+
+            <div className="text-2xl font-bold text-yellow-600 mb-3">
+              🪙 Coins: {finalCoins}
+            </div>
+
+            <div className="text-2xl font-bold text-green-600 mb-6">
+              ⚡ XP: {finalXP}
+            </div>
+
+            <button
+              onClick={() => navigate("/dashboard")}
+              className="bg-purple-500 hover:bg-purple-600 text-white px-8 py-4 rounded-2xl text-xl font-bold"
+            >
+              Continue
+            </button>
+          </div>
+        </div>
+      )}
+
+      {showGameOverCard && (
+        <div className="fixed inset-0 bg-black/70 flex items-center justify-center z-50 p-4">
+          <div className="bg-white rounded-[30px] p-6 md:p-8 text-center shadow-2xl w-full max-w-md">
+            <div className="text-7xl mb-4">😢</div>
+
+            <h1 className="text-4xl font-black text-red-600 mb-2">GAME OVER</h1>
+
+            <p className="text-xl font-bold text-gray-600 mb-4">
+              Better luck next time!
+            </p>
+
+            <button
+              onClick={() => navigate("/dashboard")}
+              className="bg-red-500 hover:bg-red-600 text-white px-8 py-4 rounded-2xl text-xl font-bold"
+            >
+              Back to Dashboard
+            </button>
+          </div>
+        </div>
+      )}
+
       {/* 🎉 Confetti */}
-      {score >= 70 && <Confetti />}
+      {showWinCard && <Confetti />}
 
       <div className="min-h-screen pb-28 bg-gradient-to-b from-purple-400 via-pink-300 to-yellow-200 flex items-center justify-center p-6 relative overflow-hidden">
         {/* Main Card */}
         <div className="bg-white rounded-[40px] shadow-2xl p-6 md:p-10 w-full max-w-3xl text-center relative z-10 border-8 border-white">
           {/* Title */}
-          <h1 className="text-3xl md:text-5xl font-black mb-4 text-purple-700">
-            Speed Math Battle ⚡
+          <h1 className="text-3xl md:text-5xl font-black mb-2 text-purple-700">
+            Speed Math Battle
           </h1>
 
           {/* Hearts */}
-          <div className="text-4xl mb-4">{"❤️".repeat(hearts)}</div>
+          <div className="text-4xl mb-3">{"❤️".repeat(hearts)}</div>
 
           {/* Timer */}
-          <div className="text-2xl font-bold text-red-500 mb-3">
+          <div className="text-2xl font-bold text-red-500 mb-2">
             ⏱ {timeLeft}s
           </div>
 
@@ -189,21 +242,21 @@ export default function SpeedMathGame() {
           </div>
 
           {/* Goal */}
-          <div className="text-lg font-bold text-blue-600 mb-2">
+          <div className="text-lg font-bold text-blue-600 mb-1">
             Reach 70 Score To Win 🏆
           </div>
 
           {/* 📈 Progress Bar */}
           <div className="mb-6">
-            <div className="flex justify-between text-sm font-bold mb-2">
-              <span>Progress 🚀</span>
+            <div className="flex justify-between text-sm font-bold mb-1">
+              <span>Progress</span>
 
               <span>{score}/70</span>
             </div>
 
             <div className="w-full bg-gray-200 rounded-full h-5 overflow-hidden shadow-inner">
               <div
-                className="bg-gradient-to-r from-green-400 via-yellow-400 to-orange-500 h-5 rounded-full transition-all duration-500"
+                className="bg-gradient-to-r from-green-400 via-yellow-400 to-orange-500 h-5 rounded-full transition-all duration-500 "
                 style={{
                   width: `${progress}%`,
                 }}
@@ -212,7 +265,7 @@ export default function SpeedMathGame() {
           </div>
 
           {/* Combo */}
-          <div className="text-xl font-bold text-purple-600 mb-8">
+          <div className="text-xl font-bold text-purple-600 mb-4">
             Streak: {combo}
           </div>
 
@@ -229,7 +282,7 @@ export default function SpeedMathGame() {
               <button
                 key={index}
                 onClick={() => checkAnswer(option)}
-                className="bg-green-400 hover:bg-green-500 active:scale-90 hover:scale-105 transition duration-300 text-white text-3xl font-black py-6 rounded-[30px] shadow-xl border-b-8 border-green-600"
+                className="bg-green-400 active:scale-90 hover:scale-105 transition duration-300 text-white text-3xl font-black py-6 rounded-[30px] shadow-xl border-b-8 border-green-600"
               >
                 {option}
               </button>

@@ -39,6 +39,9 @@ export default function WordPuzzleGame() {
 
   const [finalXP, setFinalXP] = useState(0);
 
+  // 💔 Game Over
+  const [showGameOver, setShowGameOver] = useState(false);
+
   // 🔤 Used Words
   const [usedWords, setUsedWords] = useState<string[]>([]);
 
@@ -166,6 +169,8 @@ export default function WordPuzzleGame() {
 
   // 🖱 Mouse Down
   const handleMouseDown = (row: number, col: number, letter: string) => {
+    if (showGameOver) return;
+
     setDragging(true);
 
     setSelected(letter);
@@ -175,6 +180,7 @@ export default function WordPuzzleGame() {
 
   // 📱 Touch Start
   const handleTouchStart = (row: number, col: number, letter: string) => {
+    if (showGameOver) return;
     setTouchStarted(true);
 
     setSelected(letter);
@@ -184,6 +190,8 @@ export default function WordPuzzleGame() {
 
   // 🖱 Mouse Enter
   const handleMouseEnter = (row: number, col: number, letter: string) => {
+    if (showGameOver) return;
+
     if (!dragging) return;
 
     const alreadySelected = selectedCells.some(
@@ -199,6 +207,8 @@ export default function WordPuzzleGame() {
 
   // 📱 Touch Enter
   const handleTouchMove = (e: React.TouchEvent) => {
+    if (showGameOver) return;
+
     if (!touchStarted) return;
 
     const touch = e.touches[0];
@@ -243,6 +253,7 @@ export default function WordPuzzleGame() {
 
   // ✅ Check Word
   const checkWord = () => {
+    if (showGameOver) return;
     // ✅ Correct
     if (
       selected === targetWord ||
@@ -335,14 +346,47 @@ export default function WordPuzzleGame() {
   // 💔 Game Over
   useEffect(() => {
     if (hearts === 0) {
-      setTimeout(() => {
-        navigate("/dashboard");
-      }, 2000);
+      setShowGameOver(true);
     }
   }, [hearts]);
 
   return (
     <>
+      {showGameOver && (
+        <div className="fixed inset-0 bg-black/70 flex items-center justify-center z-50 p-4">
+          <div className="bg-white rounded-[30px] md:rounded-[40px] p-6 md:p-10 text-center shadow-2xl w-full max-w-[90%] md:max-w-md animate-[popup_0.4s_ease]">
+            <div className="text-5xl md:text-7xl mb-4">😢</div>
+
+            <h1 className="text-3xl md:text-5xl font-black text-red-600 mb-4">
+              GAME OVER
+            </h1>
+
+            <p className="text-lg md:text-2xl font-bold text-gray-600 mb-6">
+              Better luck next time!
+            </p>
+
+            <button
+              onClick={() => navigate("/dashboard")}
+              className="
+          bg-red-500
+          hover:bg-red-600
+          text-white
+          px-5
+          py-3
+          md:px-8
+          md:py-4
+          rounded-2xl
+          text-lg
+          md:text-xl
+          font-bold
+        "
+            >
+              Back to Dashboard 
+            </button>
+          </div>
+        </div>
+      )}
+
       {/* 🎉 Result */}
       {showResult && (
         <div className="fixed inset-0 bg-black/70 flex items-center justify-center z-50 p-4">
@@ -369,7 +413,7 @@ export default function WordPuzzleGame() {
               onClick={() => navigate("/dashboard")}
               className="bg-purple-500 hover:bg-purple-600 text-white px-5 py-3 md:px-8 md:py-4 rounded-2xl text-lg md:text-xl font-bold hover:scale-105 transition duration-300"
             >
-              Continue 🚀
+              Continue 
             </button>
           </div>
         </div>
@@ -379,21 +423,21 @@ export default function WordPuzzleGame() {
         {score >= 70 && <Confetti />}
 
         <div className="min-h-screen pb-28 md:pb-40 overflow-x-hidden bg-gradient-to-b from-pink-300 via-purple-300 to-blue-300 flex items-center justify-center p-3 md:p-6">
-          <div className="bg-white rounded-[25px] md:rounded-[40px] shadow-2xl p-4 md:p-10 w-full max-w-4xl text-center">
+          <div className="bg-white rounded-[25px] md:rounded-[40px] shadow-2xl p-4 md:p-10 w-full max-w-4xl text-center mb-0 md:mb-0">
             {/* Title */}
-            <h1 className="text-3xl md:text-5xl font-black text-purple-700 mb-4">
-              Word Search 🔤
+            <h1 className="text-3xl md:text-5xl font-black text-purple-700 mb-1 md:mb-3">
+              Word Search 
             </h1>
 
             {/* Hearts */}
-            <div className="text-3xl md:text-5xl mb-4">
+            <div className="text-3xl md:text-5xl mb-2 md:mb-4">
               {"❤️".repeat(Math.max(hearts, 0))}
             </div>
 
             {/* Top Info */}
-            <div className="flex flex-col md:flex-row items-center justify-center gap-3 md:gap-8 mb-5">
+            <div className="flex flex-col md:flex-row items-center justify-center gap-3 md:gap-8 mb-3 md:mb-5">
               {/* Timer */}
-              <div className="text-lg md:text-2xl font-bold text-blue-600">
+              <div className="text-lg md:text-2xl font-bold text-blue-600 mb-0">
                 ⏱ {time}s
               </div>
 
@@ -404,7 +448,7 @@ export default function WordPuzzleGame() {
             </div>
 
             {/* Target */}
-            <h2 className="text-xl md:text-3xl font-black mb-6 md:mb-8 text-blue-700 break-words">
+            <h2 className="text-xl md:text-3xl font-black mb-6 md:mb-8 text-blue-700 break-words mb-1">
               Find: {targetWord}
             </h2>
 
@@ -482,7 +526,7 @@ overflow-x-auto
             </div>
 
             {/* Selected */}
-            <div className="text-lg md:text-2xl font-black text-purple-700 break-words ">
+            <div className="text-lg md:text-2xl font-black text-purple-700 break-words">
               Selected: {selected}
             </div>
 
