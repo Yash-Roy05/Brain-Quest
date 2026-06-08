@@ -132,7 +132,7 @@ export default function ReflexTapGame() {
                 onClick={() => navigate("/dashboard")}
                 className="bg-green-500 hover:bg-green-600 text-white px-5 py-3 md:px-8 md:py-4 text-base md:text-xl rounded-2xl text-lg md:text-2xl font-black hover:scale-105 transition duration-300"
               >
-                Continue 🚀
+                Continue
               </button>
             </div>
           </div>
@@ -141,24 +141,58 @@ export default function ReflexTapGame() {
         {/* 💔 GAME OVER */}
         {gameOver && (
           <div className="fixed inset-0 bg-black/70 flex items-center justify-center z-50">
-            <div
-              className="bg-white rounded-[25px] md:rounded-[40px] p-4 md:p-10 text-center w-[90%] max-w-md max-h-[90vh] overflow-y-auto">
+            <div className="bg-white rounded-[25px] md:rounded-[40px] p-4 md:p-10 text-center w-[90%] max-w-md max-h-[90vh] overflow-y-auto">
               <div className="text-5xl md:text-7xl mb-4">😢</div>
 
               <h1 className="text-2xl md:text-5xl font-black text-red-500 mb-4">
                 Game Over
               </h1>
 
-              <p className="text-xl font-bold text-gray-600 mb-8">
-                Try Again Faster ⚡
+              <p className="text-xl font-bold text-gray-600 mb-4">
+                Try Again Faster
               </p>
 
-              <button
-                onClick={() => window.location.reload()}
-                className="bg-red-500 hover:bg-red-600 text-white px-8 py-4 rounded-2xl text-lg md:text-2xl font-black hover:scale-105 transition duration-300"
-              >
-                Retry 🔄
-              </button>
+              <div className="flex flex-col gap-4">
+                <button
+                  onClick={() => window.location.reload()}
+                  className="
+      bg-red-500
+      hover:bg-red-600
+      text-white
+      px-8
+      py-4
+      rounded-2xl
+      text-lg
+      md:text-2xl
+      font-black
+      hover:scale-105
+      transition
+      duration-300
+    "
+                >
+                  Retry 
+                </button>
+
+                <button
+                  onClick={() => navigate("/dashboard")}
+                  className="
+      bg-blue-500
+      hover:bg-blue-600
+      text-white
+      px-8
+      py-4
+      rounded-2xl
+      text-lg
+      md:text-2xl
+      font-black
+      hover:scale-105
+      transition
+      duration-300
+    "
+                >
+                  Dashboard 
+                </button>
+              </div>
             </div>
           </div>
         )}
@@ -167,7 +201,7 @@ export default function ReflexTapGame() {
           {/* Header */}
           <div className="flex flex-wrap justify-center gap-3 md:gap-8 items-center p-6">
             {/* Hearts */}
-            <div className="text-4xl">{"❤️".repeat(Math.max(hearts, 0))}</div>
+            <div className="text-4xl mb-0">{"❤️".repeat(Math.max(hearts, 0))}</div>
 
             {/* Score */}
             <div className="text-3xl font-black text-cyan-400">{score} ⚡</div>
@@ -176,7 +210,7 @@ export default function ReflexTapGame() {
           {/* Title */}
           <div className="text-center mt-4">
             <h1 className="text-5xl text-3xl md:text-5xl font-black text-white mb-4">
-              Reflex Tap ⚡
+              Reflex Tap
             </h1>
 
             <p className="text-xl font-bold text-purple-300">
@@ -187,7 +221,7 @@ export default function ReflexTapGame() {
           {/* Progress */}
           <div className="max-w-xl mx-auto mt-8 px-6">
             <div className="flex justify-between text-white font-bold mb-2">
-              <span>Progress 🚀</span>
+              <span>Progress </span>
 
               <span>{score}/100</span>
             </div>

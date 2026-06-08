@@ -35,6 +35,9 @@ export default function CodeBreakerGame() {
   // 🎉 Win State
   const [won, setWon] = useState(false);
 
+  // Game Over State
+  const [showGameOver, setShowGameOver] = useState(false);
+
   // ⏱ Timer
   const [time, setTime] = useState(0);
 
@@ -213,10 +216,8 @@ export default function CodeBreakerGame() {
 
   // 💔 Game Over
   useEffect(() => {
-    if (attempts <= 0 && !won) {
-      alert(`Game Over 😢 Secret Code Was ${secretCode}`);
-
-      navigate("/dashboard");
+    if (attempts === 0) {
+      setShowGameOver(true);
     }
   }, [attempts]);
 
@@ -251,7 +252,42 @@ export default function CodeBreakerGame() {
               onClick={() => navigate("/dashboard")}
               className="bg-green-500 hover:bg-green-600 text-white px-8 py-3 md:py-6 rounded-2xl text-lg md:text-3xl font-bold hover:scale-105 transition duration-300"
             >
-              Continue 🚀
+              Continue
+            </button>
+          </div>
+        </div>
+      )}
+
+      {showGameOver && (
+        <div className="fixed inset-0 bg-black/70 flex items-center justify-center z-50 p-4">
+          <div className="bg-white rounded-[30px] md:rounded-[40px] p-6 md:p-10 text-center shadow-2xl w-full max-w-[90%] md:max-w-md animate-[popup_0.4s_ease]">
+            <div className="text-5xl md:text-7xl mb-4">😢</div>
+
+            <h1 className="text-3xl md:text-5xl font-black text-red-600 mb-4">
+              GAME OVER
+            </h1>
+
+            <p className="text-lg md:text-2xl font-bold text-gray-600 mb-6">
+              Better luck next time!
+            </p>
+
+            <button
+              onClick={() => navigate("/dashboard")}
+              className="
+          bg-red-500
+          hover:bg-red-600
+          text-white
+          px-5
+          py-3
+          md:px-8
+          md:py-4
+          rounded-2xl
+          text-lg
+          md:text-xl
+          font-bold
+        "
+            >
+              Back to Dashboard
             </button>
           </div>
         </div>
@@ -262,12 +298,12 @@ export default function CodeBreakerGame() {
           {/* Main Card */}
           <div className="bg-white rounded-[25px] md:rounded-[40px] shadow-2xl p-4 md:p-10 w-full max-w-md md:max-w-xl text-center relative z-10">
             {/* Title */}
-            <h1 className="text-5xl font-black text-gray-800 mb-4">
-              Code Breaker 🔐
+            <h1 className="text-5xl font-black text-gray-800 mb-2">
+              Code Breaker
             </h1>
 
             {/* Attempts */}
-            <div className="text-2xl font-bold text-red-500 mb-3">
+            <div className="text-2xl font-bold text-red-500 mb-2">
               Attempts Left: {attempts}
             </div>
 
@@ -277,14 +313,14 @@ export default function CodeBreakerGame() {
             </div>
 
             {/* Goal */}
-            <div className="text-lg font-bold text-green-600 mb-6">
-              Crack The 3-Digit Secret Code 🧠
+            <div className="text-lg font-bold text-green-600 mb-2">
+              Crack The 3-Digit Secret Code
             </div>
 
             {/* Progress */}
             <div className="mb-8">
               <div className="flex justify-between text-sm font-bold mb-2">
-                <span>Attempts Used 🚀</span>
+                <span>Attempts Used </span>
 
                 <span>{15 - attempts}/15</span>
               </div>
@@ -302,7 +338,7 @@ export default function CodeBreakerGame() {
             {/* 🧠 Smart Hints */}
             <div className="bg-blue-50 rounded-3xl p-6 mb-8 text-left shadow-inner">
               <h2 className="text-2xl font-black text-blue-700 mb-4 text-center">
-                Smart Hints 🧠
+                Smart Hints
               </h2>
 
               <div className="space-y-3">
@@ -336,7 +372,7 @@ export default function CodeBreakerGame() {
               onClick={checkGuess}
               className="bg-green-500 hover:bg-green-600 hover:scale-105 active:scale-95 transition duration-300 text-white text-lg md:text-3xl font-bold px-10 py-3 md:py-6 rounded-2xl shadow-xl mb-8"
             >
-              Crack Code 🚀
+              Crack Code
             </button>
 
             {/* Hint */}
@@ -386,8 +422,8 @@ export default function CodeBreakerGame() {
     "
                   >
                     {showHistory
-                      ? "Hide History 📕"
-                      : `Show History 📖 (${history.length})`}
+                      ? "Hide History "
+                      : `Show History (${history.length})`}
                   </button>
 
                   {history.length === 0 ? (
@@ -402,7 +438,7 @@ export default function CodeBreakerGame() {
                             key={index}
                             className="bg-white rounded-2xl p-4 shadow flex flex-col md:flex-row md:items-center md:justify-between"
                           >
-                            <div className="text-xl font-black text-blue-700">
+                            <div className="text-xl font-black text-blue-700 mb-5">
                               {item.guess}
                             </div>
 

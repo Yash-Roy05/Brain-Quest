@@ -137,7 +137,7 @@ export default function SudokuLiteGame() {
                 onClick={() => navigate("/dashboard")}
                 className="bg-green-500 hover:bg-green-600 text-white px-8 py-4 rounded-2xl text-xl font-bold hover:scale-105 transition duration-300"
               >
-                Continue 🚀
+                Continue 
               </button>
             </div>
           </div>
@@ -146,8 +146,8 @@ export default function SudokuLiteGame() {
         <div className="min-h-screen pb-32 bg-gradient-to-b from-purple-400 via-blue-300 to-cyan-200 flex items-center justify-center p-6">
           <div className="bg-white rounded-[40px] shadow-2xl p-4 md:p-8 w-full max-w-2xl text-center">
             {/* Title */}
-            <h1 className="text-5xl font-black text-purple-700 mb-4">
-              Sudoku Lite 🔢
+            <h1 className="text-5xl font-black text-purple-700 mb-2">
+              Sudoku Lite 
             </h1>
 
             {/* Hearts */}
@@ -156,14 +156,14 @@ export default function SudokuLiteGame() {
             </div>
 
             {/* Goal */}
-            <div className="text-xl font-bold text-green-600 mb-6">
-              Fill The Missing Numbers 🧠
+            <div className="text-xl font-bold text-green-600 mb-2">
+              Fill The Missing Numbers 
             </div>
 
             {/* Progress */}
             <div className="mb-8">
               <div className="flex justify-between text-sm font-bold mb-2">
-                <span>Progress 🚀</span>
+                <span>Progress </span>
                 <span>{Math.floor(progress)}%</span>
               </div>
 
