@@ -2,6 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { useUser } from "../context/UserContext.tsx";
 import PageWrapper from "../components/PageWrapper.tsx";
 import { useState } from "react";
+import { useTheme } from "../context/ThemeContext.tsx";
 
 export default function Profile() {
   const navigate = useNavigate();
@@ -19,6 +20,9 @@ export default function Profile() {
   const [newName, setNewName] = useState(user.name);
   const [newAvatar, setNewAvatar] = useState(user.avatar);
   const [newAge, setNewAge] = useState(user.age);
+
+  // dark/light mode
+  const { darkMode, setDarkMode } = useTheme();
 
   // about us
   const [showAbout, setShowAbout] = useState(false);
@@ -46,7 +50,7 @@ export default function Profile() {
 
   return (
     <PageWrapper>
-      <div className="min-h-screen bg-gradient-to-b from-blue-400 via-purple-300 to-pink-300 px-4 pt-4 pb-6 md:px-8 md:pt-4 md:pb-8">
+      <div className="min-h-screen bg-gradient-to-b from-blue-400 via-purple-300 to-pink-300 dark:from-gray-900 dark:via-gray-800 dark:to-blackpx-4 pt-4 pb-6 md:px-8 md:pt-4 md:pb-8">
         <div className="max-w-4xl mx-auto pb-16 md:pb-14">
           {/* Profile Card */}
 
@@ -55,7 +59,8 @@ export default function Profile() {
 
             <button
               onClick={() => setShowSettings(true)}
-              className="absolute top-5 left-4 bg-gray-100 hover:bg-gray-200 p-3 rounded-full text-xl">
+              className="absolute top-5 left-4 bg-gray-100 hover:bg-gray-200 p-3 rounded-full text-xl"
+            >
               ⚙️
             </button>
 
@@ -70,32 +75,32 @@ export default function Profile() {
           <div className="grid grid-cols-2 md:grid-cols-4 gap-2 mb-4 md:mb-4">
             <div className="bg-white rounded-3xl shadow-xl p-5 text-center">
               <div className="w-16 h-16 mx-auto mb-2 rounded-full bg-yellow-100 flex items-center justify-center text-3xl">
-  🪙
-</div>
+                🪙
+              </div>
               <div className="font-black text-2xl">{user.coins}</div>
               <div className="text-gray-500">Coins</div>
             </div>
 
             <div className="bg-white rounded-3xl shadow-xl p-5 text-center">
               <div className="w-16 h-16 mx-auto mb-2 rounded-full bg-blue-100 flex items-center justify-center text-3xl">
-  ⚡
-</div>
+                ⚡
+              </div>
               <div className="font-black text-2xl">{user.xp}</div>
               <div className="text-gray-500">XP</div>
             </div>
 
             <div className="bg-white rounded-3xl shadow-xl p-5 text-center">
               <div className="w-16 h-16 mx-auto mb-2 rounded-full bg-orange-100 flex items-center justify-center text-3xl">
-  🏆
-</div>
+                🏆
+              </div>
               <div className="font-black text-2xl">{user.level}</div>
               <div className="text-gray-500">Level</div>
             </div>
 
             <div className="bg-white rounded-3xl shadow-xl p-5 text-center">
               <div className="w-16 h-16 mx-auto mb-2 rounded-full bg-red-100 flex items-center justify-center text-3xl">
-  🔥
-</div>
+                🔥
+              </div>
               <div className="font-black text-2xl">{user.streak}</div>
               <div className="text-gray-500">Streak</div>
             </div>
@@ -191,10 +196,10 @@ export default function Profile() {
               </button>
 
               <button
-                onClick={() => alert("DARK MODE feature coming soon!")}
+                onClick={() => setDarkMode(!darkMode)}
                 className="w-full text-left p-4 rounded-2xl bg-gray-100"
               >
-                🌙 Dark Mode
+                {darkMode ? "☀️ Light Mode" : "🌙 Dark Mode"}
               </button>
 
               <button

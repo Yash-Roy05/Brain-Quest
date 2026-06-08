@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App.tsx';
 import reportWebVitals from './reportWebVitals';
+import { ThemeProvider } from "./context/ThemeContext.tsx";
 
 import { UserProvider } from "./context/UserContext.tsx";
 
@@ -13,9 +14,13 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
 
-    <UserProvider>
-      <App />
-    </UserProvider>
+    <ThemeProvider>
+
+      <UserProvider>
+        <App />
+      </UserProvider>
+
+    </ThemeProvider>
 
   </React.StrictMode>
 );
