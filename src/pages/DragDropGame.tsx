@@ -24,6 +24,9 @@ export default function DragDropGame() {
   // 🎉 Win Card
   const [showWinCard, setShowWinCard] = useState(false);
 
+  // 💔 Game Over
+  const [showGameOver, setShowGameOver] = useState(false);
+
   // 🎯 Progress
   const progress = (matched.length / 4) * 100;
 
@@ -102,9 +105,7 @@ export default function DragDropGame() {
   // 💔 Game Over
   useEffect(() => {
     if (hearts === 0) {
-      setTimeout(() => {
-        navigate("/dashboard");
-      }, 2000);
+      setShowGameOver(true);
     }
   }, [hearts]);
 
@@ -113,6 +114,41 @@ export default function DragDropGame() {
 
   return (
     <PageWrapper>
+      {showGameOver && (
+        <div className="fixed inset-0 bg-black/70 flex items-center justify-center z-50 p-4">
+          <div className="bg-white rounded-[30px] md:rounded-[40px] p-6 md:p-10 text-center shadow-2xl w-full max-w-[90%] md:max-w-md animate-[popup_0.4s_ease]">
+            <div className="text-5xl md:text-7xl mb-4">😢</div>
+
+            <h1 className="text-3xl md:text-5xl font-black text-red-600 mb-4">
+              GAME OVER
+            </h1>
+
+            <p className="text-lg md:text-2xl font-bold text-gray-600 mb-6">
+              Better luck next time!
+            </p>
+
+            <button
+              onClick={() => navigate("/dashboard")}
+              className="
+          bg-red-500
+          hover:bg-red-600
+          text-white
+          px-5
+          py-3
+          md:px-8
+          md:py-4
+          rounded-2xl
+          text-lg
+          md:text-xl
+          font-bold
+        "
+            >
+              Back to Dashboard
+            </button>
+          </div>
+        </div>
+      )}
+
       {/* 🎉 WIN */}
       {matched.length === 4 && <Confetti />}
 
@@ -120,7 +156,7 @@ export default function DragDropGame() {
         <div className="bg-white rounded-[30px] md:rounded-[40px] shadow-2xl p-4 md:p-10 w-full max-w-6xl">
           {/* Title */}
           <h1 className="text-3xl md:text-5xl font-black text-center mb-4 text-purple-700 mb-0 md:mb-2 pt-2 md:pt-0">
-            Animal Home Match 
+            Animal Home Match
           </h1>
 
           <p className="text-center text-gray-600 mb-6 text-base md:text-xl font-bold">

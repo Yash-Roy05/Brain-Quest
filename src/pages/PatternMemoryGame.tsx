@@ -194,20 +194,34 @@ export default function PatternMemoryGame() {
     <>
       {showGameOver && (
         <div className="fixed inset-0 bg-black/70 flex items-center justify-center z-50 p-4">
-          <div className="bg-white rounded-[40px] p-10 text-center shadow-2xl w-[90%] max-w-md">
-            <div className="text-7xl mb-4">😢</div>
+          <div className="bg-white rounded-[30px] md:rounded-[40px] p-6 md:p-10 text-center shadow-2xl w-full max-w-[90%] md:max-w-md animate-[popup_0.4s_ease]">
+            <div className="text-5xl md:text-7xl mb-4">😢</div>
 
-            <h1 className="text-5xl font-black text-red-600 mb-4">GAME OVER</h1>
+            <h1 className="text-3xl md:text-5xl font-black text-red-600 mb-4">
+              GAME OVER
+            </h1>
 
-            <p className="text-xl font-bold text-gray-600 mb-6">
+            <p className="text-lg md:text-2xl font-bold text-gray-600 mb-6">
               Better luck next time!
             </p>
 
             <button
               onClick={() => navigate("/dashboard")}
-              className="bg-red-500 hover:bg-red-600 text-white px-8 py-4 rounded-2xl text-xl font-bold"
+              className="
+          bg-red-500
+          hover:bg-red-600
+          text-white
+          px-5
+          py-3
+          md:px-8
+          md:py-4
+          rounded-2xl
+          text-lg
+          md:text-xl
+          font-bold
+        "
             >
-              Back To Dashboard
+              Back to Dashboard 
             </button>
           </div>
         </div>
