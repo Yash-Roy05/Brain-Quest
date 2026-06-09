@@ -27,49 +27,49 @@ export default function Missions() {
   const visibleMissions = showAll ? activeMissions : activeMissions.slice(0, 3);
 
   return (
-    <div className="min-h-screen px-4 py-6 pb-6 pt-2 md:pb-8 md:pt-4">
+    <div className="min-h-screen px-4 py-6 pb-6 pt-2 md:pb-8 md:pt-4 ">
       <div className="max-w-5xl mx-auto">
         {/* Header */}
         <div className="text-center mb-0 md:mb-2">
-          <h1 className="text-4xl md:text-5xl font-black text-gray-800 ">
+          <h1 className="text-4xl md:text-5xl font-black text-gray-800 dark:text-white">
             Missions
           </h1>
         </div>
 
         <div className="text-center mb-3 md:mb-4">
-          <p className="text-gray-700 mt-2 text-lg font-semibold">
+          <p className="text-gray-700 mt-2 text-lg font-semibold dark:text-white">
             Track your learning progress
           </p>
         </div>
 
         {/* Stats */}
-        <div className="grid grid-cols-3 gap-2 md:gap-2 mb-4 md:mb-4">
-          <div className="bg-white rounded-3xl shadow-lg p-4 text-center">
-            <h2 className="text-2xl font-black">{totalMissions}</h2>
+        <div className="grid grid-cols-3 gap-2 md:gap-2 mb-4 md:mb-4 ">
+          <div className="bg-white rounded-3xl shadow-lg p-4 text-center dark:bg-gray-700">
+            <h2 className="text-2xl font-black dark:text-white">{totalMissions}</h2>
 
-            <p className="text-gray-500 text-sm">Total</p>
+            <p className="text-gray-500 text-sm dark:text-white">Total</p>
           </div>
 
-          <div className="bg-white rounded-3xl shadow-lg p-4 text-center">
-            <h2 className="text-2xl font-black text-green-600">
+          <div className="bg-white rounded-3xl shadow-lg p-4 text-center dark:bg-gray-700">
+            <h2 className="text-2xl font-black text-green-600 ">
               {completedMissions}
             </h2>
 
-            <p className="text-gray-500 text-sm">Completed</p>
+            <p className="text-gray-500 text-sm dark:text-white">Completed</p>
           </div>
 
-          <div className="bg-white rounded-3xl shadow-lg p-4 text-center">
+          <div className="bg-white rounded-3xl shadow-lg p-4 text-center dark:bg-gray-700">
             <h2 className="text-2xl font-black text-orange-500">
               {remainingMissions}
             </h2>
 
-            <p className="text-gray-500 text-sm">Remaining</p>
+            <p className="text-gray-500 text-sm dark:text-white">Remaining</p>
           </div>
         </div>
 
         {/* Progress */}
-        <div className="bg-white rounded-3xl shadow-lg p-4 mb-4 md:mb-4">
-          <div className="flex justify-between mb-3 font-bold">
+        <div className="bg-white rounded-3xl shadow-lg p-4 mb-4 md:mb-4 dark:bg-gray-700">
+          <div className="flex justify-between mb-3 font-bold dark:text-white">
             <span>Overall Progress</span>
 
             <span>
@@ -88,10 +88,10 @@ export default function Missions() {
         </div>
 
         {/* Active Missions */}
-        <div className="bg-white rounded-3xl shadow-lg p-4 mb-4 md:mb-4">
-          <h2 className="text-xl font-black mb-4">Active Missions</h2>
+        <div className="bg-white rounded-3xl shadow-lg p-4 mb-4 md:mb-4 dark:bg-gray-700">
+          <h2 className="text-xl font-black mb-4 dark:text-white">Active Missions</h2>
 
-          <div className="grid md:grid-cols-3 gap-3 md:gap-2">
+          <div className="grid md:grid-cols-3 gap-3 md:gap-2 dark:text-white">
             {visibleMissions.map((mission, index) => (
               <div
                 key={index}
@@ -108,6 +108,7 @@ export default function Missions() {
     border
     border-transparent
     hover:border-blue-300
+    dark:bg-gray-600
   "
               >
                 {mission}
@@ -136,8 +137,8 @@ export default function Missions() {
         </div>
 
         {/* Completed */}
-        <div className="bg-white rounded-3xl shadow-lg p-4 mb-16 md:mb-16">
-          <h2 className="text-xl font-black mb-3">Completed</h2>
+        <div className="bg-white rounded-3xl shadow-lg p-4 mb-16 md:mb-16 dark:bg-gray-700">
+          <h2 className="text-xl font-black mb-3 dark:text-white">Completed</h2>
 
           <div
             className="
@@ -149,6 +150,9 @@ p-4
 shadow-sm
 hover:shadow-lg
 transition
+dark:bg-gray-600
+dark:border-gray-600
+dark:text-white
 "
           >
             ✅ {completedMissions} Missions Completed

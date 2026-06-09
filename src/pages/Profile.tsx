@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { useUser } from "../context/UserContext.tsx";
 import PageWrapper from "../components/PageWrapper.tsx";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useTheme } from "../context/ThemeContext.tsx";
 
 export default function Profile() {
@@ -23,6 +23,22 @@ export default function Profile() {
 
   // dark/light mode
   const { darkMode, setDarkMode } = useTheme();
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.ctrlKey && e.key.toLowerCase() === "d") {
+        e.preventDefault();
+
+        setDarkMode(!darkMode);
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [setDarkMode]);
 
   // about us
   const [showAbout, setShowAbout] = useState(false);
@@ -50,71 +66,81 @@ export default function Profile() {
 
   return (
     <PageWrapper>
-      <div className="min-h-screen bg-gradient-to-b from-blue-400 via-purple-300 to-pink-300 dark:from-gray-900 dark:via-gray-800 dark:to-blackpx-4 pt-4 pb-6 md:px-8 md:pt-4 md:pb-8">
+      <div className="min-h-screen bg-gradient-to-b from-blue-400 via-purple-300 to-pink-300 px-4 pt-4 pb-6 md:px-8 md:pt-4 md:pb-8">
         <div className="max-w-4xl mx-auto pb-16 md:pb-14">
           {/* Profile Card */}
 
-          <div className="relative bg-white rounded-[35px] shadow-2xl px-8 py-5 text-center mb-4 md:mb-4">
+          <div className="relative bg-white dark:bg-gray-700 rounded-[35px] shadow-2xl px-8 py-5 text-center mb-4 md:mb-4">
             <div className="text-7xl mb-2">{user.avatar}</div>
 
             <button
               onClick={() => setShowSettings(true)}
-              className="absolute top-5 left-4 bg-gray-100 hover:bg-gray-200 p-3 rounded-full text-xl"
+              className="absolute top-5 left-4 bg-gray-100 hover:bg-gray-200 p-3 rounded-full text-xl dark:bg-gray-700"
             >
               ⚙️
             </button>
 
-            <h1 className="text-3xl md:text-4xl font-black text-gray-800 mb-1">
+            <h1 className="text-3xl md:text-4xl font-black text-gray-800 dark:text-white mb-1">
               {user.name}
             </h1>
 
-            <p className="text-lg text-gray-500 mb-1">Age Group: {user.age}</p>
+            <p className="text-lg text-gray-500 mb-1 dark:text-white">
+              Age Group: {user.age}
+            </p>
           </div>
 
           {/* Stats */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-2 mb-4 md:mb-4">
-            <div className="bg-white rounded-3xl shadow-xl p-5 text-center">
+            <div className="bg-white dark:bg-gray-700 rounded-3xl shadow-xl p-5 text-center">
               <div className="w-16 h-16 mx-auto mb-2 rounded-full bg-yellow-100 flex items-center justify-center text-3xl">
                 🪙
               </div>
-              <div className="font-black text-2xl">{user.coins}</div>
-              <div className="text-gray-500">Coins</div>
+              <div className="font-black text-2xl dark:text-white">
+                {user.coins}
+              </div>
+              <div className="text-gray-500 dark:text-gray-300">Coins</div>
             </div>
 
-            <div className="bg-white rounded-3xl shadow-xl p-5 text-center">
+            <div className="bg-white dark:bg-gray-700 rounded-3xl shadow-xl p-5 text-center">
               <div className="w-16 h-16 mx-auto mb-2 rounded-full bg-blue-100 flex items-center justify-center text-3xl">
                 ⚡
               </div>
-              <div className="font-black text-2xl">{user.xp}</div>
-              <div className="text-gray-500">XP</div>
+              <div className="font-black text-2xl dark:text-white">
+                {user.xp}
+              </div>
+              <div className="text-gray-500 dark:text-white">XP</div>
             </div>
 
-            <div className="bg-white rounded-3xl shadow-xl p-5 text-center">
+            <div className="bg-white rounded-3xl shadow-xl p-5 text-center dark:bg-gray-700">
               <div className="w-16 h-16 mx-auto mb-2 rounded-full bg-orange-100 flex items-center justify-center text-3xl">
                 🏆
               </div>
-              <div className="font-black text-2xl">{user.level}</div>
-              <div className="text-gray-500">Level</div>
+              <div className="font-black text-2xl dark:text-white">
+                {user.level}
+              </div>
+              <div className="text-gray-500 dark:text-white">Level</div>
             </div>
 
-            <div className="bg-white rounded-3xl shadow-xl p-5 text-center">
+            <div className="bg-white rounded-3xl shadow-xl p-5 text-center dark:bg-gray-700">
               <div className="w-16 h-16 mx-auto mb-2 rounded-full bg-red-100 flex items-center justify-center text-3xl">
                 🔥
               </div>
-              <div className="font-black text-2xl">{user.streak}</div>
-              <div className="text-gray-500">Streak</div>
+              <div className="font-black text-2xl dark:text-white">
+                {user.streak}
+              </div>
+              <div className="text-gray-500 dark:text-white">Streak</div>
             </div>
           </div>
 
           {/* XP Progress */}
-          <div className="bg-white rounded-3xl shadow-xl p-6 mb-4 md:mb-4">
-            <div className="flex justify-between mb-3 font-bold">
+          <div className="bg-white rounded-3xl shadow-xl p-6 mb-4 md:mb-4 dark:bg-gray-700">
+            <div className="flex justify-between mb-3 font-bold dark:text-white">
               <span>Level Progress</span>
 
               <span>{Math.floor(progress)}%</span>
             </div>
 
-            <div className="w-full h-5 bg-gray-200 rounded-full overflow-hidden">
+            <div className="w-full h-5 bg-gray-200 rounded-full overflow-hidden ">
               <div
                 className="h-5 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 rounded-full transition-all duration-500"
                 style={{
@@ -125,10 +151,12 @@ export default function Profile() {
           </div>
 
           {/* Mission Progress */}
-          <div className="bg-white rounded-3xl shadow-xl p-6 text-center mb-0 md:mb-0">
-            <h2 className="text-2xl font-black mb-3">Missions Completed</h2>
+          <div className="bg-white rounded-3xl shadow-xl p-6 text-center mb-0 md:mb-0 dark:bg-gray-700">
+            <h2 className="text-2xl font-black mb-3 dark:text-white">
+              Missions Completed
+            </h2>
 
-            <div className="text-4xl font-black text-green-600">
+            <div className="text-4xl font-black text-green-600 ">
               {user.completedMissions.length}
             </div>
           </div>
@@ -139,7 +167,7 @@ export default function Profile() {
         <>
           {/* Overlay */}
           <div
-            className="fixed inset-0 bg-black/40 z-40"
+            className="fixed inset-0 bg-black/40 z-40 "
             onClick={() => setShowSettings(false)}
           />
 
@@ -157,14 +185,15 @@ export default function Profile() {
         z-50
         p-6
         animate-slideIn
+        dark:bg-gray-700
       "
           >
             <div className="flex justify-between items-center mb-8">
-              <h2 className="text-2xl font-black">Settings</h2>
+              <h2 className="text-2xl font-black dark:text-white">Settings</h2>
 
               <button
                 onClick={() => setShowSettings(false)}
-                className="text-2xl"
+                className="text-2xl dark:text-white"
               >
                 ✕
               </button>

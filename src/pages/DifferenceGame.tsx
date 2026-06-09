@@ -70,14 +70,14 @@ export default function DifferenceGame() {
     <PageWrapper>
       {showGameOver && (
         <div className="fixed inset-0 bg-black/70 flex items-center justify-center z-50 p-4">
-          <div className="bg-white rounded-[30px] md:rounded-[40px] p-6 md:p-10 text-center shadow-2xl w-full max-w-[90%] md:max-w-md animate-[popup_0.4s_ease]">
+          <div className="bg-white rounded-[30px] md:rounded-[40px] p-6 md:p-10 text-center shadow-2xl w-full max-w-[90%] md:max-w-md animate-[popup_0.4s_ease] dark:bg-gray-600">
             <div className="text-5xl md:text-7xl mb-4">😢</div>
 
-            <h1 className="text-3xl md:text-5xl font-black text-red-600 mb-4">
+            <h1 className="text-3xl md:text-5xl font-black text-red-600 mb-4 dark:text-white">
               GAME OVER
             </h1>
 
-            <p className="text-lg md:text-2xl font-bold text-gray-600 mb-6">
+            <p className="text-lg md:text-2xl font-bold text-gray-600 mb-6 dark:text-white">
               Better luck next time!
             </p>
 
@@ -105,18 +105,18 @@ export default function DifferenceGame() {
 
       {showResult && (
         <div className="fixed inset-0 bg-black/70 flex items-center justify-center z-50 p-4">
-          <div className="bg-white rounded-[30px] p-4 md:p-8 text-center shadow-2xl w-full max-w-md animate-[popup_0.4s_ease-out]">
+          <div className="bg-white rounded-[30px] p-4 md:p-8 text-center shadow-2xl w-full max-w-md animate-[popup_0.4s_ease-out] dark:bg-gray-600">
             <div className="text-7xl mb-4">🏆</div>
 
-            <h1 className="text-4xl font-black text-purple-700 mb-4">
+            <h1 className="text-4xl font-black text-purple-700 mb-4 dark:text-white">
               YOU WIN!
             </h1>
 
-            <div className="text-2xl font-bold text-yellow-600 mb-3">
+            <div className="text-2xl font-bold text-yellow-600 mb-3 dark:text-white">
               🪙 Coins: {finalCoins}
             </div>
 
-            <div className="text-2xl font-bold text-green-600 mb-6">
+            <div className="text-2xl font-bold text-green-600 mb-6 dark:text-white">
               ⚡ XP: {finalXP}
             </div>
 
@@ -133,23 +133,23 @@ export default function DifferenceGame() {
           font-bold
         "
             >
-              Continue 🚀
+              Continue 
             </button>
           </div>
         </div>
       )}
-      <div className="min-h-screen pb-28 bg-gradient-to-b from-sky-300 via-blue-200 to-green-300 flex items-center justify-center p-4 md:p-10 relative overflow-x-hidden mb-16 md:mb-12 pb-6 pt-4 md:pb-12 md:pt-4">
+      <div className="min-h-screen pb-28 bg-gradient-to-b from-sky-300 via-blue-200 to-green-300 flex items-center justify-center p-4 md:p-10 relative overflow-x-hidden mb-16 md:mb-12 pb-6 pt-4 md:pb-12 md:pt-4 ">
         {/* 🌳 Hills */}
         <div className="absolute bottom-0 left-0 w-full h-40 bg-green-400 rounded-t-[100%]"></div>
 
         {/* Main Card */}
-        <div className="relative z-10 bg-white rounded-3xl shadow-2xl p-4 md:p-8 w-full max-w-5xl text-center">
+        <div className="relative z-10 bg-white rounded-3xl shadow-2xl p-4 md:p-8 w-full max-w-5xl text-center dark:bg-gray-700">
           {/* Title */}
-          <h1 className="text-3xl md:text-6xl font-bold mb-1 md:mb-2 text-purple-700">
+          <h1 className="text-3xl md:text-6xl font-bold mb-1 md:mb-2 text-purple-700 dark:text-white">
             Find the Difference
           </h1>
 
-          <p className="text-base md:text-lg text-gray-600 mb-2 md:mb-2">
+          <p className="text-base md:text-lg text-gray-600 mb-2 md:mb-2 dark:text-white">
             Find 3 hidden differences!
           </p>
 
@@ -157,7 +157,7 @@ export default function DifferenceGame() {
           <div className="text-4xl mb-2 md:mb-2">{"❤️".repeat(hearts)}</div>
 
           {/* 🎯 Progress */}
-          <div className="text-xl font-bold text-purple-700 mb-2 md:mb-4">
+          <div className="text-xl font-bold text-purple-700 mb-2 md:mb-4 dark:text-white">
             Found: {found.length}/3 🎯
           </div>
 
