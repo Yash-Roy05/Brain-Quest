@@ -39,47 +39,47 @@ export default function Dashboard() {
     <PageWrapper>
       <div className="min-h-[250px] pb-40 relative overflow-hidden bg-gradient-to-b from-sky-300 via-blue-400 to-green-300 p-6 min-h-[250px] pb-20 pt-4 md:pb-24 md:pt-5">
         {/* 👤 User Info */}
-        <div className="bg-white rounded-3xl shadow-2xl p-5 md:p-5 w-full max-w-7xl px-4 md:px-8 mx-auto mb-4 md:mb-4">
+        <div className="bg-white rounded-3xl shadow-2xl p-5 md:p-5 w-full max-w-7xl px-4 md:px-8 mx-auto mb-4 md:mb-4 dark:bg-gray-700">
           {/* Avatar + Welcome */}
           <div className=" rounded-3xl p-6 text-black mb-0">
             <div className="flex items-center gap-2 md:gap-2">
               <div className="text-6xl ">{user.avatar}</div>
 
               <div>
-                <h1 className="text-3xl md:text-4xl font-black mb-0">
+                <h1 className="text-3xl md:text-4xl font-black mb-0 dark:text-white">
                   Welcome, {user.name}
                 </h1>
 
-                <p className="opacity-80">Age Group: {user.age}</p>
+                <p className="opacity-80 dark:text-white">Age Group: {user.age}</p>
               </div>
             </div>
           </div>
 
           {/* Stats */}
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 mt-0 md:gap-2 md:mt-0">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 mt-0 md:gap-2 md:mt-0 ">
             {/* Level */}
-            <div className="bg-green-100 p-4 rounded-2xl text-center">
-              <h2 className="text-2xl md:text-3xl font-bold">{user.level}</h2>
+            <div className="bg-green-100 p-4 rounded-2xl text-center dark:bg-gray-500">
+              <h2 className="text-2xl md:text-3xl font-bold dark:text-white">{user.level}</h2>
 
-              <p>Level</p>
+              <p className="dark:text-white">Level</p>
             </div>
 
             {/* Missions Completed */}
-            <div className="bg-blue-100 p-4 rounded-2xl text-center">
-              <h2 className="text-2xl md:text-3xl font-bold">
+            <div className="bg-blue-100 p-4 rounded-2xl text-center dark:bg-gray-500">
+              <h2 className="text-2xl md:text-3xl font-bold dark:text-white">
                 {user.completedMissions.length}
               </h2>
 
-              <p>Missions</p>
+              <p className="dark:text-white">Missions</p>
             </div>
 
             {/* Daily Streak */}
-            <div className="bg-purple-100 p-4 rounded-2xl text-center">
-              <h3 className="text-2xl md:text-3xl font-bold">
+            <div className="bg-purple-100 p-4 rounded-2xl text-center dark:bg-gray-500">
+              <h3 className="text-2xl md:text-3xl font-bold dark:text-white">
                 🔥 Daily Streak
               </h3>
 
-              <p className="text-gray-500">Coming Soon</p>
+              <p className="text-gray-500 dark:text-white">Coming Soon</p>
             </div>
           </div>
         </div>
@@ -87,13 +87,13 @@ export default function Dashboard() {
         {/* 🎯 Missions */}
         <div className="max-w-6xl mx-auto">
           <div className="text-center">
-            <h1 className="text-3xl md:text-2xl font-black text-gray-800 ">
+            <h1 className="text-3xl md:text-2xl font-black text-gray-800 dark:text-white">
               Available Missions
             </h1>
           </div>
 
           <div className="text-center mb-3 md:mb-4">
-            <p className="text-gray-700 mt-0 text-lg font-semibold">
+            <p className="text-gray-700 mt-0 text-lg font-semibold dark:text-white">
               Complete missions and earn rewards
             </p>
           </div>
@@ -117,13 +117,13 @@ export default function Dashboard() {
                   whileHover={{
                     scale: 1.05,
                   }}
-                  className="bg-white rounded-3xl shadow-xl p-6"
+                  className="bg-white rounded-3xl shadow-xl p-6 dark:bg-gray-700"
                 >
-                  <h3 className="text-xl md:text-2xl font-bold text-gray-800 mb-3">
+                  <h3 className="text-xl md:text-2xl font-bold text-gray-800 mb-3 dark:text-white">
                     {mission.title}
                   </h3>
 
-                  <p className="font-semibold text-lg mb-4">
+                  <p className="font-semibold text-lg mb-4 dark:text-white">
                     Reward: {mission.reward} 🪙
                   </p>
 
@@ -177,7 +177,7 @@ export default function Dashboard() {
                         });
                       }
                     }}
-                    className="w-full bg-green-500 hover:bg-green-600 text-white py-3 rounded-xl text-base md:text-lg font-semibold transition duration-300"
+                    className="w-full bg-green-500 hover:bg-green-600 text-white py-3 rounded-xl text-base md:text-lg font-semibold transition duration-300 "
                   >
                     Start Mission
                   </motion.button>
@@ -185,12 +185,12 @@ export default function Dashboard() {
               ))}
             </div>
           ) : (
-            <div className="bg-white rounded-3xl shadow-xl p-10 text-center max-w-2xl mx-auto mt-3 md:mt-4 ">
-              <h2 className="text-3xl font-bold text-purple-700 mb-3">
+            <div className="bg-white rounded-3xl shadow-xl p-10 text-center max-w-2xl mx-auto mt-3 md:mt-4 dark:bg-gray-700">
+              <h2 className="text-3xl font-bold text-purple-700 mb-3 dark:text-white">
                 More Missions Coming Soon!
               </h2>
 
-              <p className="text-gray-600 text-lg">
+              <p className="text-gray-600 text-lg dark:text-white">
                 You completed all available missions. New challenges will be
                 added soon.
               </p>
