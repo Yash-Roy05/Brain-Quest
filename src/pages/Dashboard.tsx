@@ -37,13 +37,13 @@ export default function Dashboard() {
 
   return (
     <PageWrapper>
-      <div className="min-h-[250px] pb-40 relative overflow-hidden bg-gradient-to-b from-sky-300 via-blue-400 to-green-300 p-6 min-h-[250px] pb-20 pt-4 md:pb-24 md:pt-5">
+      <div className="min-h-[250px] pb-40 relative overflow-hidden bg-gradient-to-b from-sky-300 via-blue-400 to-green-300 p-6 min-h-[250px] pb-20 pt-4 md:pb-24 md:pt-5 dark:from-gray-900 dark:via-gray-900 dark:to-black">
         {/* 👤 User Info */}
         <div className="bg-white rounded-3xl shadow-2xl p-5 md:p-5 w-full max-w-7xl px-4 md:px-8 mx-auto mb-4 md:mb-4 dark:bg-gray-700">
           {/* Avatar + Welcome */}
-          <div className=" rounded-3xl p-6 text-black mb-0">
+          <div className=" rounded-3xl p-6 text-black mb-0 dark:text-white">
             <div className="flex items-center gap-2 md:gap-2">
-              <div className="text-6xl ">{user.avatar}</div>
+              <div className="text-6xl">{user.avatar}</div>
 
               <div>
                 <h1 className="text-3xl md:text-4xl font-black mb-0 dark:text-white">
@@ -58,28 +58,28 @@ export default function Dashboard() {
           {/* Stats */}
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 mt-0 md:gap-2 md:mt-0 ">
             {/* Level */}
-            <div className="bg-green-100 p-4 rounded-2xl text-center dark:bg-gray-500">
+            <div className="bg-green-100 p-4 rounded-2xl text-center dark:bg-gray-600">
               <h2 className="text-2xl md:text-3xl font-bold dark:text-white">{user.level}</h2>
 
-              <p className="dark:text-white">Level</p>
+              <p className="text:black dark:text-white">Level</p>
             </div>
 
             {/* Missions Completed */}
-            <div className="bg-blue-100 p-4 rounded-2xl text-center dark:bg-gray-500">
+            <div className="bg-blue-100 p-4 rounded-2xl text-center dark:bg-gray-600">
               <h2 className="text-2xl md:text-3xl font-bold dark:text-white">
                 {user.completedMissions.length}
               </h2>
 
-              <p className="dark:text-white">Missions</p>
+              <p className="text:black dark:text-white">Missions</p>
             </div>
 
             {/* Daily Streak */}
-            <div className="bg-purple-100 p-4 rounded-2xl text-center dark:bg-gray-500">
+            <div className="bg-purple-100 p-4 rounded-2xl text-center dark:bg-gray-600">
               <h3 className="text-2xl md:text-3xl font-bold dark:text-white">
                 🔥 Daily Streak
               </h3>
 
-              <p className="text-gray-500 dark:text-white">Coming Soon</p>
+              <p className="text-black dark:text-white">Coming Soon</p>
             </div>
           </div>
         </div>
@@ -186,11 +186,11 @@ export default function Dashboard() {
             </div>
           ) : (
             <div className="bg-white rounded-3xl shadow-xl p-10 text-center max-w-2xl mx-auto mt-3 md:mt-4 dark:bg-gray-700">
-              <h2 className="text-3xl font-bold text-purple-700 mb-3 dark:text-white">
+              <h2 className="text-3xl font-bold text-purple-700 mb-3">
                 More Missions Coming Soon!
               </h2>
 
-              <p className="text-gray-600 text-lg dark:text-white">
+              <p className="text-green-600 text-lg">
                 You completed all available missions. New challenges will be
                 added soon.
               </p>

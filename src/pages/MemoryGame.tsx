@@ -74,7 +74,7 @@ export default function MemoryGame() {
           <div className="fixed inset-0 bg-black/50 z-50" />
 
           <div className="fixed inset-0 flex items-center justify-center z-50 p-4">
-            <div className="bg-white rounded-3xl shadow-2xl p-4 md:p-8 text-center w-full max-w-md animate-[popup_0.4s_ease-out] dark:bg-gray-600">
+            <div className="bg-white rounded-3xl shadow-2xl p-4 md:p-8 text-center w-full max-w-md animate-[popup_0.4s_ease-out] dark:bg-gray-700">
               <div className="text-6xl mb-4">🏆</div>
 
               <h1 className="text-4xl font-black text-purple-700 mb-2 dark:text-white">
@@ -118,9 +118,10 @@ pb-24
 mb-2
 md:mb-0
 min-h-[calc(100vh-80px)]
+dark:from-gray-900 dark:via-gray-900 dark:to-black
 "
       >
-        <div className="bg-white rounded-3xl shadow-2xl p-8 w-full max-w-2xl text-center animate-[fadeIn_0.5s_ease-out] dark:bg-gray-700 ">
+        <div className="bg-white rounded-3xl shadow-2xl p-8 w-full max-w-2xl text-center animate-[fadeIn_0.5s_ease-out] dark:bg-gray-700">
           <h1 className="text-4xl font-bold mb-3 text-purple-700 dark:text-white">
             Memory Match
           </h1>
