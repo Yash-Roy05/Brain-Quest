@@ -59,7 +59,7 @@ export default function Games() {
   ];
 
   return (
-    <div className="min-h-screen px-6 py-6 pb-4 pt-2 md:pb-4 md:pt-4">
+    <div className="min-h-screen px-6 py-6 pb-4 pt-2 md:pb-4 md:pt-4 dark:bg-gray-900">
       {/* Title */}
       <div className="text-center mb-5 md:mb-6">
         <div className="text-center">
@@ -148,8 +148,8 @@ dark:bg-gray-700
       rounded-full
       text-sm
       font-bold
-      dark:text-white
       dark:bg-gray-500
+      dark:text-white
     "
               >
                 ⭐ {game.difficulty}

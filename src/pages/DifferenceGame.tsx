@@ -70,7 +70,7 @@ export default function DifferenceGame() {
     <PageWrapper>
       {showGameOver && (
         <div className="fixed inset-0 bg-black/70 flex items-center justify-center z-50 p-4">
-          <div className="bg-white rounded-[30px] md:rounded-[40px] p-6 md:p-10 text-center shadow-2xl w-full max-w-[90%] md:max-w-md animate-[popup_0.4s_ease] dark:bg-gray-600">
+          <div className="bg-white rounded-[30px] md:rounded-[40px] p-6 md:p-10 text-center shadow-2xl w-full max-w-[90%] md:max-w-md animate-[popup_0.4s_ease] dark:bg-gray-700">
             <div className="text-5xl md:text-7xl mb-4">😢</div>
 
             <h1 className="text-3xl md:text-5xl font-black text-red-600 mb-4 dark:text-white">
@@ -105,7 +105,7 @@ export default function DifferenceGame() {
 
       {showResult && (
         <div className="fixed inset-0 bg-black/70 flex items-center justify-center z-50 p-4">
-          <div className="bg-white rounded-[30px] p-4 md:p-8 text-center shadow-2xl w-full max-w-md animate-[popup_0.4s_ease-out] dark:bg-gray-600">
+          <div className="bg-white rounded-[30px] p-4 md:p-8 text-center shadow-2xl w-full max-w-md animate-[popup_0.4s_ease-out] dark:bg-gray-800">
             <div className="text-7xl mb-4">🏆</div>
 
             <h1 className="text-4xl font-black text-purple-700 mb-4 dark:text-white">
@@ -133,14 +133,14 @@ export default function DifferenceGame() {
           font-bold
         "
             >
-              Continue 
+              Continue
             </button>
           </div>
         </div>
       )}
-      <div className="min-h-screen pb-28 bg-gradient-to-b from-sky-300 via-blue-200 to-green-300 flex items-center justify-center p-4 md:p-10 relative overflow-x-hidden mb-16 md:mb-12 pb-6 pt-4 md:pb-12 md:pt-4 ">
+      <div className="min-h-screen pb-28 bg-gradient-to-b from-sky-300 via-blue-200 to-green-300 flex items-center justify-center p-4 md:p-10 relative overflow-x-hidden mb-16 md:mb-12 pb-6 pt-4 md:pb-12 md:pt-4 dark:from-gray-900 dark:via-gray-900 dark:to-black">
         {/* 🌳 Hills */}
-        <div className="absolute bottom-0 left-0 w-full h-40 bg-green-400 rounded-t-[100%]"></div>
+        <div className="absolute bottom-0 left-0 w-full h-40 bg-green-400 rounded-t-[100%] dark:bg-gray-900"></div>
 
         {/* Main Card */}
         <div className="relative z-10 bg-white rounded-3xl shadow-2xl p-4 md:p-8 w-full max-w-5xl text-center dark:bg-gray-700">
@@ -158,7 +158,7 @@ export default function DifferenceGame() {
 
           {/* 🎯 Progress */}
           <div className="text-xl font-bold text-purple-700 mb-2 md:mb-4 dark:text-white">
-            Found: {found.length}/3 🎯
+            Found : {found.length}/3 
           </div>
 
           {/* 🖼 Images */}
