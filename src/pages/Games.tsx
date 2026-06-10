@@ -59,17 +59,17 @@ export default function Games() {
   ];
 
   return (
-    <div className="min-h-screen px-6 py-6 pb-4 pt-2 md:pb-4 md:pt-4">
+    <div className="min-h-screen px-6 py-6 pb-4 pt-2 md:pb-4 md:pt-4 dark:bg-gray-900">
       {/* Title */}
       <div className="text-center mb-5 md:mb-6">
         <div className="text-center">
-          <h1 className="text-4xl md:text-5xl font-black text-gray-800 ">
+          <h1 className="text-4xl md:text-5xl font-black text-gray-800 dark:text-white">
             Game Zone
           </h1>
         </div>
 
         <div className="text-center mb-3 md:mb-2">
-          <p className="text-gray-700 mt-2 text-lg font-semibold">
+          <p className="text-gray-700 mt-2 text-lg font-semibold dark:text-white">
             Play games & earn rewards
           </p>
         </div>
@@ -100,6 +100,7 @@ hover:shadow-2xl
 hover:-translate-y-2
 transition-all
 duration-300
+dark:bg-gray-700
 "
           >
             {/* Emoji */}
@@ -130,6 +131,7 @@ duration-300
     mb-3 
     md:mb-3
     text-center
+    dark:text-white
   "
             >
               {game.title}
@@ -146,6 +148,8 @@ duration-300
       rounded-full
       text-sm
       font-bold
+      dark:bg-gray-500
+      dark:text-white
     "
               >
                 ⭐ {game.difficulty}
@@ -153,7 +157,7 @@ duration-300
             </div>
 
             {/* Reward */}
-            <div className="text-gray-500 mb-3 md:mb-3 text-center">
+            <div className="text-gray-500 mb-3 md:mb-3 text-center dark:text-white">
               Reward • {game.reward} Coins
             </div>
 

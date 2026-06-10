@@ -74,16 +74,16 @@ export default function MemoryGame() {
           <div className="fixed inset-0 bg-black/50 z-50" />
 
           <div className="fixed inset-0 flex items-center justify-center z-50 p-4">
-            <div className="bg-white rounded-3xl shadow-2xl p-4 md:p-8 text-center w-full max-w-md animate-[popup_0.4s_ease-out]">
+            <div className="bg-white rounded-3xl shadow-2xl p-4 md:p-8 text-center w-full max-w-md animate-[popup_0.4s_ease-out] dark:bg-gray-700">
               <div className="text-6xl mb-4">🏆</div>
 
-              <h1 className="text-4xl font-black text-purple-700 mb-2">
+              <h1 className="text-4xl font-black text-purple-700 mb-2 dark:text-white">
               YOU WIN!
             </h1>
 
               <div className="rounded-2xl p-4 mb-4">
-                <p className="font-bold text-2xl font-bold text-yellow-600 mb-3">🪙 +40 Coins</p>
-                <p className="font-bold text-2xl font-bold text-green-600 mb-0">⚡ +20 XP</p>
+                <p className="font-bold text-2xl font-bold text-yellow-600 mb-3 dark:text-white">🪙 +40 Coins</p>
+                <p className="font-bold text-2xl font-bold text-green-600 mb-0 dark:text-white">⚡ +20 XP</p>
               </div>
 
               <button
@@ -118,18 +118,19 @@ pb-24
 mb-2
 md:mb-0
 min-h-[calc(100vh-80px)]
+dark:from-gray-900 dark:via-gray-900 dark:to-black
 "
       >
-        <div className="bg-white rounded-3xl shadow-2xl p-8 w-full max-w-2xl text-center animate-[fadeIn_0.5s_ease-out]">
-          <h1 className="text-4xl font-bold mb-3 text-purple-700">
+        <div className="bg-white rounded-3xl shadow-2xl p-8 w-full max-w-2xl text-center animate-[fadeIn_0.5s_ease-out] dark:bg-gray-700">
+          <h1 className="text-4xl font-bold mb-3 text-purple-700 dark:text-white">
             Memory Match
           </h1>
 
-          <p className="text-lg text-gray-600 mb-4">
+          <p className="text-lg text-gray-600 mb-4 dark:text-white">
             Match the same cards together!
           </p>
 
-          <div className="grid grid-cols-3 gap-4">
+          <div className="grid grid-cols-3 gap-4 ">
             {cards.map((card, index) => {
               const isFlipped =
                 flipped.includes(index) || matched.includes(index);
@@ -138,7 +139,7 @@ min-h-[calc(100vh-80px)]
                 <div
                   key={index}
                   onClick={() => handleClick(index)}
-                  className="bg-blue-200 h-24 rounded-2xl flex items-center justify-center text-4xl cursor-pointer hover:scale-105 transition"
+                  className="bg-blue-200 h-24 rounded-2xl flex items-center justify-center text-4xl cursor-pointer hover:scale-105 transition "
                 >
                   {isFlipped ? card : "❓"}
                 </div>
