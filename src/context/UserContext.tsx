@@ -1,5 +1,12 @@
 import { createContext, useContext, useState, useEffect } from "react";
 
+type SavedProfile = {
+  coins: number;
+  xp: number;
+  level: number;
+  completedMissions: number[];
+};
+
 type User = {
   name: string;
   age: string;
@@ -11,6 +18,10 @@ type User = {
 
   streak: number;
   lastLoginDate: string;  
+
+  savedProfiles: {
+  [key: string]: SavedProfile;
+};
 };
 
 type UserContextType = {
@@ -42,6 +53,8 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
 
           streak: 0,
           lastLoginDate: "",
+          
+          savedProfiles: {},
         };
   });
 

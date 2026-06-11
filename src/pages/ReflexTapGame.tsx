@@ -1,9 +1,12 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import PageWrapper from "../components/PageWrapper.tsx";
+import { useUser } from "../context/UserContext.tsx";
 
 export default function ReflexTapGame() {
   const navigate = useNavigate();
+
+  const { addCoins, addXP, setUser } = useUser();
 
   // ❤️ Hearts
   const [hearts, setHearts] = useState(3);
@@ -106,10 +109,21 @@ export default function ReflexTapGame() {
 
   // 🎉 Win Condition
   useEffect(() => {
-    if (score >= 100) {
-      setWon(true);
-    }
-  }, [score]);
+  if (score >= 100 && !won) {
+    addCoins(100);
+    addXP(50);
+
+    setUser((prev) => ({
+      ...prev,
+      completedMissions: [
+        ...prev.completedMissions,
+        405,
+      ],
+    }));
+
+    setWon(true);
+  }
+}, [score, won]);
 
   return (
     <PageWrapper>
@@ -117,15 +131,15 @@ export default function ReflexTapGame() {
         {/* 🎉 WIN */}
         {won && (
           <div className="fixed inset-0 bg-black/70 flex items-center justify-center z-50">
-            <div className="bg-white rounded-[25px] md:rounded-[40px] p-4 md:p-10 text-center w-[90%] max-w-md max-h-[90vh] overflow-y-auto">
-              <div className="text-5xl md:text-7xl mb-4 animate-bounce">🏆</div>
+            <div className="bg-white rounded-[25px] md:rounded-[40px] p-4 md:p-10 text-center w-[90%] max-w-md max-h-[90vh] overflow-y-auto dark:bg-gray-600">
+              <div className="text-5xl md:text-7xl mb-2">🏆</div>
 
-              <h1 className="text-2xl text-2xl md:text-5xl font-black text-green-600 mb-4">
+              <h1 className="text-2xl text-2xl md:text-5xl font-black text-green-600 mb-2 dark:text-white">
                 You Win!
               </h1>
 
-              <p className="text-xl font-bold text-gray-600 mb-8">
-                Amazing Reflexes ⚡
+              <p className="text-xl font-bold text-gray-600 mb-4 dark:text-white">
+                Amazing Reflexes 
               </p>
 
               <button
@@ -141,14 +155,14 @@ export default function ReflexTapGame() {
         {/* 💔 GAME OVER */}
         {gameOver && (
           <div className="fixed inset-0 bg-black/70 flex items-center justify-center z-50">
-            <div className="bg-white rounded-[25px] md:rounded-[40px] p-4 md:p-10 text-center w-[90%] max-w-md max-h-[90vh] overflow-y-auto">
+            <div className="bg-white rounded-[25px] md:rounded-[40px] p-4 md:p-10 text-center w-[90%] max-w-md max-h-[90vh] overflow-y-auto dark:bg-gray-600">
               <div className="text-5xl md:text-7xl mb-4">😢</div>
 
-              <h1 className="text-2xl md:text-5xl font-black text-red-500 mb-4">
+              <h1 className="text-2xl md:text-5xl font-black text-red-500 mb-4 dark:text-white">
                 Game Over
               </h1>
 
-              <p className="text-xl font-bold text-gray-600 mb-4">
+              <p className="text-xl font-bold text-gray-600 mb-4 dark:text-white">
                 Try Again Faster
               </p>
 
