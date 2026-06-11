@@ -52,12 +52,35 @@ export default function Profile() {
     setIsSaving(true);
 
     setTimeout(() => {
-      setUser((prev) => ({
-        ...prev,
-        name: newName,
-        avatar: newAvatar,
-        age: newAge,
-      }));
+      setUser((prev) => {
+        const updatedProfiles = {
+          ...prev.savedProfiles,
+
+          [prev.age]: {
+            coins: prev.coins,
+            xp: prev.xp,
+            level: prev.level,
+            completedMissions: prev.completedMissions,
+          },
+        };
+
+        const newAgeProfile = updatedProfiles[newAge];
+
+        return {
+          ...prev,
+
+          name: newName,
+          avatar: newAvatar,
+          age: newAge,
+
+          coins: newAgeProfile?.coins ?? 0,
+          xp: newAgeProfile?.xp ?? 0,
+          level: newAgeProfile?.level ?? 1,
+          completedMissions: newAgeProfile?.completedMissions ?? [],
+
+          savedProfiles: updatedProfiles,
+        };
+      });
 
       setIsSaving(false);
       setShowEditProfile(false);
@@ -84,7 +107,9 @@ export default function Profile() {
               {user.name}
             </h1>
 
-            <p className="text-lg text-gray-500 mb-1 dark:text-white">Age Group: {user.age}</p>
+            <p className="text-lg text-gray-500 mb-1 dark:text-white">
+              Age Group: {user.age}
+            </p>
           </div>
 
           {/* Stats */}
@@ -93,7 +118,9 @@ export default function Profile() {
               <div className="w-16 h-16 mx-auto mb-2 rounded-full bg-yellow-100 flex items-center justify-center text-3xl">
                 🪙
               </div>
-              <div className="font-black text-2xl dark:text-white">{user.coins}</div>
+              <div className="font-black text-2xl dark:text-white">
+                {user.coins}
+              </div>
               <div className="text-gray-500 dark:text-white">Coins</div>
             </div>
 
@@ -101,7 +128,9 @@ export default function Profile() {
               <div className="w-16 h-16 mx-auto mb-2 rounded-full bg-blue-100 flex items-center justify-center text-3xl">
                 ⚡
               </div>
-              <div className="font-black text-2xl dark:text-white">{user.xp}</div>
+              <div className="font-black text-2xl dark:text-white">
+                {user.xp}
+              </div>
               <div className="text-gray-500 dark:text-white">XP</div>
             </div>
 
@@ -109,7 +138,9 @@ export default function Profile() {
               <div className="w-16 h-16 mx-auto mb-2 rounded-full bg-orange-100 flex items-center justify-center text-3xl">
                 🏆
               </div>
-              <div className="font-black text-2xl dark:text-white">{user.level}</div>
+              <div className="font-black text-2xl dark:text-white">
+                {user.level}
+              </div>
               <div className="text-gray-500 dark:text-white">Level</div>
             </div>
 
@@ -117,7 +148,9 @@ export default function Profile() {
               <div className="w-16 h-16 mx-auto mb-2 rounded-full bg-red-100 flex items-center justify-center text-3xl">
                 🔥
               </div>
-              <div className="font-black text-2xl dark:text-white">{user.streak}</div>
+              <div className="font-black text-2xl dark:text-white">
+                {user.streak}
+              </div>
               <div className="text-gray-500 dark:text-white">Streak</div>
             </div>
           </div>
@@ -142,7 +175,9 @@ export default function Profile() {
 
           {/* Mission Progress */}
           <div className="bg-white rounded-3xl shadow-xl p-6 text-center mb-0 md:mb-0 dark:bg-gray-700">
-            <h2 className="text-2xl font-black mb-3 dark:text-white">Missions Completed</h2>
+            <h2 className="text-2xl font-black mb-3 dark:text-white">
+              Missions Completed
+            </h2>
 
             <div className="text-4xl font-black text-green-600 ">
               {user.completedMissions.length}
@@ -215,7 +250,7 @@ export default function Profile() {
 
               <button
                 onClick={() => setDarkMode(!darkMode)}
-                className="w-full text-left p-4 rounded-2xl bg-gray-100 dark:text-white dark:bg-gray-600" 
+                className="w-full text-left p-4 rounded-2xl bg-gray-100 dark:text-white dark:bg-gray-600"
               >
                 {darkMode ? "☀️ Light Mode" : "🌙 Dark Mode"}
               </button>
@@ -229,7 +264,7 @@ export default function Profile() {
 
               <button
                 onClick={() => setShowContact(true)}
-                className="w-full text-left p-4 rounded-2xl bg-gray-100 dark:text-white dark:bg-gray-600" 
+                className="w-full text-left p-4 rounded-2xl bg-gray-100 dark:text-white dark:bg-gray-600"
               >
                 📩 Contact Us
               </button>
@@ -248,7 +283,9 @@ export default function Profile() {
           <div className="fixed inset-0 flex items-center justify-center z-50 p-4 ">
             <div className="bg-white rounded-3xl shadow-2xl p-6 w-full max-w-md dark:bg-gray-800">
               <div className="flex justify-between items-center mb-6">
-                <h2 className="text-2xl font-black dark:text-white">Edit Profile</h2>
+                <h2 className="text-2xl font-black dark:text-white">
+                  Edit Profile
+                </h2>
 
                 <button
                   onClick={() => setShowEditProfile(false)}
@@ -314,7 +351,9 @@ export default function Profile() {
             <div className="bg-white rounded-3xl p-8 max-w-md w-full shadow-2xl text-center dark:bg-gray-700">
               <div className="text-5xl mb-4">🧠</div>
 
-              <h2 className="text-2xl font-black mb-4 dark:text-white">About Brain Quest</h2>
+              <h2 className="text-2xl font-black mb-4 dark:text-white">
+                About Brain Quest
+              </h2>
 
               <p className="text-gray-600 dark:text-white">
                 Brain Quest is a fun learning platform designed to improve
@@ -344,13 +383,17 @@ export default function Profile() {
             <div className="bg-white rounded-3xl p-8 max-w-md w-full shadow-2xl text-center dark:bg-gray-700">
               <div className="text-5xl mb-4">📩</div>
 
-              <h2 className="text-2xl font-black mb-4 dark:text-white">Contact Us</h2>
+              <h2 className="text-2xl font-black mb-4 dark:text-white">
+                Contact Us
+              </h2>
 
               <p className="text-gray-600 mb-2 dark:text-white">
                 Email: support@brainquest.com
               </p>
 
-              <p className="text-gray-600 dark:text-white">Instagram: @brainquest</p>
+              <p className="text-gray-600 dark:text-white">
+                Instagram: @brainquest
+              </p>
 
               <button
                 onClick={() => setShowContact(false)}
