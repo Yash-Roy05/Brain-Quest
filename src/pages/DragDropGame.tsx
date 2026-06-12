@@ -152,7 +152,7 @@ export default function DragDropGame() {
       {/* 🎉 WIN */}
       {matched.length === 4 && <Confetti />}
 
-      <div className="min-h-screen pb-24 md:pb-24 overflow-x-hidden bg-gradient-to-b from-sky-300 via-blue-200 to-green-300 p-4 md:p-6 flex items-center justify-center mb-0 md:mb-0 pt-4 md:pt-6 dark:from-gray-900 dark:via-gray-900 dark:to-black">
+      <div className="h-auto pb-8 md:pb-8 overflow-x-hidden bg-gradient-to-b from-sky-300 via-blue-200 to-green-300 p-4 md:p-6 flex justify-center mb-0 md:mb-0 pt-4 md:pt-6 dark:from-gray-900 dark:via-gray-900 dark:to-black">
         <div className="bg-white rounded-[30px] md:rounded-[40px] shadow-2xl p-4 md:p-10 w-full max-w-6xl dark:bg-gray-700">
           {/* Title */}
           <h1 className="text-3xl md:text-5xl font-black text-center mb-4 text-purple-700 mb-0 md:mb-2 pt-2 md:pt-0 dark:text-white">
