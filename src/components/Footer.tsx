@@ -34,12 +34,14 @@ export default function Footer() {
           onClick={() => navigate("/dashboard")}
           className="relative flex flex-col items-center font-bold"
         >
-          <span className="text-2xl dark:w-10 dark:h-10 dark:rounded-full dark:bg-yellow-100 dark:flex dark:items-center dark:justify-center">🏠</span>
+          <span className="text-2xl w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center    dark:w-10 dark:h-10 dark:rounded-full dark:bg-yellow-100 dark:flex dark:items-center dark:justify-center dark:text-2xl">
+            🏠
+          </span>
           <span
             className={`text-xs dark:text-white ${
               location.pathname === "/dashboard"
-                ? "text-blue-600"
-                : "text-gray-500"
+                ? "text-blue-600 dark:text-yellow-300"
+                : "text-gray-500 dark:text-gray-300"
             }`}
           >
             Home
@@ -54,10 +56,14 @@ export default function Footer() {
           onClick={() => navigate("/games")}
           className="relative flex flex-col items-center font-bold"
         >
-          <span className="text-2xl dark:w-10 dark:h-10 dark:rounded-full dark:bg-blue-100 dark:flex dark:items-center dark:justify-center">🎮</span>
+          <span className="text-2xl w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center     dark:w-10 dark:h-10 dark:rounded-full dark:bg-blue-100 dark:flex dark:items-center dark:justify-center dark:text-2xl">
+            🎮
+          </span>
           <span
             className={`text-xs dark:text-white ${
-              location.pathname === "/games" ? "text-blue-600" : "text-gray-500"
+              location.pathname === "/games"
+                ? "text-blue-600 dark:text-yellow-300"
+                : "text-gray-500 dark:text-gray-300"
             }`}
           >
             Games
@@ -72,12 +78,14 @@ export default function Footer() {
           onClick={() => navigate("/missions")}
           className="relative flex flex-col items-center font-bold"
         >
-          <span className="text-2xl dark:w-10 dark:h-10 dark:rounded-full dark:bg-orange-100 dark:flex dark:items-center dark:justify-center">🏆</span>
+          <span className="text-2xl w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center   dark:w-10 dark:h-10 dark:rounded-full dark:bg-orange-100 dark:flex dark:items-center dark:justify-center dark:text-2xl">
+            🏆
+          </span>
           <span
             className={`text-xs dark:text-white ${
               location.pathname === "/missions"
-                ? "text-blue-600"
-                : "text-gray-500"
+                ? "text-blue-600 dark:text-yellow-300"
+                : "text-gray-500 dark:text-gray-300"
             }`}
           >
             Missions
@@ -92,12 +100,14 @@ export default function Footer() {
           onClick={() => navigate("/Profile")}
           className="relative flex flex-col items-center font-bold"
         >
-          <span className="text-2xl dark:w-10 dark:h-10 dark:rounded-full dark:bg-red-100 dark:flex dark:items-center dark:justify-center text-2xl">👤</span>
+          <span className="text-2xl w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center       dark:w-10 dark:h-10 dark:rounded-full dark:bg-red-100 dark:flex dark:items-center dark:justify-center text-2xl">
+            👤
+          </span>
           <span
             className={`text-xs dark:text-white ${
               location.pathname === "/Profile"
-                ? "text-blue-600"
-                : "text-gray-500"
+                ? "text-blue-600 dark:text-yellow-300"
+                : "text-gray-500 dark:text-gray-300"
             }`}
           >
             Profile

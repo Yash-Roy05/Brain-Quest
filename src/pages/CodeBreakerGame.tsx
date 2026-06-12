@@ -229,22 +229,22 @@ export default function CodeBreakerGame() {
       {/* 🏆 Result Screen */}
       {won && (
         <div className="fixed inset-0 bg-black/60 flex items-center justify-center z-50">
-          <div className="bg-white rounded-[40px] p-10 text-center shadow-2xl w-[90%] max-w-md animate-[popup_0.4s_ease]">
+          <div className="bg-white rounded-[40px] p-10 text-center shadow-2xl w-[90%] max-w-md animate-[popup_0.4s_ease] dark:bg-gray-600">
             <div className="text-7xl mb-4">🔐</div>
 
-            <h1 className="text-3xl md:text-5xl font-black text-green-600 mb-6">
+            <h1 className="text-3xl md:text-5xl font-black text-green-600 mb-6 dark:text-white">
               CODE CRACKED!
             </h1>
 
-            <div className="text-2xl font-bold text-blue-600 mb-3">
+            <div className="text-2xl font-bold text-blue-600 mb-3 dark:text-white">
               ⏱ Time: {time}s
             </div>
 
-            <div className="text-2xl font-bold text-yellow-600 mb-3">
+            <div className="text-2xl font-bold text-yellow-600 mb-3 dark:text-white">
               🪙 Coins: {finalCoins}
             </div>
 
-            <div className="text-2xl font-bold text-purple-600 mb-6">
+            <div className="text-2xl font-bold text-purple-600 mb-6 dark:text-white">
               ⚡ XP: {finalXP}
             </div>
 
@@ -260,14 +260,14 @@ export default function CodeBreakerGame() {
 
       {showGameOver && (
         <div className="fixed inset-0 bg-black/70 flex items-center justify-center z-50 p-4">
-          <div className="bg-white rounded-[30px] md:rounded-[40px] p-6 md:p-10 text-center shadow-2xl w-full max-w-[90%] md:max-w-md animate-[popup_0.4s_ease]">
+          <div className="bg-white rounded-[30px] md:rounded-[40px] p-6 md:p-10 text-center shadow-2xl w-full max-w-[90%] md:max-w-md animate-[popup_0.4s_ease] dark:bg-gray-600">
             <div className="text-5xl md:text-7xl mb-4">😢</div>
 
-            <h1 className="text-3xl md:text-5xl font-black text-red-600 mb-4">
+            <h1 className="text-3xl md:text-5xl font-black text-red-600 mb-4 dark:text-white">
               GAME OVER
             </h1>
 
-            <p className="text-lg md:text-2xl font-bold text-gray-600 mb-6">
+            <p className="text-lg md:text-2xl font-bold text-gray-600 mb-6 dark:text-white">
               Better luck next time!
             </p>
 
@@ -294,21 +294,21 @@ export default function CodeBreakerGame() {
       )}
 
       <PageWrapper>
-        <div className="min-h-screen pb-6 md:pb-8 bg-gradient-to-b from-gray-900 via-gray-800 to-black flex items-center justify-center p-6 relative overflow-hidden">
+        <div className="min-h-screen pb-28 bg-gradient-to-b from-indigo-400 via-purple-400 to-pink-300 flex items-center justify-center p-6 relative overflow-hidden dark:from-gray-900 dark:via-gray-900 dark:to-black">
           {/* Main Card */}
-          <div className="bg-white rounded-[25px] md:rounded-[40px] shadow-2xl p-4 md:p-10 w-full max-w-md md:max-w-xl text-center relative z-10">
+          <div className="bg-white rounded-[25px] md:rounded-[40px] shadow-2xl p-4 md:p-10 w-full max-w-md md:max-w-xl text-center relative z-10 dark:bg-gray-700">
             {/* Title */}
-            <h1 className="text-5xl font-black text-gray-800 mb-2">
+            <h1 className="text-5xl font-black text-gray-800 mb-2 dark:text-white">
               Code Breaker
             </h1>
 
             {/* Attempts */}
-            <div className="text-2xl font-bold text-red-500 mb-2">
+            <div className="text-2xl font-bold text-red-500 mb-2 ">
               Attempts Left: {attempts}
             </div>
 
             {/* Timer */}
-            <div className="text-2xl font-bold text-blue-600 mb-6">
+            <div className="text-2xl font-bold text-blue-600 mb-2 dark:text-white">
               ⏱ Time: {time}s
             </div>
 
@@ -319,7 +319,7 @@ export default function CodeBreakerGame() {
 
             {/* Progress */}
             <div className="mb-8">
-              <div className="flex justify-between text-sm font-bold mb-2">
+              <div className="flex justify-between text-sm font-bold mb-2 dark:text-white">
                 <span>Attempts Used </span>
 
                 <span>{15 - attempts}/15</span>
@@ -378,31 +378,31 @@ export default function CodeBreakerGame() {
             {/* Hint */}
             <div className="bg-gray-100 rounded-3xl p-6 shadow-inner mb-8">
               <h2 className="text-2xl font-black text-purple-700 mb-3">
-                Result 💡
+                Result 
               </h2>
 
               <p className="text-xl font-bold text-gray-700">
-                {hint || "Start Guessing 🔍"}
+                {hint || "Start Guessing "}
               </p>
             </div>
 
             {/* 📜 Guess History */}
             <div className="bg-gray-50 rounded-3xl p-6 shadow-inner text-left">
               <h2 className="text-2xl font-black text-gray-800 mb-4 text-center">
-                Guess History 📜
+                Guess History 
               </h2>
 
               <div className="space-y-3 max-h-64 overflow-y-auto">
                 {history.length === 0 && (
                   <div className="text-center text-gray-500 font-bold">
-                    No guesses yet 🤔
+                    No guesses yet
                   </div>
                 )}
 
                 {/* 📜 Guess History */}
                 <div className="bg-gray-50 rounded-3xl p-6 shadow-inner text-left">
                   <h2 className="text-2xl font-black text-gray-800 mb-4 text-center">
-                    Guess History 📜
+                    Guess History 
                   </h2>
 
                   {/* Toggle Button */}
@@ -428,7 +428,7 @@ export default function CodeBreakerGame() {
 
                   {history.length === 0 ? (
                     <div className="text-center text-gray-500 font-bold">
-                      No guesses yet 🤔
+                      No guesses yet 
                     </div>
                   ) : (
                     showHistory && (

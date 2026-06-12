@@ -171,18 +171,18 @@ export default function SpeedMathGame() {
     <PageWrapper>
       {showWinCard && (
         <div className="fixed inset-0 bg-black/70 flex items-center justify-center z-50 p-4">
-          <div className="bg-white rounded-[30px] p-6 md:p-8 text-center shadow-2xl w-full max-w-md animate-[popup_0.4s_ease-out]">
+          <div className="bg-white rounded-[30px] p-6 md:p-8 text-center shadow-2xl w-full max-w-md animate-[popup_0.4s_ease-out] dark:bg-gray-600">
             <div className="text-7xl mb-4">🏆</div>
 
-            <h1 className="text-4xl font-black text-purple-700 mb-4">
+            <h1 className="text-4xl font-black text-purple-700 mb-4 dark:text-white">
               YOU WIN!
             </h1>
 
-            <div className="text-2xl font-bold text-yellow-600 mb-3">
+            <div className="text-2xl font-bold text-yellow-600 mb-3 dark:text-white">
               🪙 Coins: {finalCoins}
             </div>
 
-            <div className="text-2xl font-bold text-green-600 mb-6">
+            <div className="text-2xl font-bold text-green-600 mb-6 dark:text-white">
               ⚡ XP: {finalXP}
             </div>
 
@@ -198,12 +198,12 @@ export default function SpeedMathGame() {
 
       {showGameOverCard && (
         <div className="fixed inset-0 bg-black/70 flex items-center justify-center z-50 p-4">
-          <div className="bg-white rounded-[30px] p-6 md:p-8 text-center shadow-2xl w-full max-w-md">
+          <div className="bg-white rounded-[30px] p-6 md:p-8 text-center shadow-2xl w-full max-w-md dark:bg-gray-600">
             <div className="text-7xl mb-4">😢</div>
 
-            <h1 className="text-4xl font-black text-red-600 mb-2">GAME OVER</h1>
+            <h1 className="text-4xl font-black text-red-600 mb-2 dark:text-white">GAME OVER</h1>
 
-            <p className="text-xl font-bold text-gray-600 mb-4">
+            <p className="text-xl font-bold text-gray-600 mb-4 dark:text-white">
               Better luck next time!
             </p>
 
@@ -220,11 +220,11 @@ export default function SpeedMathGame() {
       {/* 🎉 Confetti */}
       {showWinCard && <Confetti />}
 
-      <div className="min-h-screen pb-6 md:pb-8 bg-gradient-to-b from-purple-400 via-pink-300 to-yellow-200 flex items-center justify-center p-6 relative overflow-hidden">
+      <div className="min-h-screen pb-28 bg-gradient-to-b from-purple-400 via-pink-300 to-yellow-200 flex items-center justify-center p-6 relative overflow-hidden dark:from-gray-900 dark:via-gray-900 dark:to-black">
         {/* Main Card */}
-        <div className="bg-white rounded-[40px] shadow-2xl p-6 md:p-10 w-full max-w-3xl text-center relative z-10 border-8 border-white">
+        <div className="bg-white rounded-[40px] shadow-2xl p-6 md:p-10 w-full max-w-3xl text-center relative z-10 dark:bg-gray-700">
           {/* Title */}
-          <h1 className="text-3xl md:text-5xl font-black mb-2 text-purple-700">
+          <h1 className="text-3xl md:text-5xl font-black mb-2 text-purple-700 dark:text-white">
             Speed Math Battle
           </h1>
 
@@ -232,7 +232,7 @@ export default function SpeedMathGame() {
           <div className="text-4xl mb-3">{"❤️".repeat(hearts)}</div>
 
           {/* Timer */}
-          <div className="text-2xl font-bold text-red-500 mb-2">
+          <div className="text-2xl font-bold text-red-500 mb-2 dark:text-white">
             ⏱ {timeLeft}s
           </div>
 
@@ -242,13 +242,13 @@ export default function SpeedMathGame() {
           </div>
 
           {/* Goal */}
-          <div className="text-lg font-bold text-blue-600 mb-1">
+          <div className="text-lg font-bold text-blue-600 mb-1 dark:text-white">
             Reach 70 Score To Win 🏆
           </div>
 
           {/* 📈 Progress Bar */}
           <div className="mb-6">
-            <div className="flex justify-between text-sm font-bold mb-1">
+            <div className="flex justify-between text-sm font-bold mb-1 dark:text-white">
               <span>Progress</span>
 
               <span>{score}/70</span>
@@ -265,7 +265,7 @@ export default function SpeedMathGame() {
           </div>
 
           {/* Combo */}
-          <div className="text-xl font-bold text-purple-600 mb-4">
+          <div className="text-xl font-bold text-purple-600 mb-4 dark:text-white">
             Streak: {combo}
           </div>
 

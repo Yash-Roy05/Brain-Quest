@@ -354,14 +354,14 @@ export default function WordPuzzleGame() {
     <>
       {showGameOver && (
         <div className="fixed inset-0 bg-black/70 flex items-center justify-center z-50 p-4">
-          <div className="bg-white rounded-[30px] md:rounded-[40px] p-6 md:p-10 text-center shadow-2xl w-full max-w-[90%] md:max-w-md animate-[popup_0.4s_ease]">
+          <div className="bg-white rounded-[30px] md:rounded-[40px] p-6 md:p-10 text-center shadow-2xl w-full max-w-[90%] md:max-w-md animate-[popup_0.4s_ease] dark:bg-gray-700">
             <div className="text-5xl md:text-7xl mb-4">😢</div>
 
-            <h1 className="text-3xl md:text-5xl font-black text-red-600 mb-4">
+            <h1 className="text-3xl md:text-5xl font-black text-red-600 mb-4 dark:text-white">
               GAME OVER
             </h1>
 
-            <p className="text-lg md:text-2xl font-bold text-gray-600 mb-6">
+            <p className="text-lg md:text-2xl font-bold text-gray-600 mb-6 dark:text-white">
               Better luck next time!
             </p>
 
@@ -390,22 +390,22 @@ export default function WordPuzzleGame() {
       {/* 🎉 Result */}
       {showResult && (
         <div className="fixed inset-0 bg-black/70 flex items-center justify-center z-50 p-4">
-          <div className="bg-white rounded-[30px] md:rounded-[40px] p-6 md:p-10 text-center shadow-2xl w-full max-w-[90%] md:max-w-md animate-[popup_0.4s_ease]">
+          <div className="bg-white rounded-[30px] md:rounded-[40px] p-6 md:p-10 text-center shadow-2xl w-full max-w-[90%] md:max-w-md animate-[popup_0.4s_ease] dark:bg-gray-600">
             <div className="text-5xl md:text-7xl mb-4">🏆</div>
 
-            <h1 className="text-3xl md:text-5xl font-black text-purple-700 mb-4">
+            <h1 className="text-3xl md:text-5xl font-black text-purple-700 mb-4 dark:text-white">
               YOU WIN!
             </h1>
 
-            <div className="text-lg md:text-2xl font-bold text-blue-600 mb-3">
+            <div className="text-lg md:text-2xl font-bold text-blue-600 mb-3 dark:text-white">
               ⏱ Time: {time}s
             </div>
 
-            <div className="text-lg md:text-2xl font-bold text-yellow-600 mb-3">
+            <div className="text-lg md:text-2xl font-bold text-yellow-600 mb-3 dark:text-white">
               🪙 Coins: {finalCoins}
             </div>
 
-            <div className="text-lg md:text-2xl font-bold text-green-600 mb-6">
+            <div className="text-lg md:text-2xl font-bold text-green-600 mb-6 dark:text-white">
               ⚡ XP: {finalXP}
             </div>
 
@@ -422,10 +422,10 @@ export default function WordPuzzleGame() {
       <PageWrapper>
         {score >= 70 && <Confetti />}
 
-        <div className="min-h-screen pb-6 md:pb-8 overflow-x-hidden bg-gradient-to-b from-pink-300 via-purple-300 to-blue-300 flex items-center justify-center p-3 md:p-6">
-          <div className="bg-white rounded-[25px] md:rounded-[40px] shadow-2xl p-4 md:p-10 w-full max-w-4xl text-center mb-0 md:mb-0">
+        <div className="min-h-screen pb-28 md:pb-40 overflow-x-hidden bg-gradient-to-b from-pink-300 via-purple-300 to-blue-300 flex items-center justify-center p-3 md:p-6 dark:from-gray-900 dark:via-gray-900 dark:to-black">
+          <div className="bg-white rounded-[25px] md:rounded-[40px] shadow-2xl p-4 md:p-10 w-full max-w-4xl text-center mb-0 md:mb-0 dark:bg-gray-700">
             {/* Title */}
-            <h1 className="text-3xl md:text-5xl font-black text-purple-700 mb-1 md:mb-3">
+            <h1 className="text-3xl md:text-5xl font-black text-purple-700 mb-1 md:mb-3 dark:text-white">
               Word Search 
             </h1>
 
@@ -437,24 +437,24 @@ export default function WordPuzzleGame() {
             {/* Top Info */}
             <div className="flex flex-col md:flex-row items-center justify-center gap-3 md:gap-8 mb-3 md:mb-5">
               {/* Timer */}
-              <div className="text-lg md:text-2xl font-bold text-blue-600 mb-0">
+              <div className="text-lg md:text-2xl font-bold text-blue-600 mb-0 dark:text-white">
                 ⏱ {time}s
               </div>
 
               {/* Score */}
-              <div className="text-lg md:text-2xl font-bold text-yellow-600">
+              <div className="text-lg md:text-2xl font-bold text-yellow-600 dark:text-white">
                 🔍 {score / 10}/7
               </div>
             </div>
 
             {/* Target */}
-            <h2 className="text-xl md:text-3xl font-black mb-6 md:mb-8 text-blue-700 break-words mb-1">
+            <h2 className="text-xl md:text-3xl font-black mb-6 md:mb-8 text-blue-700 break-words mb-1 dark:text-white">
               Find: {targetWord}
             </h2>
 
             {/* Message */}
             {message && (
-              <div className="text-2xl md:text-3xl font-black text-pink-500 mb-5 animate-pulse">
+              <div className="text-2xl md:text-3xl font-black text-pink-500 mb-5 animate-pulse dark:text-white">
                 {message}
               </div>
             )}
@@ -526,7 +526,7 @@ overflow-x-auto
             </div>
 
             {/* Selected */}
-            <div className="text-lg md:text-2xl font-black text-purple-700 break-words">
+            <div className="text-lg md:text-2xl font-black text-purple-700 break-words dark:text-white">
               Selected: {selected}
             </div>
 
