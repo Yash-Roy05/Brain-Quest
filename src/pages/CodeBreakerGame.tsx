@@ -294,7 +294,7 @@ export default function CodeBreakerGame() {
       )}
 
       <PageWrapper>
-        <div className="min-h-screen pb-28 bg-gradient-to-b from-gray-900 via-gray-800 to-black flex items-center justify-center p-6 relative overflow-hidden">
+        <div className="min-h-screen pb-6 md:pb-8 bg-gradient-to-b from-gray-900 via-gray-800 to-black flex items-center justify-center p-6 relative overflow-hidden">
           {/* Main Card */}
           <div className="bg-white rounded-[25px] md:rounded-[40px] shadow-2xl p-4 md:p-10 w-full max-w-md md:max-w-xl text-center relative z-10">
             {/* Title */}

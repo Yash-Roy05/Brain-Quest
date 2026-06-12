@@ -143,7 +143,7 @@ export default function SudokuLiteGame() {
           </div>
         </div>
       ) : (
-        <div className="min-h-screen pb-32 bg-gradient-to-b from-purple-400 via-blue-300 to-cyan-200 flex items-center justify-center p-6">
+        <div className="min-h-screen pb-6 md:pb-8 bg-gradient-to-b from-purple-400 via-blue-300 to-cyan-200 flex items-center justify-center p-6">
           <div className="bg-white rounded-[40px] shadow-2xl p-4 md:p-8 w-full max-w-2xl text-center">
             {/* Title */}
             <h1 className="text-5xl font-black text-purple-700 mb-2">
