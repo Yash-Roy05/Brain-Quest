@@ -17,31 +17,45 @@ export default function Profile() {
   // ⭐ Selected Avatar
   const [avatar, setAvatar] = useState("🐼");
 
+  const [nameError, setNameError] = useState(false);
+  const [ageError, setAgeError] = useState(false);
+
   const handleStart = () => {
-    if (!name || !age) {
-      alert("Please enter all details ❗");
+    if (!name.trim()) {
+      setNameError(true);
+    } else {
+      setNameError(false);
+    }
+
+    if (!age) {
+      setAgeError(true);
+    } else {
+      setAgeError(false);
+    }
+
+    if (!name.trim() || !age) {
       return;
     }
 
-setUser({
-  name,
-  age,
-  coins: 0,
-  xp: 0,
-  level: 1,
-  completedMissions: [],
-  avatar,
+    setUser({
+      name,
+      age,
+      coins: 0,
+      xp: 0,
+      level: 1,
+      completedMissions: [],
+      avatar,
 
-  streak: 1,
-  lastLoginDate: new Date().toDateString(),
-});
+      streak: 1,
+      lastLoginDate: new Date().toDateString(),
+    });
 
     navigate("/dashboard");
   };
 
   return (
     <PageWrapper>
-      <div className="flex items-center justify-center py-10 px-4 bg-gradient-to-r from-blue-400 to-purple-500 min-h-[80vh] pb-28 ">
+      <div className="flex items-center justify-center py-10 px-4 bg-gradient-to-r from-blue-400 to-purple-500 min-h-[80vh] pb-8">
         <div className="bg-white rounded-3xl shadow-2xl p-6 md:p-10 w-full max-w-xl text-center">
           {/* Hero Avatar */}
           <div className="mb-6">
@@ -51,9 +65,7 @@ setUser({
               Brain Quest
             </h1>
 
-            <p className="text-gray-500 mt-2">
-              Create your learning profile 🚀
-            </p>
+            <p className="text-gray-500 mt-2">Create your learning profile</p>
           </div>
 
           {/* Name Input */}
@@ -61,16 +73,36 @@ setUser({
             type="text"
             placeholder="Enter Your Name"
             value={name}
-            onChange={(e) => setName(e.target.value)}
-            className="w-full bg-gray-50 border-2 border-gray-100 rounded-3xl p-4 text-lg shadow-sm focus:outline-none focus:border-purple-500 mb-4"
+            onChange={(e) => {
+              setName(e.target.value);
+              setNameError(false);
+            }}
+            className={`w-full bg-gray-50 border-2 placeholder:text-gray-700 rounded-3xl p-4 text-lg shadow-sm focus:outline-none mb-1 ${
+              nameError
+                ? "border-red-500"
+                : "border-gray-100 focus:border-purple-500"
+            }`}
           />
-          
+          <p
+            className={`mt-0 text-red-500 text-sm text-left min-h-[20px] mb-1 ${
+              nameError ? "opacity-100" : "opacity-0"
+            }`}
+          >
+            Please enter your name
+          </p>
 
           {/* Age Group */}
           <select
             value={age}
-            onChange={(e) => setAge(e.target.value)}
-            className="w-full bg-gray-50 border-2 border-gray-100 rounded-3xl p-4 text-lg shadow-sm focus:outline-none focus:border-purple-500 mb-4"
+            onChange={(e) => {
+              setAge(e.target.value);
+              setAgeError(false);
+            }}
+            className={`w-full bg-gray-50 border-2 rounded-3xl p-4 text-lg shadow-sm focus:outline-none mb-2 ${
+              ageError
+                ? "border-red-500"
+                : "border-gray-100 focus:border-purple-500"
+            }`}
           >
             <option value="">Select Age Group</option>
 
@@ -80,6 +112,11 @@ setUser({
 
             <option value="14-15">14-15</option>
           </select>
+          {ageError && (
+            <p className="text-red-500 text-sm text-left mt-0 min-h-[20px] mb-1">
+              Please select age group
+            </p>
+          )}
 
           {/* 🧍 Avatar Selection */}
           <div className="mb-8">

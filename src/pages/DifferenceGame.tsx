@@ -138,7 +138,7 @@ export default function DifferenceGame() {
           </div>
         </div>
       )}
-      <div className="min-h-screen pb-28 bg-gradient-to-b from-sky-300 via-blue-200 to-green-300 flex items-center justify-center p-4 md:p-10 relative overflow-x-hidden mb-16 md:mb-12 pb-6 pt-4 md:pb-12 md:pt-4 dark:from-gray-900 dark:via-gray-900 dark:to-black">
+      <div className="min-h-screen pb-28 bg-gradient-to-b from-sky-300 via-blue-200 to-green-300 flex items-center justify-center p-4 md:p-10 relative overflow-x-hidden mb-0 md:mb-0 pb-6 pt-4 md:pb-12 md:pt-4 dark:from-gray-900 dark:via-gray-900 dark:to-black">
         {/* 🌳 Hills */}
         <div className="absolute bottom-0 left-0 w-full h-40 bg-green-400 rounded-t-[100%] dark:bg-gray-900"></div>
 
