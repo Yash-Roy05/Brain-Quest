@@ -14,6 +14,9 @@ export default function Profile() {
   const [name, setName] = useState("");
   const [age, setAge] = useState("");
 
+  // parent mode
+  const [parentPin, setParentPin] = useState("");
+
   // ⭐ Selected Avatar
   const [avatar, setAvatar] = useState("🐼");
 
@@ -48,8 +51,11 @@ export default function Profile() {
 
       streak: 1,
       lastLoginDate: new Date().toDateString(),
-    });
 
+      parentPin,
+
+      savedProfiles: {},
+    });
     navigate("/dashboard");
   };
 
@@ -113,10 +119,19 @@ export default function Profile() {
             <option value="14-15">14-15</option>
           </select>
           {ageError && (
-            <p className="text-red-500 text-sm text-left mt-0 min-h-[20px] mb-1">
+            <p className="text-red-500 text-sm text-left mt-0 min-h-[20px] mb-2">
               Please select age group
             </p>
           )}
+
+          <input
+            type="password"
+            maxLength={6}
+            placeholder="Create Parent PIN"
+            value={parentPin}
+            onChange={(e) => setParentPin(e.target.value)}
+            className="w-full bg-gray-50 border-2 border-gray-100 placeholder:text-gray-700 rounded-3xl p-4 text-lg shadow-sm focus:outline-none focus:border-purple-500 mb-4"
+          />
 
           {/* 🧍 Avatar Selection */}
           <div className="mb-8">

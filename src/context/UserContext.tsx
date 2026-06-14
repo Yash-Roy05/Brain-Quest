@@ -19,6 +19,8 @@ type User = {
   streak: number;
   lastLoginDate: string;  
 
+  parentPin: string;
+
   savedProfiles: {
   [key: string]: SavedProfile;
 };
@@ -53,6 +55,8 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
 
           streak: 0,
           lastLoginDate: "",
+
+          parentPin: "",
           
           savedProfiles: {},
         };
