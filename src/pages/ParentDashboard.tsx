@@ -7,9 +7,9 @@ export default function ParentDashboard() {
   const { user } = useUser();
 
   return (
-    <div className="min-h-screen pb-10 md:pb-0 bg-gradient-to-r from-blue-400 to-purple-500 p-6 md:p-10 md:mb-0">
+    <div className="min-h-screen pb-10 pt-8 md:pt-18 bg-gradient-to-r from-blue-400 to-purple-500 p-4 md:p-10">
       <div className="max-w-6xl mx-auto">
-        <div className="bg-white rounded-3xl shadow-2xl p-8">
+        <div className="bg-white rounded-3xl shadow-2xl p-5 md:p-8">
           <div className="flex justify-between items-center mb-8">
             <h1 className="text-4xl font-black text-purple-700">
               Parent Dashboard
@@ -66,6 +66,11 @@ export default function ParentDashboard() {
               <h2 className="font-bold text-xl">Missions</h2>
 
               <p className="text-2xl">{user.completedMissions.length}</p>
+            </div>
+            <div className="bg-cyan-100 p-5 rounded-2xl">
+              <h2 className="font-bold text-xl">Screen Time Today</h2>
+
+              <p className="text-2xl">{user.screenTimeToday} min</p>
             </div>
           </div>
 

@@ -40,8 +40,8 @@ export default function Dashboard() {
       <div className="min-h-[250px] pb-24 md:pb-8 relative overflow-hidden bg-gradient-to-b from-sky-300 via-blue-400 to-green-300 p-6 min-h-[250px] pb-20 pt-4 md:pb-24 md:pt-5 dark:from-gray-900 dark:via-gray-900 dark:to-black">
         {/* 👤 User Info */}
         <div className="bg-white rounded-3xl shadow-2xl p-5 md:p-5 w-full max-w-7xl px-4 md:px-8 mx-auto mb-4 md:mb-4 dark:bg-gray-700">
-          <div className="flex justify-between items-start p-6">
-            <div className="flex items-center gap-2 md:gap-2">
+          <div className="flex flex-col md:flex-row md:justify-between md:items-center gap-4 p-2 md:p-6">
+            <div className="flex items-center gap-3">
               <div className="text-6xl">{user.avatar}</div>
 
               <div>
@@ -56,19 +56,23 @@ export default function Dashboard() {
             </div>
 
             <button
-              onClick={() => navigate("/parent-login")}
-              className="
-      bg-purple-500
-      hover:bg-purple-600
-      text-white
-      px-4
-      py-3
-      rounded-xl
-      font-bold
-    "
-            >
-              🔒 Parent
-            </button>
+  onClick={() => navigate("/parent-login")}
+  className="
+    self-end
+    md:self-auto
+    bg-purple-500
+    hover:bg-purple-600
+    text-white
+    px-4
+    py-3
+    rounded-xl
+    font-bold
+    text-sm
+    md:text-base
+  "
+>
+  🔒 Parent
+</button>
           </div>
 
           {/* Stats */}
@@ -203,7 +207,7 @@ export default function Dashboard() {
               ))}
             </div>
           ) : (
-            <div className="bg-white rounded-3xl shadow-xl p-10 text-center max-w-2xl mx-auto mt-3 md:mt-4 dark:bg-gray-700">
+            <div className="bg-white pb-14 rounded-3xl shadow-xl p-10 text-center max-w-2xl mx-auto mt-3 md:mt-4 dark:bg-gray-700">
               <h2 className="text-3xl font-bold text-purple-700 mb-3">
                 More Missions Coming Soon!
               </h2>

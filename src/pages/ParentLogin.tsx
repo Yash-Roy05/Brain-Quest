@@ -19,7 +19,7 @@ export default function ParentLogin() {
   };
 
   return (
-    <div className="min-h-[80vh] pb-0 md:pb-10 pt-9 md:pt-32 bg-gradient-to-r from-blue-400 to-purple-500 flex items-start justify-center py-8 px-4 mb-0 md:mb-0">
+    <div className="h-[calc(100vh-100px)] pb-0 md:pb-10 pt-20 md:pt-40 bg-gradient-to-r from-blue-400 to-purple-500 flex items-start justify-center py-8 px-4 mb-0 md:mb-0">
       <div className="bg-white rounded-3xl shadow-2xl p-8 w-full max-w-md text-center">
 
         <h1 className="text-4xl font-black text-purple-700 mb-2 md:mb-2">

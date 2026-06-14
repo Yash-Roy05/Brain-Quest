@@ -17,13 +17,16 @@ type User = {
   avatar: string;
 
   streak: number;
-  lastLoginDate: string;  
+  lastLoginDate: string;
 
   parentPin: string;
 
   savedProfiles: {
-  [key: string]: SavedProfile;
-};
+    [key: string]: SavedProfile;
+  };
+
+  screenTimeToday: number;
+  screenTimeTotal: number;
 };
 
 type UserContextType = {
@@ -57,8 +60,11 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
           lastLoginDate: "",
 
           parentPin: "",
-          
+
           savedProfiles: {},
+
+          screenTimeToday: 0,
+          screenTimeTotal: 0,
         };
   });
 
@@ -66,6 +72,18 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     localStorage.setItem("brainquest-user", JSON.stringify(user));
   }, [user]);
+
+  useEffect(() => {
+  const interval = setInterval(() => {
+    setUser((prev) => ({
+      ...prev,
+      screenTimeToday: prev.screenTimeToday + 1,
+      screenTimeTotal: prev.screenTimeTotal + 1,
+    }));
+  }, 60000);
+
+  return () => clearInterval(interval);
+}, []);
 
   // ✅ Add Coins
   const addCoins = (amount: number) => {
@@ -90,53 +108,42 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
 
   // ✅ Complete Mission
   // 🔥 Daily Streak
-const checkDailyStreak = () => {
-  const today = new Date().toDateString();
+  const checkDailyStreak = () => {
+    const today = new Date().toDateString();
 
-  if (user.lastLoginDate === today) {
-    return;
-  }
+    if (user.lastLoginDate === today) {
+      return;
+    }
 
-  const yesterday = new Date();
-  yesterday.setDate(yesterday.getDate() - 1);
+    const yesterday = new Date();
+    yesterday.setDate(yesterday.getDate() - 1);
 
-  if (
-    user.lastLoginDate ===
-    yesterday.toDateString()
-  ) {
-    const reward = Math.min(
-      (user.streak + 1) * 10,
-      100
-    );
+    if (user.lastLoginDate === yesterday.toDateString()) {
+      const reward = Math.min((user.streak + 1) * 10, 100);
 
+      setUser((prev) => ({
+        ...prev,
+        streak: prev.streak + 1,
+        lastLoginDate: today,
+        coins: prev.coins + reward,
+      }));
+    } else {
+      setUser((prev) => ({
+        ...prev,
+        streak: 1,
+        lastLoginDate: today,
+        coins: prev.coins + 10,
+      }));
+    }
+  };
+
+  // ✅ Complete Mission
+  const completeMission = (missionId: number) => {
     setUser((prev) => ({
       ...prev,
-      streak: prev.streak + 1,
-      lastLoginDate: today,
-      coins: prev.coins + reward,
+      completedMissions: [...prev.completedMissions, missionId],
     }));
-  } else {
-    setUser((prev) => ({
-      ...prev,
-      streak: 1,
-      lastLoginDate: today,
-      coins: prev.coins + 10,
-    }));
-  }
-};
-
-// ✅ Complete Mission
-const completeMission = (
-  missionId: number
-) => {
-  setUser((prev) => ({
-    ...prev,
-    completedMissions: [
-      ...prev.completedMissions,
-      missionId,
-    ],
-  }));
-};
+  };
 
   return (
     <UserContext.Provider
