@@ -422,8 +422,13 @@ export default function WordPuzzleGame() {
       <PageWrapper>
         {score >= 70 && <Confetti />}
 
+<<<<<<< HEAD
         <div className="min-h-screen pb-28 md:pb-40 overflow-x-hidden bg-gradient-to-b from-pink-300 via-purple-300 to-blue-300 flex items-center justify-center p-3 md:p-6 dark:from-gray-900 dark:via-gray-900 dark:to-black">
           <div className="bg-white rounded-[25px] md:rounded-[40px] shadow-2xl p-4 md:p-10 w-full max-w-4xl text-center mb-0 md:mb-0 dark:bg-gray-700">
+=======
+        <div className="min-h-screen pb-6 md:pb-8 overflow-x-hidden bg-gradient-to-b from-pink-300 via-purple-300 to-blue-300 flex items-center justify-center p-3 md:p-6">
+          <div className="bg-white rounded-[25px] md:rounded-[40px] shadow-2xl p-4 md:p-10 w-full max-w-4xl text-center mb-0 md:mb-0">
+>>>>>>> Feature/Parent-Login
             {/* Title */}
             <h1 className="text-3xl md:text-5xl font-black text-purple-700 mb-1 md:mb-3 dark:text-white">
               Word Search 

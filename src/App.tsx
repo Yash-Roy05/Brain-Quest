@@ -19,6 +19,8 @@ import ReflexTapGame from "./pages/ReflexTapGame.tsx";
 import Games from "./pages/Games.tsx";
 import Missions from "./pages/Missions.tsx";
 import Loading from "./pages/Loading.tsx";
+import ParentLogin from "./pages/ParentLogin.tsx";
+import ParentDashboard from "./pages/ParentDashboard.tsx";
 
 function App() {
   return (
@@ -48,6 +50,9 @@ function App() {
       <Route path="games" element={<Games />} />
       <Route path="missions" element={<Missions />} />
       <Route path="loading" element={<Loading />} />
+<Route path="/parent-login" element={<ParentLogin />} />
+<Route path="/parent-dashboard" element={<ParentDashboard />} />
+
     </Route>
 
   </Routes>

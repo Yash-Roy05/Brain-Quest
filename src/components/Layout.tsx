@@ -12,6 +12,8 @@ const hideFooterRoutes = [
   "/sudoku-lite",
   "/reflex-tap",
   "/speedmath-game",
+  "/parent-login",
+  "/parent-dashboard",
 ];
 
 export default function Layout() {
@@ -25,9 +27,7 @@ export default function Layout() {
         <Outlet />
       </main>
 
-      {!hideFooterRoutes.includes(location.pathname) && (
-        <Footer />
-      )}
+      {!hideFooterRoutes.includes(location.pathname) && <Footer />}
     </div>
   );
 }

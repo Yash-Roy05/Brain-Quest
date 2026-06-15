@@ -14,6 +14,12 @@ export default function Profile() {
   const [name, setName] = useState("");
   const [age, setAge] = useState("");
 
+  // parent mode
+  const [parentPin, setParentPin] = useState("");
+
+  // parent empty error hadling
+  const [pinError, setPinError] = useState(false);
+
   // ⭐ Selected Avatar
   const [avatar, setAvatar] = useState("🐼");
 
@@ -33,7 +39,13 @@ export default function Profile() {
       setAgeError(false);
     }
 
-    if (!name.trim() || !age) {
+    if (!parentPin.trim()) {
+      setPinError(true);
+    } else {
+      setPinError(false);
+    }
+
+    if (!name.trim() || !age || !parentPin.trim()) {
       return;
     }
 
@@ -45,11 +57,12 @@ export default function Profile() {
       level: 1,
       completedMissions: [],
       avatar,
-
       streak: 1,
       lastLoginDate: new Date().toDateString(),
-
+      parentPin,
       savedProfiles: {},
+      screenTimeToday: 0,
+      screenTimeTotal: 0,
     });
 
     navigate("/dashboard");
@@ -79,7 +92,7 @@ export default function Profile() {
               setName(e.target.value);
               setNameError(false);
             }}
-            className={`w-full bg-gray-50 border-2 placeholder:text-gray-700 rounded-3xl p-4 text-lg shadow-sm focus:outline-none mb-1 ${
+            className={`w-full bg-gray-50 border-2 rounded-3xl p-4 text-lg shadow-sm focus:outline-none mb-1 ${
               nameError
                 ? "border-red-500"
                 : "border-gray-100 focus:border-purple-500"
@@ -100,7 +113,7 @@ export default function Profile() {
               setAge(e.target.value);
               setAgeError(false);
             }}
-            className={`w-full bg-gray-50 border-2 rounded-3xl p-4 text-lg shadow-sm focus:outline-none mb-2 ${
+            className={`w-full bg-gray-50 border-2 rounded-3xl p-4 text-lg shadow-sm focus:outline-none mb-1 ${
               ageError
                 ? "border-red-500"
                 : "border-gray-100 focus:border-purple-500"
@@ -114,11 +127,37 @@ export default function Profile() {
 
             <option value="14-15">14-15</option>
           </select>
-          {ageError && (
-            <p className="text-red-500 text-sm text-left mt-0 min-h-[20px] mb-1">
-              Please select age group
-            </p>
-          )}
+          <p
+            className={`text-red-500 text-sm text-left min-h-[20px] mb-2 ${
+              ageError ? "opacity-100" : "opacity-0"
+            }`}
+          >
+            Please select age group
+          </p>
+
+          <input
+            type="password"
+            maxLength={6}
+            placeholder="Create Parent PIN"
+            value={parentPin}
+            onChange={(e) => {
+              setParentPin(e.target.value);
+              setPinError(false);
+            }}
+            className={`w-full bg-gray-50 border-2 rounded-3xl p-4 text-lg shadow-sm focus:outline-none mb-1 ${
+              pinError
+                ? "border-red-500"
+                : "border-gray-100 focus:border-purple-500"
+            }`}
+          />
+
+          <p
+            className={`text-red-500 text-sm text-left min-h-[20px] mb-4 ${
+              pinError ? "opacity-100" : "opacity-0"
+            }`}
+          >
+            Please create parent PIN
+          </p>
 
           {/* 🧍 Avatar Selection */}
           <div className="mb-8">
