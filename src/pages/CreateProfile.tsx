@@ -48,6 +48,8 @@ export default function Profile() {
 
       streak: 1,
       lastLoginDate: new Date().toDateString(),
+
+      savedProfiles: {},
     });
 
     navigate("/dashboard");
