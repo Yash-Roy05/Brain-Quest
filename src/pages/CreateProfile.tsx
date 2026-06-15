@@ -27,46 +27,46 @@ export default function Profile() {
   const [ageError, setAgeError] = useState(false);
 
   const handleStart = () => {
-  if (!name.trim()) {
-    setNameError(true);
-  } else {
-    setNameError(false);
-  }
+    if (!name.trim()) {
+      setNameError(true);
+    } else {
+      setNameError(false);
+    }
 
-  if (!age) {
-    setAgeError(true);
-  } else {
-    setAgeError(false);
-  }
+    if (!age) {
+      setAgeError(true);
+    } else {
+      setAgeError(false);
+    }
 
-  if (!parentPin.trim()) {
-    setPinError(true);
-  } else {
-    setPinError(false);
-  }
+    if (!parentPin.trim()) {
+      setPinError(true);
+    } else {
+      setPinError(false);
+    }
 
-  if (!name.trim() || !age || !parentPin.trim()) {
-    return;
-  }
+    if (!name.trim() || !age || !parentPin.trim()) {
+      return;
+    }
 
-  setUser({
-    name,
-    age,
-    coins: 0,
-    xp: 0,
-    level: 1,
-    completedMissions: [],
-    avatar,
-    streak: 1,
-    lastLoginDate: new Date().toDateString(),
-    parentPin,
-    savedProfiles: {},
+    setUser({
+      name,
+      age,
+      coins: 0,
+      xp: 0,
+      level: 1,
+      completedMissions: [],
+      avatar,
+      streak: 1,
+      lastLoginDate: new Date().toDateString(),
+      parentPin,
+      savedProfiles: {},
       screenTimeToday: 0,
-  screenTimeTotal: 0,
-  });
+      screenTimeTotal: 0,
+    });
 
-  navigate("/dashboard");
-};
+    navigate("/dashboard");
+  };
 
   return (
     <PageWrapper>
@@ -92,7 +92,7 @@ export default function Profile() {
               setName(e.target.value);
               setNameError(false);
             }}
-            className={`w-full bg-gray-50 border-2 placeholder:text-gray-700 rounded-3xl p-4 text-lg shadow-sm focus:outline-none mb-1 ${
+            className={`w-full bg-gray-50 border-2 rounded-3xl p-4 text-lg shadow-sm focus:outline-none mb-1 ${
               nameError
                 ? "border-red-500"
                 : "border-gray-100 focus:border-purple-500"
@@ -152,12 +152,12 @@ export default function Profile() {
           />
 
           <p
-  className={`text-red-500 text-sm text-left min-h-[20px] mb-4 ${
-    pinError ? "opacity-100" : "opacity-0"
-  }`}
->
-  Please create parent PIN
-</p>
+            className={`text-red-500 text-sm text-left min-h-[20px] mb-4 ${
+              pinError ? "opacity-100" : "opacity-0"
+            }`}
+          >
+            Please create parent PIN
+          </p>
 
           {/* 🧍 Avatar Selection */}
           <div className="mb-8">
