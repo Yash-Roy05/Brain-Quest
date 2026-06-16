@@ -165,6 +165,13 @@ export default function Profile() {
               {showPin ? <EyeOff size={20} /> : <Eye size={20} />}
             </button>
           </div>
+          <p
+            className={`text-red-500 text-sm text-left min-h-[20px] mb-2 ${
+              pinError ? "opacity-100" : "opacity-0"
+            }`}
+          >
+            Please enter 4 digit Parent PIN
+          </p>
 
           {/* 🧍 Avatar Selection */}
           <div className="mb-8">
