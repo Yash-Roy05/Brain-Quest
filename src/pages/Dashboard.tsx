@@ -37,7 +37,7 @@ export default function Dashboard() {
 
   return (
     <PageWrapper>
-      <div className="min-h-[250px] pb-24 md:pb-8 relative overflow-hidden bg-gradient-to-b from-sky-300 via-blue-400 to-green-300 p-6 min-h-[250px] pb-20 pt-4 md:pb-24 md:pt-5 dark:from-gray-900 dark:via-gray-900 dark:to-black">
+      <div className="min-h-[250px]  relative overflow-hidden bg-gradient-to-b from-sky-300 via-blue-400 to-green-300 p-6 min-h-[250px] pb-20 pt-4 md:pb-24 md:pt-5 dark:from-gray-900 dark:via-gray-900 dark:to-black">
         {/* 👤 User Info */}
         <div className="bg-white rounded-3xl shadow-2xl p-5 md:p-5 w-full max-w-7xl px-4 md:px-8 mx-auto mb-4 md:mb-4 dark:bg-gray-700">
           <div className="flex flex-col md:flex-row md:justify-between md:items-center gap-4 p-2 md:p-6">
@@ -56,8 +56,8 @@ export default function Dashboard() {
             </div>
 
             <button
-  onClick={() => navigate("/parent-login")}
-  className="
+              onClick={() => navigate("/parent-login")}
+              className="
     self-end
     md:self-auto
     bg-purple-500
@@ -70,9 +70,9 @@ export default function Dashboard() {
     text-sm
     md:text-base
   "
->
-  🔒 Parent
-</button>
+            >
+              🔒 Parent
+            </button>
           </div>
 
           {/* Stats */}
@@ -118,6 +118,14 @@ export default function Dashboard() {
             <p className="text-gray-700 mt-0 text-lg font-semibold dark:text-white">
               Complete missions and earn rewards
             </p>
+          </div>
+
+          <div className="mb-6 md:mb-20 ">
+            <button
+              onClick={() => navigate("/plants")}
+              className="w-full bg-green-500 hover:bg-green-600 text-white py-5 rounded-3xl text-2xl font-black shadow-xl ">
+              🌱 Plants World
+            </button>
           </div>
 
           {userMissions.length > 0 ? (

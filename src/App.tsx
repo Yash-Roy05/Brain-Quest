@@ -22,41 +22,46 @@ import Loading from "./pages/Loading.tsx";
 import ParentLogin from "./pages/ParentLogin.tsx";
 import ParentDashboard from "./pages/ParentDashboard.tsx";
 
+import PlantDashboard from "./pages/Plants/PlantDashboard.tsx";
+import PlantLesson from "./pages/Plants/PlantLesson.tsx";
+import PlantQuiz from "./pages/Plants/PlantQuiz.tsx";
+
 function App() {
   return (
     <BrowserRouter>
-  <Routes>
+      <Routes>
+        {/* Pages WITHOUT Header/Footer */}
+        <Route path="/" element={<Welcome />} />
+        <Route path="/loading" element={<Loading />} />
+        <Route path="/create-profile" element={<CreateProfile />} />
 
-    {/* Pages WITHOUT Header/Footer */}
-    <Route path="/" element={<Welcome />} />
-    <Route path="/loading" element={<Loading />} />
-    <Route path="/create-profile" element={<CreateProfile />} />
+        {/* All Other Pages WITH Header/Footer */}
+        <Route element={<Layout />}>
+          <Route path="create-profile" element={<CreateProfile />} />
+          <Route path="/profile" element={<Profile />} />
+          <Route path="dashboard" element={<Dashboard />} />
+          <Route path="result" element={<Result />} />
+          <Route path="memory-game" element={<MemoryGame />} />
+          <Route path="difference-game" element={<DifferenceGame />} />
+          <Route path="dragdrop-game" element={<DragDropGame />} />
+          <Route path="speedmath-game" element={<SpeedMathGame />} />
+          <Route path="wordpuzzle-game" element={<WordPuzzleGame />} />
+          <Route path="pattern-memory" element={<PatternMemoryGame />} />
+          <Route path="code-breaker" element={<CodeBreakerGame />} />
+          <Route path="sudoku-lite" element={<SudokuLiteGame />} />
+          <Route path="reflex-tap" element={<ReflexTapGame />} />
+          <Route path="games" element={<Games />} />
+          <Route path="missions" element={<Missions />} />
+          <Route path="loading" element={<Loading />} />
+          <Route path="/parent-login" element={<ParentLogin />} />
+          <Route path="/parent-dashboard" element={<ParentDashboard />} />
 
-    {/* All Other Pages WITH Header/Footer */}
-    <Route element={<Layout />}>
-      <Route path="create-profile" element={<CreateProfile />} />
-      <Route path="/profile" element={<Profile />} />
-      <Route path="dashboard" element={<Dashboard />} />
-      <Route path="result" element={<Result />} />
-      <Route path="memory-game" element={<MemoryGame />} />
-      <Route path="difference-game" element={<DifferenceGame />} />
-      <Route path="dragdrop-game" element={<DragDropGame />} />
-      <Route path="speedmath-game" element={<SpeedMathGame />} />
-      <Route path="wordpuzzle-game" element={<WordPuzzleGame />} />
-      <Route path="pattern-memory" element={<PatternMemoryGame />} />
-      <Route path="code-breaker" element={<CodeBreakerGame />} />
-      <Route path="sudoku-lite" element={<SudokuLiteGame />} />
-      <Route path="reflex-tap" element={<ReflexTapGame />} />
-      <Route path="games" element={<Games />} />
-      <Route path="missions" element={<Missions />} />
-      <Route path="loading" element={<Loading />} />
-<Route path="/parent-login" element={<ParentLogin />} />
-<Route path="/parent-dashboard" element={<ParentDashboard />} />
-
-    </Route>
-
-  </Routes>
-</BrowserRouter>
+          <Route path="/plants" element={<PlantDashboard />} />
+          <Route path="/plants/lesson" element={<PlantLesson />} />
+          <Route path="/plants/quiz" element={<PlantQuiz />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
   );
 }
 
