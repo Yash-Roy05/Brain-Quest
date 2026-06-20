@@ -15,29 +15,37 @@ export default function PlantQuiz() {
 
   const [gameOver, setGameOver] = useState(false);
 
+  const [feedback, setFeedback] = useState("");
+
+  const [selectedAnswer, setSelectedAnswer] = useState("");
+
   const [wrongQuestions, setWrongQuestions] = useState<any[]>([]);
 
   const [reviewMode, setReviewMode] = useState(false);
 
-  const [feedback, setFeedback] = useState("");
+  const currentQuestions = reviewMode ? wrongQuestions : plantQuizData;
 
-  const question = plantQuizData[currentQuestion];
+  const question = currentQuestions[currentQuestion];
 
-  const [quizFinished, setQuizFinished] = useState(false);
+  const [isLocked, setIsLocked] = useState(false);
+
+  const [correctCount, setCorrectCount] = useState(0);
+
+  const [wrongCount, setWrongCount] = useState(0);
 
   useEffect(() => {
     if (showResult || gameOver) return;
 
     const interval = setInterval(() => {
       setTimer((prev) => {
-        if (prev <= 1) {
-          setFeedback(`⏰ Time's Up! Correct Answer: ${question.answer}`);
+        if (prev <= 1 && !isLocked) {
+          setIsLocked(true);
 
           setTimeout(() => {
             handleWrong();
-          }, 1500);
+          }, 0);
 
-          return 8;
+          return 0;
         }
 
         return prev - 1;
@@ -45,43 +53,23 @@ export default function PlantQuiz() {
     }, 1000);
 
     return () => clearInterval(interval);
-  }, [currentQuestion, showResult, gameOver]);
-
-  useEffect(() => {
-    if (showResult || gameOver) return;
-
-    const interval = setInterval(() => {
-      setTimer((prev) => {
-        if (prev <= 1) {
-          setFeedback(`⏰ Time's Up! Correct Answer: ${question.answer}`);
-
-          setTimeout(() => {
-            handleWrong();
-          }, 1500);
-
-          return 8;
-        }
-
-        return prev - 1;
-      });
-    }, 1000);
-
-    return () => clearInterval(interval);
-  }, [currentQuestion, showResult, gameOver]);
+  }, [currentQuestion, showResult, gameOver, isLocked]);
 
   const handleWrong = () => {
+    setIsLocked(true);
+
     const newHearts = hearts - 1;
 
     setHearts(newHearts);
 
     setWrongQuestions((prev) => [...prev, question]);
 
-    setFeedback(`❌ Correct Answer: ${question.answer}`);
+    setWrongCount((prev) => prev + 1);
 
     if (newHearts <= 0) {
       setTimeout(() => {
         setGameOver(true);
-      }, 1500);
+      }, 2000);
 
       return;
     }
@@ -89,70 +77,68 @@ export default function PlantQuiz() {
     setTimeout(() => {
       setFeedback("");
 
-      if (currentQuestion === plantQuizData.length - 1) {
-        finishQuiz();
+      if (currentQuestion === currentQuestions.length - 1) {
+        if (wrongQuestions.length > 0 && !reviewMode) {
+          setReviewMode(true);
+
+          setCurrentQuestion(0);
+
+          setSelectedAnswer("");
+
+          setTimer(8);
+
+          setIsLocked(false);
+
+          return;
+        }
+
+        setShowResult(true);
       } else {
-        setCurrentQuestion((prev) => prev + 1);
+        setSelectedAnswer("");
+        setCurrentQuestion(currentQuestion + 1);
         setTimer(8);
+        setIsLocked(false);
       }
-    }, 1500);
-  };
-
-  const finishQuiz = () => {
-    if (wrongQuestions.length > 0) {
-      setReviewMode(true);
-
-      plantQuizData.length = 0;
-
-      wrongQuestions.forEach((q) => {
-        plantQuizData.push(q);
-      });
-
-      setCurrentQuestion(0);
-      setTimer(8);
-
-      return;
-    }
-
-    setShowResult(true);
+    }, 2000);
   };
 
   const handleAnswer = (option: string) => {
+    if (isLocked) return;
+    setSelectedAnswer(option);
+
     if (option === question.answer) {
-      setFeedback("🎉 Awesome!");
+      setCorrectCount((prev) => prev + 1);
+
+      setIsLocked(true);
 
       setTimeout(() => {
         setFeedback("");
 
-        if (currentQuestion === plantQuizData.length - 1) {
-          finishQuiz();
+        if (currentQuestion === currentQuestions.length - 1) {
+          if (wrongQuestions.length > 0 && !reviewMode) {
+            setReviewMode(true);
+
+            setCurrentQuestion(0);
+
+            setSelectedAnswer("");
+
+            setTimer(8);
+
+            setIsLocked(false);
+
+            return;
+          }
+
+          setShowResult(true);
         } else {
-          setCurrentQuestion((prev) => prev + 1);
+          setSelectedAnswer("");
+          setCurrentQuestion(currentQuestion + 1);
+          setTimer(8);
+          setIsLocked(false);
         }
       }, 1000);
     } else {
-      const newHearts = hearts - 1;
-
-      setHearts(newHearts);
-
-      setFeedback(`❌ Oops! Correct Answer: ${question.answer}`);
-
-      if (newHearts <= 0) {
-        setTimeout(() => {
-          setGameOver(true);
-        }, 1500);
-      } else {
-        setTimeout(() => {
-          setFeedback("");
-
-          if (currentQuestion === plantQuizData.length - 1) {
-            setShowResult(true);
-          } else {
-            setCurrentQuestion((prev) => prev + 1);
-            setTimer(8);
-          }
-        }, 1500);
-      }
+      handleWrong();
     }
   };
 
@@ -162,7 +148,7 @@ export default function PlantQuiz() {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
-          <h1 className="text-5xl font-bold">💀 Mission Failed</h1>
+          <h1 className="text-5xl font-bold"> Mission Failed</h1>
 
           <button
             onClick={() => navigate("/dashboard")}
@@ -181,11 +167,19 @@ export default function PlantQuiz() {
         <div className="text-center">
           <h1 className="text-5xl font-bold">🌱 Plant Expert</h1>
 
-          <p className="text-xl mt-4">Level 1 Completed</p>
+          <p className="text-xl mt-4">Correct Answers: {correctCount}</p>
+
+          <p className="text-xl">Wrong Answers: {wrongCount}</p>
+
+          <p className="text-xl mt-2">Level 1 Completed</p>
+
+          <p className="text-2xl font-bold text-green-600 mt-4">
+            Accuracy: {Math.round((correctCount / plantQuizData.length) * 100)}%
+          </p>
 
           <button
             onClick={() => navigate("/plants/level2")}
-            className="mt-5 bg-green-500 text-white px-6 py-3 rounded-xl"
+            className="mt-5 bg-green-500 text-white px-4 sm:px-6 py-2 sm:py-3 rounded-xl"
           >
             Unlock Level 2
           </button>
@@ -195,33 +189,88 @@ export default function PlantQuiz() {
   }
 
   return (
-    <div className="p-6">
-      <div className="mb-4 font-bold">
-        Question {currentQuestion + 1} / {plantQuizData.length}
+    <div className="relative min-h-screen overflow-hidden mx-auto px-4 sm:px-6 pb-24">
+      <div
+        className="absolute inset-0 bg-sky-200 transition-all duration-100"
+        style={{
+          opacity: timer / 8,
+        }}
+      />
+      {/* Timer Background */}
+      <div
+        className="absolute inset-0 bg-sky-200 transition-all duration-1000"
+        style={{
+          clipPath: `inset(${100 - (timer / 8) * 100}% 0 0 0)`,
+        }}
+      />
+
+      <div className="relative z-10 p-6">
+        <div className="mb-4 font-bold text-sm sm:text-base">
+          Question {currentQuestion + 1} / {currentQuestions.length}
+        </div>
+
+        {!reviewMode && (
+          <div className="w-full bg-gray-200 h-4 rounded-full mb-6">
+            <div
+              className="bg-green-500 h-4 rounded-full transition-all duration-500"
+              style={{
+                width: `${(currentQuestion / plantQuizData.length) * 100}%`,
+              }}
+            />
+          </div>
+        )}
+
+        <div className="bg-white rounded-3xl shadow-xl p-6 mb-6">
+          <h1 className="text-xl sm:text-2xl md:text-3xl font-bold text-center">
+            {question.question}
+          </h1>
+        </div>
+
+        <div className="flex justify-between items-center mb-6">
+          <div
+            className={`
+          text-2xl
+          sm:text-3xl
+          transition-all
+          duration-300
+          ${hearts <= 1 ? "animate-bounce" : ""}
+        `}
+          >
+            {"❤️".repeat(hearts)}
+          </div>
+        </div>
+
+        {question.options.map((option: string) => {
+          let buttonColor = "bg-blue-500 hover:bg-blue-600";
+
+          if (selectedAnswer !== "") {
+            if (option === question.answer) {
+              buttonColor = "bg-green-500 shadow-lg";
+            }
+
+            if (option === selectedAnswer && option !== question.answer) {
+              buttonColor = "bg-red-500 shake";
+            }
+          }
+
+          return (
+            <button
+              key={option}
+              disabled={isLocked}
+              onClick={() => handleAnswer(option)}
+              className={`block w-full text-white p-3 sm:p-4 rounded-xl mb-3 transition-all duration-300 text-sm sm:text-base ${buttonColor}`}
+            >
+              {option}
+            </button>
+          );
+        })}
+
+        {feedback && (
+          <div className="mt-6 text-center text-2xl font-bold animate-pulse">
+            {feedback}
+          </div>
+        )}
       </div>
-
-{reviewMode && (
-  <div className="bg-yellow-200 text-yellow-900 p-3 rounded-xl mb-4 font-bold">
-    🔄 Review Round - Answer wrong questions again
-  </div>
-)}
-
-      <h1>{question.question}</h1>
-
-      <div className="text-xl font-bold">⏱️ {timer}s</div>
-
-      <div className="text-2xl mb-4">{"❤️".repeat(hearts)}</div>
-
-      {question.options.map((option: string) => (
-        <button
-          key={option}
-          onClick={() => handleAnswer(option)}
-          className="block w-full bg-blue-500 text-white p-4 rounded-xl mb-3 hover:bg-blue-600 transition"
-        >
-          {option}
-        </button>
-      ))}
-      {feedback && <div className="mt-4 text-xl font-bold">{feedback}</div>}
     </div>
   );
 }

@@ -120,7 +120,7 @@ export default function Dashboard() {
             </p>
           </div>
 
-          <div className="mb-6 md:mb-20 ">
+          <div className="mb-6 md:mb-8">
             <button
               onClick={() => navigate("/plants")}
               className="w-full bg-green-500 hover:bg-green-600 text-white py-5 rounded-3xl text-2xl font-black shadow-xl ">
