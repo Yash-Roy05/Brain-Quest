@@ -286,9 +286,9 @@ md:w-32 md:h-32
         <button
           disabled={visitedParts.length !== plantParts.length}
           onClick={() => {
-  speechSynthesis.cancel();
-  navigate("/plants/quiz");
-}}
+            speechSynthesis.cancel();
+            navigate("/plants/quiz");
+          }}
           className="
           mt-8
           w-full
