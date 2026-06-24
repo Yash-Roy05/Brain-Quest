@@ -146,15 +146,100 @@ export default function PlantQuiz() {
 
   if (gameOver) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="text-center">
-          <h1 className="text-5xl font-bold"> Mission Failed</h1>
+      <div
+  className="
+  min-h-screen
+  bg-gradient-to-b
+  from-red-300
+  via-red-400
+  to-red-600
+  px-4
+  pt-6
+  pb-28
+  flex
+  justify-center
+  "
+>
+        <div
+          className="
+    bg-white
+    rounded-3xl
+    shadow-2xl
+    p-5 md:p-8
+    max-w-lg
+    w-full
+    text-center
+    pt-4
+    "
+        >
+          <div className="text-5xl md:text-7xl mb-4">💔</div>
+
+          <h1 className="text-4xl md:text-5xl font-black text-red-600">
+            Mission Failed
+          </h1>
+
+          <p className="mt-4 text-lg text-gray-700">Don't worry Explorer!</p>
+
+          <p className="text-gray-600">Plants need practice too</p>
+
+          <div className="grid grid-cols-2 gap-4 mt-6">
+            <div className="bg-green-100 rounded-2xl p-4">
+              <div className="text-3xl">✅</div>
+
+              <div className="text-2xl font-black">{correctCount}</div>
+
+              <div>Correct</div>
+            </div>
+
+            <div className="bg-red-100 rounded-2xl p-4">
+              <div className="text-3xl">❌</div>
+
+              <div className="text-2xl font-black">{wrongCount}</div>
+
+              <div>Wrong</div>
+            </div>
+          </div>
 
           <button
-            onClick={() => navigate("/dashboard")}
-            className="mt-5 bg-red-500 text-white px-6 py-3 rounded-xl"
+            onClick={() => window.location.reload()}
+            className="
+      mt-6
+      w-full
+      bg-yellow-400
+      hover:bg-yellow-500
+      text-black
+      py-3 md:py-4
+text-lg md:text-xl
+      rounded-3xl
+      text-xl
+      font-black
+      shadow-xl
+      hover:scale-105
+      active:scale-95
+      transition-all
+      duration-300
+      "
           >
-            Back To Dashboard
+            🔄 Try Again
+          </button>
+
+          <button
+            onClick={() => navigate("/plants")}
+            className="
+      mt-3
+      w-full
+      bg-gray-700
+      hover:bg-gray-800
+      text-white
+      py-3 md:py-4
+text-lg md:text-xl
+      rounded-3xl
+      text-xl
+      font-black
+      shadow-xl
+      "
+          >
+            🏠 Plant Dashboard
           </button>
         </div>
       </div>
@@ -163,23 +248,85 @@ export default function PlantQuiz() {
 
   if (showResult) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="text-center">
-          <h1 className="text-5xl font-bold">🌱 Plant Expert</h1>
+      <div className="min-h-screen flex items-center justify-center pt-6 md:pt-6 pb-20 px-4 md:px-4">
+        <div
+          className="
+  bg-white
+  rounded-3xl
+  shadow-2xl
+  p-4
+  max-w-lg
+  w-full
+  text-center
+  animate-[fadeIn_0.8s_ease]
+  mb-4
+  md:mb-4
+"
+        >
+          <div className="text-6xl sm:text-8xl mb-4">🏆</div>
 
-          <p className="text-xl mt-4">Correct Answers: {correctCount}</p>
+          <h1 className="text-3xl sm:text-5xl font-black text-green-600">
+            Plant Expert!
+          </h1>
 
-          <p className="text-xl">Wrong Answers: {wrongCount}</p>
+          <div className="grid grid-cols-2 gap-3 sm:gap-4 gap-4 mt-6 p-3 sm:p-4">
+            <div className="bg-green-100 rounded-2xl p-4">
+              <div className="text-3xl">✅</div>
+              <div className="font-black text-2xl">{correctCount}</div>
+              <div>Correct</div>
+            </div>
+
+            <div className="bg-red-100 rounded-2xl p-4">
+              <div className="text-3xl">❌</div>
+              <div className="font-black text-2xl">{wrongCount}</div>
+              <div>Wrong</div>
+            </div>
+          </div>
 
           <p className="text-xl mt-2">Level 1 Completed</p>
 
-          <p className="text-2xl font-bold text-green-600 mt-4">
-            Accuracy: {Math.round((correctCount / plantQuizData.length) * 100)}%
-          </p>
+          <div
+            className="
+  mt-4
+  bg-yellow-100
+  rounded-full
+  px-8
+  py-4
+  inline-block
+  shadow-lg
+"
+          >
+            <div className="text-4xl">⭐</div>
+
+            <div className="text-3xl font-black text-yellow-700">
+              {Math.round((correctCount / plantQuizData.length) * 100)}%
+            </div>
+
+            <div className="font-bold">Accuracy</div>
+          </div>
 
           <button
-            onClick={() => navigate("/plants/level2")}
-            className="mt-5 bg-green-500 text-white px-4 sm:px-6 py-2 sm:py-3 rounded-xl"
+            onClick={() => {
+              localStorage.setItem("plantLevel1Completed", "true");
+              navigate("/plants");
+            }}
+            className="
+mt-8
+w-full
+bg-gradient-to-r
+from-green-500
+to-emerald-600
+text-white
+py-4
+rounded-3xl
+text-xl
+font-black
+shadow-xl
+hover:scale-105
+active:scale-95
+transition-all
+duration-300
+"
           >
             Unlock Level 2
           </button>

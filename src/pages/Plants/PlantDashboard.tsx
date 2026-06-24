@@ -3,6 +3,11 @@ import { useNavigate } from "react-router-dom";
 export default function PlantDashboard() {
   const navigate = useNavigate();
 
+  const level1Completed =
+  localStorage.getItem(
+    "plantLevel1Completed"
+  ) === "true";
+
   const levels = [
     {
       id: 1,
@@ -42,6 +47,8 @@ export default function PlantDashboard() {
         <p className="text-center text-white text-lg mb-4 md:mb-4">
           Learn plants level by level
         </p>
+
+        
 
         <div className="grid gap-5">
           {levels.map((level) => (

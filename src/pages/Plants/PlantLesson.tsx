@@ -107,6 +107,23 @@ export default function PlantLesson() {
       speakMessage(message);
     }
   };
+
+  const handleQuizStart = () => {
+    if (visitedParts.length !== plantParts.length) {
+      const message =
+        "Wait Explorer! Please learn all four plant parts before starting the quiz.";
+
+      setCurrentTeacherMessage(message);
+
+      speakMessage(message);
+
+      return;
+    }
+
+    speechSynthesis.cancel();
+    navigate("/plants/quiz");
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-r from-green-400 to-emerald-500 p-4 md:p-6 pb-24 md:pb-24">
       <div className="max-w-4xl mx-auto">
@@ -120,60 +137,7 @@ export default function PlantLesson() {
           </p>
         </div>
 
-        <div className="flex flex-col items-center mb-8">
-          <div
-            className="
-    bg-white
-    rounded-3xl
-    shadow-xl
-    p-4
-    max-w-md
-    relative
-    mt-3
-  "
-          >
-            <p className="font-bold text-green-700">Quester</p>
-
-            <p className="mt-2">{currentTeacherMessage}</p>
-
-            <div
-              className="
-      absolute-top-3
-      left-10
-      w-6
-      h-6
-      bg-white
-      rotate-45
-      "
-            />
-          </div>
-        </div>
-
-        <div className="relative w-full max-w-md mx-auto h-[420px] mt-10">
-          {/* Daisy Center */}
-          <div
-            className="
-  absolute
-  inset-0
-  flex
-  items-center
-  justify-center
-  pointer-events-none z-10
-"
-          >
-            <div
-              className={`
-      text-7xl
-      transition-all
-      duration-500
-      animate-bounce
-      ${teacherHappy ? "scale-125" : ""}
-    `}
-            >
-              🌻
-            </div>
-          </div>
-
+        <div className="relative w-full max-w-md mx-auto h-[380px] md:h-[500px] mt-6 md:mt-10">
           {/* Root */}
           <button
             onClick={() => handlePartClick(plantParts[0])}
@@ -183,14 +147,16 @@ export default function PlantLesson() {
       top-0
       -translate-x-1/2
       w-24 h-24
-sm:w-28 sm:h-28
-md:w-32 md:h-32
+      sm:w-28 sm:h-28
+      md:w-32 md:h-32
       rounded-full
       shadow-xl
       transition-all duration-300
+      hover:scale-110
+      active:scale-95
       ${
         selectedPart === "Root"
-          ? "bg-green-300 scale-110 border-4 border-green-500"
+          ? "bg-green-300 scale-110 ring-4 ring-yellow-300 border-4 border-green-500"
           : "bg-white"
       }
     `}
@@ -210,14 +176,16 @@ md:w-32 md:h-32
       top-1/2
       -translate-y-1/2
       w-24 h-24
-sm:w-28 sm:h-28
-md:w-32 md:h-32
+      sm:w-28 sm:h-28
+      md:w-32 md:h-32
       rounded-full
       shadow-xl
       transition-all duration-300
+      hover:scale-110
+      active:scale-95
       ${
         selectedPart === "Stem"
-          ? "bg-green-300 scale-110 border-4 border-green-500"
+          ? "bg-green-300 scale-110 ring-4 ring-yellow-300 border-4 border-green-500"
           : "bg-white"
       }
     `}
@@ -237,14 +205,16 @@ md:w-32 md:h-32
       top-1/2
       -translate-y-1/2
       w-24 h-24
-sm:w-28 sm:h-28
-md:w-32 md:h-32
+      sm:w-28 sm:h-28
+      md:w-32 md:h-32
       rounded-full
       shadow-xl
       transition-all duration-300
+      hover:scale-110
+      active:scale-95
       ${
         selectedPart === "Leaf"
-          ? "bg-green-300 scale-110 border-4 border-green-500"
+          ? "bg-green-300 scale-110 ring-4 ring-yellow-300 border-4 border-green-500"
           : "bg-white"
       }
     `}
@@ -264,14 +234,17 @@ md:w-32 md:h-32
       bottom-0
       -translate-x-1/2
       w-24 h-24
-sm:w-28 sm:h-28
-md:w-32 md:h-32
+      sm:w-28 sm:h-28
+      md:w-32 md:h-32
       rounded-full
       shadow-xl
       transition-all duration-300
+      mb-1
+      hover:scale-110
+      active:scale-95
       ${
         selectedPart === "Flower"
-          ? "bg-green-300 scale-110 border-4 border-green-500"
+          ? "bg-green-300 scale-110 ring-4 ring-yellow-300 border-4 border-green-500"
           : "bg-white"
       }
     `}
@@ -283,12 +256,41 @@ md:w-32 md:h-32
           </button>
         </div>
 
+        <div className="flex flex-col items-center mb-0">
+          <div
+            className="
+    bg-white
+    rounded-3xl
+    shadow-xl
+    p-4
+    max-w-md
+    relative
+    mt-3
+    animate-fade-in
+    transition-all
+    duration-500
+    hover:scale-105
+  "
+          >
+            <p className="font-bold text-green-700 text-lg">🌻 Quester</p>
+
+            <p className="mt-2">{currentTeacherMessage}</p>
+
+            <div
+              className="
+      absolute-top-3
+      left-10
+      w-6
+      h-6
+      bg-white
+      rotate-45
+      "
+            />
+          </div>
+        </div>
+
         <button
-          disabled={visitedParts.length !== plantParts.length}
-          onClick={() => {
-            speechSynthesis.cancel();
-            navigate("/plants/quiz");
-          }}
+          onClick={handleQuizStart}
           className="
           mt-8
           w-full
@@ -300,9 +302,13 @@ md:w-32 md:h-32
           text-xl
           font-black
           shadow-xl
+          hover:scale-105
+          active:scale-95
+          transition-all
+          duration-300
           "
         >
-          Start Quiz →
+          Start Quiz
         </button>
       </div>
     </div>
