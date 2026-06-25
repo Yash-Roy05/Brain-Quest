@@ -2,6 +2,12 @@ import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import useSound from "use-sound";
 
+import plantFull from "../../assets/Plants/without-bg.png";
+import rootImg from "../../assets/Plants/Roott.png";
+import stemImg from "../../assets/Plants/Stemm.png";
+import leafImg from "../../assets/Plants/Leaff.png";
+import flowerImg from "../../assets/Plants/Flowerr.png";
+
 export default function PlantLesson() {
   const navigate = useNavigate();
 
@@ -137,126 +143,156 @@ export default function PlantLesson() {
           </p>
         </div>
 
-        <div className="relative w-full max-w-md mx-auto h-[380px] md:h-[500px] mt-6 md:mt-10">
-          {/* Root */}
-          <button
-            onClick={() => handlePartClick(plantParts[0])}
-            className={`
-      absolute
-      left-1/2
-      top-0
-      -translate-x-1/2
-      w-24 h-24
-      sm:w-28 sm:h-28
-      md:w-32 md:h-32
-      rounded-full
-      shadow-xl
-      transition-all duration-300
-      hover:scale-110
-      active:scale-95
-      ${
-        selectedPart === "Root"
-          ? "bg-green-300 scale-110 ring-4 ring-yellow-300 border-4 border-green-500"
-          : "bg-white"
-      }
-    `}
-          >
-            <div>
-              <div className="text-4xl">🌱</div>
-              <div className="text-sm font-bold">Root</div>
-            </div>
-          </button>
-
-          {/* Stem */}
-          <button
-            onClick={() => handlePartClick(plantParts[1])}
-            className={`
-      absolute
-      left-0
-      top-1/2
-      -translate-y-1/2
-      w-24 h-24
-      sm:w-28 sm:h-28
-      md:w-32 md:h-32
-      rounded-full
-      shadow-xl
-      transition-all duration-300
-      hover:scale-110
-      active:scale-95
-      ${
-        selectedPart === "Stem"
-          ? "bg-green-300 scale-110 ring-4 ring-yellow-300 border-4 border-green-500"
-          : "bg-white"
-      }
-    `}
-          >
-            <div>
-              <div className="text-4xl">🌿</div>
-              <div className="text-sm font-bold">Stem</div>
-            </div>
-          </button>
-
-          {/* Leaf */}
-          <button
-            onClick={() => handlePartClick(plantParts[2])}
-            className={`
-      absolute
-      right-0
-      top-1/2
-      -translate-y-1/2
-      w-24 h-24
-      sm:w-28 sm:h-28
-      md:w-32 md:h-32
-      rounded-full
-      shadow-xl
-      transition-all duration-300
-      hover:scale-110
-      active:scale-95
-      ${
-        selectedPart === "Leaf"
-          ? "bg-green-300 scale-110 ring-4 ring-yellow-300 border-4 border-green-500"
-          : "bg-white"
-      }
-    `}
-          >
-            <div>
-              <div className="text-4xl">🍃</div>
-              <div className="text-sm font-bold">Leaf</div>
-            </div>
-          </button>
-
+        <div className="max-w-5xl mx-auto mt-6">
           {/* Flower */}
-          <button
-            onClick={() => handlePartClick(plantParts[3])}
-            className={`
+          <div className="flex justify-center mb-4">
+            <button
+              onClick={() => handlePartClick(plantParts[3])}
+              className="
+    absolute
+    left-1/2
+    top-0
+    -translate-x-1/2
+    p-3
+    z-20
+    md:top-[200px]
+    md:left-[1000px]
+    md:w-[150px]
+    md:h-[150px]
+
+    top-[230px]
+    left-[350px]
+    w-[80px]
+    h-[70px]
+  "
+            >
+              <img
+                src={flowerImg}
+                className="w-24 h-24 object-contain mx-auto"
+              />
+              <p className="md:font-bold text-[16px] md:text-[18px] -mt-5 md:mt-0">
+                Flower
+              </p>
+            </button>
+          </div>
+
+          {/* Middle Row */}
+          <div className="relative w-full max-w-5xl mx-auto h-[700px]">
+            {/* Stem */}
+            <button
+              onClick={() => handlePartClick(plantParts[1])}
+              className="
+absolute
+-translate-y-1/2
+p-2
+z-20
+w-[70px]
+h-[70px]
+top-[140px]
+left-[23px]
+
+md:w-[150px]
+md:h-[150px]
+md:top-[180px]
+md:left-[130px]
+"
+            >
+              <img src={stemImg} className="w-24 h-24 object-contain mx-auto" />
+              <p className="md:font-bold text-[16px] md:text-[18px] -mt-4 md:mt-0">
+                Stem
+              </p>
+            </button>
+
+            {/* Plant */}
+            <img
+              src={plantFull}
+              alt="Plant"
+              className="
+absolute
+left-1/2
+top-1/2
+-translate-x-1/2
+-translate-y-1/2
+
+w-[800px]
+h-[400px]
+top-[160px]
+
+sm:w-[400px]
+sm:h-[300px]
+
+md:w-[700px]
+md:h-[450px]
+md:top-[190px]
+"
+            />
+            {/* Leaf */}
+            <button
+              onClick={() => handlePartClick(plantParts[2])}
+              className="
+    absolute
+    right-10
+    top-1/2
+    -translate-y-1/2
+    p-3
+w-[80px]
+h-[70px]
+top-[80px]
+left-[320px]
+
+md:w-[150px]
+md:h-[150px]
+md:top-[150px]
+md:left-[670px]
+
+
+  "
+            >
+              <img src={leafImg} className="w-24 h-24 object-contain mx-auto" />
+              <p className="md:font-bold text-[16px] md:text-[18px] -mt-4 md:mt-0">
+                Leaf
+              </p>
+            </button>
+          </div>
+
+          {/* Root */}
+          <div className="flex justify-center mt-4">
+            <button
+              onClick={() => handlePartClick(plantParts[0])}
+              className={`
       absolute
       left-1/2
       bottom-0
       -translate-x-1/2
-      w-24 h-24
-      sm:w-28 sm:h-28
-      md:w-32 md:h-32
-      rounded-full
-      shadow-xl
-      transition-all duration-300
-      mb-1
-      hover:scale-110
-      active:scale-95
+      p-3
+
+      w-[80px]
+      h-[70px]
+      top-[500px]
+      left-[60px]
+
+      md:w-[150px]
+      md:h-[150px]
+      md:top-[500px]
+      md:left-[490px]
+
       ${
-        selectedPart === "Flower"
-          ? "bg-green-300 scale-110 ring-4 ring-yellow-300 border-4 border-green-500"
-          : "bg-white"
+        selectedPart === "Root"
+          ? "drop-shadow-[0_0_20px_rgba(255,255,0,0.9)] scale-110"
+          : ""
       }
     `}
-          >
-            <div>
-              <div className="text-4xl">🌸</div>
-              <div className="text-sm font-bold">Flower</div>
-            </div>
-          </button>
+            >
+              <img src={rootImg} className="w-24 h-24 object-contain mx-auto" />
+
+              <p className="md:font-bold text-[16px] md:text-[18px] -mt-4 md:mt-0">
+                Root
+              </p>
+            </button>
+          </div>
         </div>
 
-        <div className="flex flex-col items-center mb-0">
+        <div className="flex flex-col items-center -mt-80 md:-mt-80">
           <div
             className="
     bg-white
