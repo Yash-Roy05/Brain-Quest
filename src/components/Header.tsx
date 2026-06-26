@@ -4,36 +4,78 @@ export default function Header() {
   const { user } = useUser();
 
   return (
-    <header className="bg-yellow-400 shadow-lg px-8 py-3 md:px-4 md:py-4 flex flex-col md:flex-row justify-between items-center gap-4 ">
-      <div className="flex flex-col md:flex-row items-center justify-between gap-4 w-full">
-        <div className="flex items-center gap-4">
-          <div className="w-16 h-16 rounded-full bg-white flex items-center justify-center text-4xl shadow-lg">
-            {user.avatar}
+    <header className="bg-yellow-400 shadow-lg px-3 py-3">
+      {user.name && (
+        <div className="flex items-center justify-center gap-3">
+          {/* Profile */}
+          <div
+            className="
+              bg-white
+              rounded-2xl
+              shadow-md
+              h-20
+              w-28
+              md:w-40
+              flex
+              items-center
+              justify-center
+              gap-2
+            "
+          >
+            <div className="text-3xl md:text-4xl">
+              {user.avatar}
+            </div>
+
+            <div className="leading-tight">
+              <p className="font-bold text-sm md:text-lg truncate">
+                {user.name}
+              </p>
+
+              <p className="text-gray-500 text-xs md:text-sm">
+                Level {user.level}
+              </p>
+            </div>
           </div>
 
-          <div>
-            <h2 className="text-xl md:text-2xl font-bold">{user.name}</h2>
-
-            <p className="text-sm opacity-80">
-              Keep learning and earning rewards
-            </p>
+          {/* Coins */}
+          <div
+            className="
+              bg-white
+              rounded-2xl
+              shadow-md
+              h-20
+              w-28
+              md:w-40
+              flex
+              items-center
+              justify-center
+              font-bold
+              text-xl
+            "
+          >
+            🪙 {user.coins}
           </div>
-        </div>
 
-        <div className="flex gap-3 flex-wrap justify-center">
-          <div className="bg-white px-4 py-3 rounded-2xl shadow-md">
-            🏆 Level {user.level}
-          </div>
-
-          <div className="bg-white px-4 py-3 rounded-2xl shadow-md">
-            🪙 {user.coins} 
-          </div>
-
-          <div className="bg-white px-4 py-3 rounded-2xl shadow-md">
+          {/* XP */}
+          <div
+            className="
+              bg-white
+              rounded-2xl
+              shadow-md
+              h-20
+              w-28
+              md:w-40
+              flex
+              items-center
+              justify-center
+              font-bold
+              text-xl
+            "
+          >
             ⚡ {user.xp} XP
           </div>
         </div>
-      </div>
+      )}
     </header>
   );
 }
