@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useUser } from "../context/UserContext.tsx";
 import PageWrapper from "../components/PageWrapper.tsx";
+import { Eye, EyeOff } from "lucide-react";
 
 export default function Profile() {
   const navigate = useNavigate();
@@ -19,6 +20,8 @@ export default function Profile() {
 
   // parent empty error hadling
   const [pinError, setPinError] = useState(false);
+
+  const [showPin, setShowPin] = useState(false);
 
   // ⭐ Selected Avatar
   const [avatar, setAvatar] = useState("🐼");
@@ -39,13 +42,13 @@ export default function Profile() {
       setAgeError(false);
     }
 
-    if (!parentPin.trim()) {
+    if (parentPin.length !== 4) {
       setPinError(true);
     } else {
       setPinError(false);
     }
 
-    if (!name.trim() || !age || !parentPin.trim()) {
+    if (!name.trim() || !age || parentPin.length !== 4) {
       return;
     }
 
@@ -135,28 +138,39 @@ export default function Profile() {
             Please select age group
           </p>
 
-          <input
-            type="password"
-            maxLength={6}
-            placeholder="Create Parent PIN"
-            value={parentPin}
-            onChange={(e) => {
-              setParentPin(e.target.value);
-              setPinError(false);
-            }}
-            className={`w-full bg-gray-50 border-2 rounded-3xl p-4 text-lg shadow-sm focus:outline-none mb-1 ${
-              pinError
-                ? "border-red-500"
-                : "border-gray-100 focus:border-purple-500"
-            }`}
-          />
+          <div className="relative">
+            <input
+              type={showPin ? "text" : "password"}
+              inputMode="numeric"
+              maxLength={4}
+              placeholder="Create Parent PIN"
+              value={parentPin}
+              onChange={(e) => {
+                const value = e.target.value.replace(/\D/g, "");
+                setParentPin(value);
+                setPinError(false);
+              }}
+              className={`w-full bg-gray-50 border-2 rounded-3xl p-4 pr-12 text-lg shadow-sm focus:outline-none mb-1 ${
+                pinError
+                  ? "border-red-500"
+                  : "border-gray-100 focus:border-purple-500"
+              }`}
+            />
 
+            <button
+              type="button"
+              onClick={() => setShowPin(!showPin)}
+              className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-700"
+            >
+              {showPin ? <EyeOff size={20} /> : <Eye size={20} />}
+            </button>
+          </div>
           <p
-            className={`text-red-500 text-sm text-left min-h-[20px] mb-4 ${
+            className={`text-red-500 text-sm text-left min-h-[20px] mb-2 ${
               pinError ? "opacity-100" : "opacity-0"
             }`}
           >
-            Please create parent PIN
+            Please enter 4 digit Parent PIN
           </p>
 
           {/* 🧍 Avatar Selection */}

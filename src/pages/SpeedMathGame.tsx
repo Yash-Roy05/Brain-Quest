@@ -220,7 +220,7 @@ export default function SpeedMathGame() {
       {/* 🎉 Confetti */}
       {showWinCard && <Confetti />}
 
-      <div className="min-h-screen pb-28 bg-gradient-to-b from-purple-400 via-pink-300 to-yellow-200 flex items-center justify-center p-6 relative overflow-hidden dark:from-gray-900 dark:via-gray-900 dark:to-black">
+      <div className="min-h-screen pb-6 md:pb-8 bg-gradient-to-b from-purple-400 via-pink-300 to-yellow-200 flex items-center justify-center p-6 relative overflow-hidden">
         {/* Main Card */}
         <div className="bg-white rounded-[40px] shadow-2xl p-6 md:p-10 w-full max-w-3xl text-center relative z-10 dark:bg-gray-700">
           {/* Title */}
