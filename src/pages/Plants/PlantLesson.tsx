@@ -154,7 +154,7 @@ export default function PlantLesson() {
           {/* Flower */}
           <button
             onClick={() => handlePartClick(plantParts[3])}
-            className={` absolute left-1/2 top-0 -translate-x-1/2 p-3 z-20 md:top-[200px] md:left-[1000px] md:w-[150px] md:h-[150px] top-[220px] left-[320px] w-[80px] h-[70px] ${selectedPart === "Flower" ? "drop-shadow-[0_0_25px_rgba(255,255,0,1)] scale-110 transition-all duration-300" : "transition-all duration-300"} `}
+            className={` absolute left-1/2 top-0 -translate-x-1/2 p-3 z-20 md:top-[200px] md:left-[1000px] md:w-[150px] md:h-[150px] top-[150px] left-[320px] w-[80px] h-[70px] ${selectedPart === "Flower" ? "drop-shadow-[0_0_25px_rgba(255,255,0,1)] scale-110 transition-all duration-300" : "transition-all duration-300"} `}
           >
             {" "}
             <img
@@ -168,7 +168,18 @@ export default function PlantLesson() {
           </button>
 
           {/* Middle Row */}
-          <div className="relative w-full max-w-5xl mx-auto h-[700px]">
+          <div
+            className="
+  relative
+  w-full
+  max-w-5xl
+  mx-auto
+
+  h-[330px]
+
+  md:h-[360px]
+"
+          >
             {/* Stem */}
             <button
               onClick={() => handlePartClick(plantParts[1])}
@@ -238,8 +249,8 @@ md:top-[190px]
 
       w-[80px]
       h-[70px]
-      top-[500px]
-      left-[60px]
+      top-[420px]
+      left-[55px]
 
       md:w-[150px]
       md:h-[150px]
@@ -262,7 +273,7 @@ md:top-[190px]
           </div>
         </div>
 
-        <div className="flex flex-col items-center -mt-80 md:-mt-80">
+        <div className="flex flex-col items-center mt-10 md:mt-12">
           <div
             className="
     bg-white

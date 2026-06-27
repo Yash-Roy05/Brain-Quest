@@ -2,6 +2,13 @@ import Header from "./Header.tsx";
 import Footer from "./Footer.tsx";
 import { Outlet, useLocation } from "react-router-dom";
 
+// const showHeaderRoutes = [
+//   "/dashboard",
+//   "/games",
+//   "/missions",
+//   "/profile",
+// ];
+
 const hideFooterRoutes = [
   "/memory-game",
   "/difference-game",
