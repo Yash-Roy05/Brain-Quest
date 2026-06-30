@@ -168,7 +168,7 @@ export default function PlantLesson() {
           </button>
 
           {/* Middle Row */}
-          <div className="relative w-full max-w-5xl mx-auto h-[700px]">
+          <div className="relative w-full max-w-5xl mx-auto md:h-[350px] h-[340px]">
             {/* Stem */}
             <button
               onClick={() => handlePartClick(plantParts[1])}
@@ -262,7 +262,7 @@ md:top-[190px]
           </div>
         </div>
 
-        <div className="flex flex-col items-center -mt-80 md:-mt-80">
+        <div className="flex flex-col items-center mt-10 md:mt-12">
           <div
             className="
     bg-white
