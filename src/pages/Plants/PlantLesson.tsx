@@ -168,18 +168,7 @@ export default function PlantLesson() {
           </button>
 
           {/* Middle Row */}
-          <div
-            className="
-  relative
-  w-full
-  max-w-5xl
-  mx-auto
-
-  h-[330px]
-
-  md:h-[360px]
-"
-          >
+          <div className="relative w-full max-w-5xl mx-auto md:h-[350px] h-[340px]">
             {/* Stem */}
             <button
               onClick={() => handlePartClick(plantParts[1])}

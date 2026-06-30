@@ -26,6 +26,8 @@ import PlantDashboard from "./pages/Plants/PlantDashboard.tsx";
 import PlantLesson from "./pages/Plants/PlantLesson.tsx";
 import PlantQuiz from "./pages/Plants/PlantQuiz.tsx";
 
+import SeedLesson from "./pages/Plants/level2/SeedLesson.tsx";
+
 function App() {
   return (
     <BrowserRouter>
@@ -59,6 +61,8 @@ function App() {
           <Route path="/plants" element={<PlantDashboard />} />
           <Route path="/plants/lesson" element={<PlantLesson />} />
           <Route path="/plants/quiz" element={<PlantQuiz />} />
+
+          <Route path="/plants/seed-growth" element={<SeedLesson />} />
         </Route>
       </Routes>
     </BrowserRouter>
