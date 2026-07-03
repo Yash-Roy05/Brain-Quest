@@ -233,8 +233,7 @@ lg:max-w-lg
             } else {
               speechSynthesis.cancel();
 
-              // later
-              // navigate("/plants/level2/activity");
+              navigate("/plants/level2/review");
             }
           }}
           className="
