@@ -16,16 +16,32 @@ export default function SeedLesson() {
 
   const [sceneIndex, setSceneIndex] = useState(0);
 
+  const [showTransition, setShowTransition] = useState(false);
+
   const scene = seedScenes[sceneIndex];
 
   const [currentTeacherMessage, setCurrentTeacherMessage] = useState(
     scene.message,
   );
 
+useEffect(() => {
+  setCurrentTeacherMessage(scene.message);
+  speakMessage(scene.message);
+
+  return () => {
+    speechSynthesis.cancel();
+  };
+}, [sceneIndex]);
+
   useEffect(() => {
-    setCurrentTeacherMessage(scene.message);
-    speakMessage(scene.message);
-  }, [sceneIndex]);
+    if (!showTransition) return;
+
+    const timer = setTimeout(() => {
+      navigate("/plants/level2/quiz");
+    }, 3500);
+
+    return () => clearTimeout(timer);
+  }, [showTransition]);
 
   const speakMessage = (message: string) => {
     const speech = new SpeechSynthesisUtterance(message);
@@ -55,6 +71,72 @@ export default function SeedLesson() {
     case "plant":
       currentImage = plantImg;
       break;
+  }
+
+  if (showTransition) {
+    return (
+      <div
+        className="
+      min-h-screen
+      bg-gradient-to-r
+      from-green-400
+      to-emerald-500
+
+      flex
+      flex-col
+      justify-center
+      items-center
+
+      text-center
+      px-6
+    "
+      >
+        <div
+          className="
+        text-7xl
+        animate-pop
+      "
+        >
+          🌸
+        </div>
+
+        <h1
+          className="
+        mt-8
+
+        text-5xl
+        md:text-7xl
+
+        font-black
+
+        text-white
+
+        animate-fade-up
+        delay-300
+      "
+        >
+          Great Job!
+        </h1>
+
+        <p
+          className="
+        mt-6
+
+        text-xl
+        md:text-3xl
+
+        font-semibold
+
+        text-white/90
+
+        animate-fade-up
+        delay-700
+      "
+        >
+          Let's see what you remember...
+        </p>
+      </div>
+    );
   }
 
   return (
@@ -233,7 +315,7 @@ lg:max-w-lg
             } else {
               speechSynthesis.cancel();
 
-              navigate("/plants/level2/review");
+              setShowTransition(true);
             }
           }}
           className="
@@ -251,7 +333,7 @@ md:text-xl
         shadow-xl
         "
         >
-          {sceneIndex === seedScenes.length - 1 ? "Start Activity" : "Next"}
+          {sceneIndex === seedScenes.length - 1 ? "Start Quiz" : "Next"}
         </button>
       </div>
     </div>

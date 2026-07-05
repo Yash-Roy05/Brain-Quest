@@ -27,10 +27,6 @@ export default function SeedQuiz() {
   const [score, setScore] = useState(0);
   const [finished, setFinished] = useState(false);
 
-  useEffect(() => {
-    speak(questions[current].question);
-  }, [current]);
-
   function speak(text: string) {
     const speech = new SpeechSynthesisUtterance(text);
 
@@ -99,8 +95,8 @@ export default function SeedQuiz() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-r from-green-400 to-emerald-500 px-4 py-8">
-      <div className="max-w-xl mx-auto">
+    <div className="bg-gradient-to-r from-green-400 to-emerald-500 px-4 pt-8 pb-24">
+      <div className="max-w-xl mx-auto flex flex-col">
         <h1 className="text-4xl md:text-5xl font-black text-center text-green-800">
           Seed Quiz
         </h1>
@@ -109,7 +105,7 @@ export default function SeedQuiz() {
           Question {current + 1} of {questions.length}
         </p>
 
-        <div className="bg-white rounded-3xl shadow-xl p-8 mt-8">
+        <div className="bg-white rounded-3xl shadow-xl p-8 mt-3 md:mt-10">
           <h2 className="text-2xl md:text-3xl font-black text-center">
             {questions[current].question}
           </h2>
