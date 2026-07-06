@@ -6,6 +6,12 @@ export default function PlantDashboard() {
   const level1Completed =
     localStorage.getItem("plantLevel1Completed") === "true";
 
+  const level2Completed =
+    localStorage.getItem("plantLevel2Completed") === "true";
+
+  const level3Completed =
+    localStorage.getItem("plantLevel3Completed") === "true";
+
   const levels = [
     {
       id: 1,
@@ -19,18 +25,13 @@ export default function PlantDashboard() {
     },
     {
       id: 3,
-      title: "Plant Needs",
-      unlocked: false,
+      title: "Types of Plants",
+      unlocked: level2Completed,
     },
     {
       id: 4,
-      title: "Types of Plants",
-      unlocked: false,
-    },
-    {
-      id: 5,
       title: "Plant Life Cycle",
-      unlocked: false,
+      unlocked: level3Completed,
     },
   ];
 
@@ -60,12 +61,22 @@ export default function PlantDashboard() {
               {level.unlocked ? (
                 <button
                   onClick={() => {
-                    if (level.id === 1) {
-                      navigate("/plants/lesson");
-                    }
+                    switch (level.id) {
+                      case 1:
+                        navigate("/plants/lesson");
+                        break;
 
-                    if (level.id === 2) {
-                      navigate("/plants/seed-growth");
+                      case 2:
+                        navigate("/plants/seed-growth");
+                        break;
+
+                      case 3:
+                        navigate("/plants/level3");
+                        break;
+
+                      case 4:
+                        navigate("/plants/level4");
+                        break;
                     }
                   }}
                   className="bg-green-500 hover:bg-green-600 text-white px-6 py-3 rounded-xl font-bold"

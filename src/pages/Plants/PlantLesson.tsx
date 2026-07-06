@@ -154,7 +154,7 @@ export default function PlantLesson() {
           {/* Flower */}
           <button
             onClick={() => handlePartClick(plantParts[3])}
-            className={` absolute left-1/2 top-0 -translate-x-1/2 p-3 z-20 md:top-[200px] md:left-[1000px] md:w-[150px] md:h-[150px] top-[150px] left-[320px] w-[80px] h-[70px] ${selectedPart === "Flower" ? "drop-shadow-[0_0_25px_rgba(255,255,0,1)] scale-110 transition-all duration-300" : "transition-all duration-300"} `}
+            className={` absolute left-1/2 top-0 -translate-x-1/2 p-3 z-20 md:top-[200px] md:left-[1000px] md:w-[150px] md:h-[150px] top-[200px] left-[360px] w-[80px] h-[70px] ${selectedPart === "Flower" ? "drop-shadow-[0_0_25px_rgba(255,255,0,1)] scale-110 transition-all duration-300" : "transition-all duration-300"} `}
           >
             {" "}
             <img
@@ -211,7 +211,7 @@ md:top-[190px]
             {/* Leaf */}
             <button
               onClick={() => handlePartClick(plantParts[2])}
-              className={` absolute right-10 top-1/2 -translate-y-1/2 p-3 w-[80px] h-[70px] top-[80px] left-[280px] md:w-[150px] md:h-[150px] md:top-[160px] md:left-[670px] ${selectedPart === "Leaf" ? "drop-shadow-[0_0_25px_rgba(255,255,0,1)] scale-110 transition-all duration-300" : "transition-all duration-300"} `}
+              className={` absolute right-10 top-1/2 -translate-y-1/2 p-3 w-[80px] h-[70px] top-[80px] left-[320px] md:w-[150px] md:h-[150px] md:top-[160px] md:left-[670px] ${selectedPart === "Leaf" ? "drop-shadow-[0_0_25px_rgba(255,255,0,1)] scale-110 transition-all duration-300" : "transition-all duration-300"} `}
             >
               {" "}
               <img
@@ -238,8 +238,8 @@ md:top-[190px]
 
       w-[80px]
       h-[70px]
-      top-[420px]
-      left-[55px]
+      top-[470px]
+      left-[65px]
 
       md:w-[150px]
       md:h-[150px]
