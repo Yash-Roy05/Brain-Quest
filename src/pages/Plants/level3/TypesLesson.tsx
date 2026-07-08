@@ -304,8 +304,6 @@ md:w-16
 md:h-16
 
     object-contain
-
-   
   "
               />
 
