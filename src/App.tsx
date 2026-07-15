@@ -32,6 +32,9 @@ import SeedQuiz from "./pages/Plants/level2/SeedQuiz.tsx";
 import TypesLesson from "./pages/Plants/level3/TypesLesson.tsx";
 import TypesQuiz from "./pages/Plants/level3/TypesQuiz.tsx";
 
+import FlowerLesson from "./pages/Plants/level4/FlowerLesson.tsx";
+import FlowerQuiz from "./pages/Plants/level4/FlowerQuiz.tsx";
+
 function App() {
   return (
     <BrowserRouter>
@@ -72,6 +75,8 @@ function App() {
           <Route path="/plants/level3" element={<TypesLesson />} />
           <Route path="/plants/level3/quiz" element={<TypesQuiz />} />
 
+          <Route path="/plants/level4" element={<FlowerLesson />} />
+          <Route path="/plants/level4/quiz" element={<FlowerQuiz />} />
         </Route>
       </Routes>
     </BrowserRouter>

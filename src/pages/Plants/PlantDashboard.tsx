@@ -25,6 +25,41 @@ export default function PlantDashboard() {
       title: "Types of Plants",
       unlocked: level2Completed,
     },
+    {
+      id: 4,
+      title: "Parts of Flower",
+      unlocked: level2Completed,
+    },
+    {
+      id: 5,
+      title: "Fruits & Vegetables",
+      unlocked: false,
+    },
+    {
+      id: 6,
+      title: "Where Plants Grow",
+      unlocked: false,
+    },
+    {
+      id: 7,
+      title: "What Plants Need",
+      unlocked: false,
+    },
+    {
+      id: 8,
+      title: "Leaf Shapes",
+      unlocked: false,
+    },
+    {
+      id: 9,
+      title: "Uses of Plants",
+      unlocked: false,
+    },
+    {
+      id: 10,
+      title: "Save Plants",
+      unlocked: false,
+    },
   ];
 
   return (
@@ -134,6 +169,34 @@ export default function PlantDashboard() {
 
                       case 3:
                         navigate("/plants/level3");
+                        break;
+
+                      case 4:
+                        navigate("/plants/level4");
+                        break;
+
+                      case 5:
+                        navigate("/plants/level5");
+                        break;
+
+                      case 6:
+                        navigate("/plants/level6");
+                        break;
+
+                      case 7:
+                        navigate("/plants/level7");
+                        break;
+
+                      case 8:
+                        navigate("/plants/level8");
+                        break;
+
+                      case 9:
+                        navigate("/plants/level9");
+                        break;
+
+                      case 10:
+                        navigate("/plants/level10");
                         break;
                     }
                   }}

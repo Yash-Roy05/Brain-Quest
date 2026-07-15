@@ -45,7 +45,7 @@ export default function PlantLesson() {
     {
       emoji: "🍃",
       title: "Leaf",
-      description:
+      description:  
         "☀️ Awesome! Leaves make food for the plant using sunlight, air and water.",
     },
     {
