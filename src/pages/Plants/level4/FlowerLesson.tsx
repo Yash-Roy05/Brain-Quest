@@ -33,6 +33,20 @@ export default function FlowerLesson() {
     return () => clearTimeout(timer);
   }, [showTransition]);
 
+  useEffect(() => {
+    const welcome = "Hello Explorer! Click any flower part to learn.";
+
+    const speech = new SpeechSynthesisUtterance(welcome);
+
+    speech.rate = 0.9;
+    speech.pitch = 1.2;
+
+    speechSynthesis.cancel();
+    speechSynthesis.speak(speech);
+
+    return () => speechSynthesis.cancel();
+  }, []);
+
   const allPartsVisited =
     visitedParts.includes("Petal") &&
     visitedParts.includes("Sepal") &&
@@ -199,7 +213,6 @@ md:pt-6
 pb-24
 "
     >
-    
       {/* Title */}
       <div className="text-center -mt-1">
         <h1
@@ -251,7 +264,7 @@ items-center
         {/* LEFT SIDE */}
 
         <div
-  className="
+          className="
 relative
 
 w-[380px]
@@ -260,7 +273,7 @@ h-[260px]
 md:w-[700px]
 md:h-[420px]
 "
->
+        >
           {/* Main Flower */}
           <img
             src={flowerImg}
@@ -312,7 +325,9 @@ z-0
   `}
           >
             <img src={petalImg} className="w-full h-full object-contain" />
-            <p className="font-bold text-sm md:text-base -mt-4 md:-mt-5">Petal</p>
+            <p className="font-bold text-sm md:text-base -mt-4 md:-mt-5">
+              Petal
+            </p>
           </button>
 
           {/* Sepal Button */}
@@ -340,7 +355,9 @@ z-0
   `}
           >
             <img src={sepalImg} className="w-full h-full object-contain" />
-            <p className="font-bold text-sm md:text-base -mt-4 md:-mt-3">Sepal</p>
+            <p className="font-bold text-sm md:text-base -mt-4 md:-mt-3">
+              Sepal
+            </p>
           </button>
 
           {/* Stamen Button */}
@@ -368,7 +385,9 @@ z-0
   `}
           >
             <img src={stamenImg} className="w-full h-full object-contain" />
-            <p className="font-bold text-sm md:text-base -mt-3 md:-mt-2">Stamen</p>
+            <p className="font-bold text-sm md:text-base -mt-3 md:-mt-2">
+              Stamen
+            </p>
           </button>
 
           {/* Pistil Button */}
@@ -396,7 +415,9 @@ z-0
   `}
           >
             <img src={pistilImg} className="w-full h-full object-contain" />
-            <p className="font-bold text-sm md:text-base -mt-3 md:-mt-3">Pistil</p>
+            <p className="font-bold text-sm md:text-base -mt-3 md:-mt-3">
+              Pistil
+            </p>
           </button>
         </div>
       </div>
@@ -489,9 +510,13 @@ text-gray-700
         <button
           onClick={() => {
             if (!allPartsVisited) {
-              speakMessage(
-                "Please learn all flower parts before starting the quiz.",
-              );
+              const warning =
+                "Please learn all four flower parts before starting the quiz.";
+
+              setCurrentTeacherMessage(warning); // Update Quester card
+
+              speakMessage(warning); // Speak the message
+
               return;
             }
             speechSynthesis.cancel();
