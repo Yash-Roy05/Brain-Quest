@@ -31,9 +31,9 @@ export default function Dashboard() {
 
   const xpProgress = (currentXP / 50) * 100;
 
-  const userMissions = (missions[user.age] || []).filter(
-    (mission: Mission) => !user.completedMissions.includes(mission.id),
-  );
+  const userMissions = (missions[user.ageGroup] || []).filter(
+  (mission: Mission) => !user.completedMissions.includes(mission.id),
+);
 
   return (
     <PageWrapper>
@@ -50,7 +50,7 @@ export default function Dashboard() {
                 </h1>
 
                 <p className="opacity-80 dark:text-white">
-                  Age Group: {user.age}
+                  Age Group: {user.ageGroup}
                 </p>
               </div>
             </div>

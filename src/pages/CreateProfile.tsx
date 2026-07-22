@@ -13,7 +13,7 @@ export default function Profile() {
   const avatars = ["🐼", "🦊", "🦁", "🐸", "🐵", "🐯"];
 
   const [name, setName] = useState("");
-  const [age, setAge] = useState("");
+  const [age, setAge] = useState<number | "">("");
 
   // parent mode
   const [parentPin, setParentPin] = useState("");
@@ -25,6 +25,9 @@ export default function Profile() {
 
   // ⭐ Selected Avatar
   const [avatar, setAvatar] = useState("🐼");
+
+  const [gender, setGender] = useState("");
+  const [genderError, setGenderError] = useState(false);
 
   const [nameError, setNameError] = useState(false);
   const [ageError, setAgeError] = useState(false);
@@ -42,24 +45,42 @@ export default function Profile() {
       setAgeError(false);
     }
 
+    if (!gender) {
+      setGenderError(true);
+    } else {
+      setGenderError(false);
+    }
+
     if (parentPin.length !== 4) {
       setPinError(true);
     } else {
       setPinError(false);
     }
 
-    if (!name.trim() || !age || parentPin.length !== 4) {
+    if (!name.trim() || !age || !gender || parentPin.length !== 4) {
       return;
     }
+
+    let ageGroup = "";
+
+if (age >= 5 && age <= 10) {
+  ageGroup = "8-10";
+} else if (age >= 11 && age <= 13) {
+  ageGroup = "11-13";
+} else {
+  ageGroup = "14-15";
+}
 
     setUser({
       name,
       age,
+      ageGroup,
+      gender,
+      avatar,
       coins: 0,
       xp: 0,
       level: 1,
       completedMissions: [],
-      avatar,
       streak: 1,
       lastLoginDate: new Date().toDateString(),
       parentPin,
@@ -113,7 +134,14 @@ export default function Profile() {
           <select
             value={age}
             onChange={(e) => {
-              setAge(e.target.value);
+              const value = e.target.value;
+
+              if (value === "") {
+                setAge("");
+              } else {
+                setAge(Number(value));
+              }
+
               setAgeError(false);
             }}
             className={`w-full bg-gray-50 border-2 rounded-3xl p-4 text-lg shadow-sm focus:outline-none mb-1 ${
@@ -122,20 +150,55 @@ export default function Profile() {
                 : "border-gray-100 focus:border-purple-500"
             }`}
           >
-            <option value="">Select Age Group</option>
+            <option value="">Select Age</option>
 
-            <option value="8-10">8-10</option>
-
-            <option value="11-13">11-13</option>
-
-            <option value="14-15">14-15</option>
+            <option value={5}>5</option>
+            <option value={6}>6</option>
+            <option value={7}>7</option>
+            <option value={8}>8</option>
+            <option value={9}>9</option>
+            <option value={10}>10</option>
+            <option value={11}>11</option>
+            <option value={12}>12</option>
+            <option value={13}>13</option>
+            <option value={14}>14</option>
+            <option value={15}>15</option>
+            <option value={16}>16</option>
+            <option value={17}>17</option>
+            <option value={18}>18</option>
           </select>
           <p
             className={`text-red-500 text-sm text-left min-h-[20px] mb-2 ${
               ageError ? "opacity-100" : "opacity-0"
             }`}
           >
-            Please select age group
+            Please select age
+          </p>
+
+          {/* Gender */}
+          <select
+            value={gender}
+            onChange={(e) => {
+              setGender(e.target.value);
+              setGenderError(false);
+            }}
+            className={`w-full bg-gray-50 border-2 rounded-3xl p-4 text-lg shadow-sm focus:outline-none mb-1 ${
+              genderError
+                ? "border-red-500"
+                : "border-gray-100 focus:border-purple-500"
+            }`}
+          >
+            <option value="">Select Gender</option>
+            <option value="male">Male 👦</option>
+            <option value="female">Female 👧</option>
+          </select>
+
+          <p
+            className={`text-red-500 text-sm text-left min-h-[20px] mb-2 ${
+              genderError ? "opacity-100" : "opacity-0"
+            }`}
+          >
+            Please select gender
           </p>
 
           <div className="relative">

@@ -9,7 +9,9 @@ type SavedProfile = {
 
 type User = {
   name: string;
-  age: string;
+  age: number;
+  ageGroup: string;
+  gender: string;
   coins: number;
   xp: number;
   level: number;
@@ -49,7 +51,9 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
       ? JSON.parse(savedUser)
       : {
           name: "",
-          age: "",
+          age: 0,
+          ageGroup: "",
+          gender: "",
           coins: 0,
           xp: 0,
           level: 1,
@@ -74,16 +78,16 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
   }, [user]);
 
   useEffect(() => {
-  const interval = setInterval(() => {
-    setUser((prev) => ({
-      ...prev,
-      screenTimeToday: prev.screenTimeToday + 1,
-      screenTimeTotal: prev.screenTimeTotal + 1,
-    }));
-  }, 60000);
+    const interval = setInterval(() => {
+      setUser((prev) => ({
+        ...prev,
+        screenTimeToday: prev.screenTimeToday + 1,
+        screenTimeTotal: prev.screenTimeTotal + 1,
+      }));
+    }, 60000);
 
-  return () => clearInterval(interval);
-}, []);
+    return () => clearInterval(interval);
+  }, []);
 
   // ✅ Add Coins
   const addCoins = (amount: number) => {
