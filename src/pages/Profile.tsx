@@ -3,8 +3,25 @@ import { useUser } from "../context/UserContext.tsx";
 import PageWrapper from "../components/PageWrapper.tsx";
 import { useState, useEffect } from "react";
 import { useTheme } from "../context/ThemeContext.tsx";
+import type { SavedProfile } from "../context/UserContext";
+
+import panda from "../assets/avatars/panda.png";
+import fox from "../assets/avatars/fox.png";
+import lion from "../assets/avatars/lion.png";
+import frog from "../assets/avatars/frog.png";
+import monkey from "../assets/avatars/monkey.png";
+import tiger from "../assets/avatars/tiger.png";
 
 export default function Profile() {
+  const avatarImages: Record<string, string> = {
+    panda,
+    fox,
+    lion,
+    frog,
+    monkey,
+    tiger,
+  };
+
   const navigate = useNavigate();
 
   const [isSaving, setIsSaving] = useState(false);
@@ -19,7 +36,7 @@ export default function Profile() {
   const [showEditProfile, setShowEditProfile] = useState(false);
   const [newName, setNewName] = useState(user.name);
   const [newAvatar, setNewAvatar] = useState(user.avatar);
-  const [newAge, setNewAge] = useState(user.age);
+  const [newAge, setNewAge] = useState<number>(user.age);
 
   // dark/light mode
   const { darkMode, setDarkMode } = useTheme();
@@ -46,17 +63,17 @@ export default function Profile() {
   // contact us
   const [showContact, setShowContact] = useState(false);
 
-  const avatars = ["🐼", "🦊", "🦁", "🐸", "🐵", "🐯"];
+  const avatars = ["panda", "fox", "lion", "frog", "monkey", "tiger"];
 
   const handleSaveProfile = () => {
     setIsSaving(true);
 
     setTimeout(() => {
       setUser((prev) => {
-        const updatedProfiles = {
+        const updatedProfiles: Record<string, SavedProfile> = {
           ...prev.savedProfiles,
 
-          [prev.age]: {
+          [String(prev.age)]: {
             coins: prev.coins,
             xp: prev.xp,
             level: prev.level,
@@ -64,7 +81,17 @@ export default function Profile() {
           },
         };
 
-        const newAgeProfile = updatedProfiles[newAge];
+        const newAgeProfile = updatedProfiles[String(newAge)];
+
+        let newAgeGroup = "";
+
+        if (newAge >= 5 && newAge <= 10) {
+          newAgeGroup = "8-10";
+        } else if (newAge >= 11 && newAge <= 13) {
+          newAgeGroup = "11-13";
+        } else {
+          newAgeGroup = "14-15";
+        }
 
         return {
           ...prev,
@@ -72,6 +99,7 @@ export default function Profile() {
           name: newName,
           avatar: newAvatar,
           age: newAge,
+          ageGroup: newAgeGroup,
 
           coins: newAgeProfile?.coins ?? 0,
           xp: newAgeProfile?.xp ?? 0,
@@ -94,7 +122,11 @@ export default function Profile() {
           {/* Profile Card */}
 
           <div className="relative bg-white rounded-[35px] shadow-2xl px-8 py-5 text-center mb-4 md:mb-4 dark:bg-gray-700">
-            <div className="text-7xl mb-2">{user.avatar}</div>
+            <img
+              src={avatarImages[user.avatar]}
+              alt="Avatar"
+              className="w-24 h-24 mx-auto mb-2 rounded-full"
+            />
 
             <button
               onClick={() => setShowSettings(true)}
@@ -108,7 +140,7 @@ export default function Profile() {
             </h1>
 
             <p className="text-lg text-gray-500 mb-1 dark:text-white">
-              Age Group: {user.age}
+              Age: {user.age}
             </p>
           </div>
 
@@ -226,6 +258,10 @@ export default function Profile() {
             <div className="space-y-4">
               <button
                 onClick={() => {
+                  setNewName(user.name);
+                  setNewAge(user.age);
+                  setNewAvatar(user.avatar);
+
                   setShowEditProfile(true);
                   setShowSettings(false);
                 }}
@@ -304,14 +340,16 @@ export default function Profile() {
 
               <select
                 value={newAge}
-                onChange={(e) => setNewAge(e.target.value)}
+                onChange={(e) => setNewAge(Number(e.target.value))}
                 className="w-full border-2 border-gray-200 rounded-2xl p-3 mb-6 dark:bg-gray-800 dark:text-white"
               >
-                <option value="8-10">8-10 Years</option>
-
-                <option value="11-13">11-13 Years</option>
-
-                <option value="14-15">14-15 Years</option>
+                {[5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18].map(
+                  (age) => (
+                    <option key={age} value={age}>
+                      {age}
+                    </option>
+                  ),
+                )}
               </select>
 
               <div className="flex justify-center gap-3 flex-wrap mb-6">
@@ -323,7 +361,11 @@ export default function Profile() {
                       newAvatar === avatar ? "bg-blue-500" : "bg-gray-100"
                     }`}
                   >
-                    {avatar}
+                    <img
+                      src={avatarImages[avatar]}
+                      alt={avatar}
+                      className="w-16 h-16 rounded-full"
+                    />
                   </button>
                 ))}
               </div>

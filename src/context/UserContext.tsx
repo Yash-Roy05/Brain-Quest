@@ -1,6 +1,6 @@
 import { createContext, useContext, useState, useEffect } from "react";
 
-type SavedProfile = {
+export type SavedProfile = {
   coins: number;
   xp: number;
   level: number;

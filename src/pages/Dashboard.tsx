@@ -5,6 +5,13 @@ import { motion } from "framer-motion";
 import PageWrapper from "../components/PageWrapper.tsx";
 import { useEffect } from "react";
 
+import panda from "../assets/avatars/panda.png";
+import fox from "../assets/avatars/fox.png";
+import lion from "../assets/avatars/lion.png";
+import frog from "../assets/avatars/frog.png";
+import monkey from "../assets/avatars/monkey.png";
+import tiger from "../assets/avatars/tiger.png";
+
 type Question = {
   question: string;
   answer: string;
@@ -21,6 +28,15 @@ type Mission = {
 export default function Dashboard() {
   const navigate = useNavigate();
 
+  const avatarImages: Record<string, string> = {
+    panda,
+    fox,
+    lion,
+    frog,
+    monkey,
+    tiger,
+  };
+
   useEffect(() => {
     checkDailyStreak();
   }, []);
@@ -32,8 +48,8 @@ export default function Dashboard() {
   const xpProgress = (currentXP / 50) * 100;
 
   const userMissions = (missions[user.ageGroup] || []).filter(
-  (mission: Mission) => !user.completedMissions.includes(mission.id),
-);
+    (mission: Mission) => !user.completedMissions.includes(mission.id),
+  );
 
   return (
     <PageWrapper>
@@ -42,7 +58,11 @@ export default function Dashboard() {
         <div className="bg-white rounded-3xl shadow-2xl p-5 md:p-5 w-full max-w-7xl px-4 md:px-8 mx-auto mb-4 md:mb-4 dark:bg-gray-700">
           <div className="flex flex-col md:flex-row md:justify-between md:items-center gap-4 p-2 md:p-6">
             <div className="flex items-center gap-3">
-              <div className="text-6xl">{user.avatar}</div>
+              <img
+                src={avatarImages[user.avatar]}
+                alt="Avatar"
+                className="w-20 h-20 rounded-full"
+              />
 
               <div>
                 <h1 className="text-3xl md:text-4xl font-black mb-0 dark:text-white">
@@ -123,7 +143,8 @@ export default function Dashboard() {
           <div className="mb-6 md:mb-8">
             <button
               onClick={() => navigate("/plants")}
-              className="w-full bg-green-500 hover:bg-green-600 text-white py-5 rounded-3xl text-2xl font-black shadow-xl ">
+              className="w-full bg-green-500 hover:bg-green-600 text-white py-5 rounded-3xl text-2xl font-black shadow-xl "
+            >
               🌱 Plants World
             </button>
           </div>

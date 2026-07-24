@@ -3,6 +3,14 @@ import { useNavigate } from "react-router-dom";
 import { useUser } from "../context/UserContext.tsx";
 import PageWrapper from "../components/PageWrapper.tsx";
 import { Eye, EyeOff } from "lucide-react";
+import axios from "axios";
+
+import panda from "../assets/avatars/panda.png";
+import fox from "../assets/avatars/fox.png";
+import lion from "../assets/avatars/lion.png";
+import frog from "../assets/avatars/frog.png";
+import monkey from "../assets/avatars/monkey.png";
+import tiger from "../assets/avatars/tiger.png";
 
 export default function Profile() {
   const navigate = useNavigate();
@@ -10,7 +18,14 @@ export default function Profile() {
   const { setUser } = useUser();
 
   // 🧍 Avatar List
-  const avatars = ["🐼", "🦊", "🦁", "🐸", "🐵", "🐯"];
+  const avatars = [
+    { id: "panda", image: panda },
+    { id: "fox", image: fox },
+    { id: "lion", image: lion },
+    { id: "frog", image: frog },
+    { id: "monkey", image: monkey },
+    { id: "tiger", image: tiger },
+  ];
 
   const [name, setName] = useState("");
   const [age, setAge] = useState<number | "">("");
@@ -24,7 +39,7 @@ export default function Profile() {
   const [showPin, setShowPin] = useState(false);
 
   // ⭐ Selected Avatar
-  const [avatar, setAvatar] = useState("🐼");
+  const [avatar, setAvatar] = useState("panda");
 
   const [gender, setGender] = useState("");
   const [genderError, setGenderError] = useState(false);
@@ -32,7 +47,7 @@ export default function Profile() {
   const [nameError, setNameError] = useState(false);
   const [ageError, setAgeError] = useState(false);
 
-  const handleStart = () => {
+  const handleStart = async () => {
     if (!name.trim()) {
       setNameError(true);
     } else {
@@ -61,15 +76,26 @@ export default function Profile() {
       return;
     }
 
+    try {
+      const response = await axios.post("http://127.0.0.1:8000/api/children", {
+        name,
+        age,
+        gender,
+        avatar,
+      });
+    } catch (error) {
+      console.error(error);
+    }
+
     let ageGroup = "";
 
-if (age >= 5 && age <= 10) {
-  ageGroup = "8-10";
-} else if (age >= 11 && age <= 13) {
-  ageGroup = "11-13";
-} else {
-  ageGroup = "14-15";
-}
+    if (age >= 5 && age <= 10) {
+      ageGroup = "8-10";
+    } else if (age >= 11 && age <= 13) {
+      ageGroup = "11-13";
+    } else {
+      ageGroup = "14-15";
+    }
 
     setUser({
       name,
@@ -98,7 +124,11 @@ if (age >= 5 && age <= 10) {
         <div className="bg-white rounded-3xl shadow-2xl p-6 md:p-10 w-full max-w-xl text-center">
           {/* Hero Avatar */}
           <div className="mb-6">
-            <div className="text-7xl mb-3">{avatar}</div>
+            <img
+              src={avatars.find((a) => a.id === avatar)?.image}
+              alt="Avatar"
+              className="w-24 h-24 mx-auto mb-3 rounded-full"
+            />
 
             <h1 className="text-3xl md:text-5xl font-black text-purple-700">
               Brain Quest
@@ -189,8 +219,8 @@ if (age >= 5 && age <= 10) {
             }`}
           >
             <option value="">Select Gender</option>
-            <option value="male">Male 👦</option>
-            <option value="female">Female 👧</option>
+            <option value="male">Male </option>
+            <option value="female">Female </option>
           </select>
 
           <p
@@ -245,9 +275,9 @@ if (age >= 5 && age <= 10) {
             <div className="flex justify-center gap-3 flex-wrap">
               {avatars.map((item) => (
                 <button
-                  key={item}
+                  key={item.id}
                   type="button"
-                  onClick={() => setAvatar(item)}
+                  onClick={() => setAvatar(item.id)}
                   className={`
 text-5xl
 w-20
@@ -259,12 +289,16 @@ rounded-3xl
 transition-all
 duration-300
 shadow-md ${
-                    avatar === item
+                    avatar === item.id
                       ? "bg-blue-500 scale-110"
                       : "bg-gray-100 hover:bg-gray-200"
                   }`}
                 >
-                  {item}
+                  <img
+                    src={item.image}
+                    alt={item.id}
+                    className="w-16 h-16 rounded-full"
+                  />
                 </button>
               ))}
             </div>
