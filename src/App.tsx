@@ -35,6 +35,8 @@ import TypesQuiz from "./pages/Plants/level3/TypesQuiz.tsx";
 import FlowerLesson from "./pages/Plants/level4/FlowerLesson.tsx";
 import FlowerQuiz from "./pages/Plants/level4/FlowerQuiz.tsx";
 
+import Auth from "./pages/Auth.tsx";
+
 function App() {
   return (
     <BrowserRouter>
@@ -43,6 +45,7 @@ function App() {
         <Route path="/" element={<Welcome />} />
         <Route path="/loading" element={<Loading />} />
         <Route path="/create-profile" element={<CreateProfile />} />
+        <Route path="/auth" element={<Auth />} />
 
         {/* All Other Pages WITH Header/Footer */}
         <Route element={<Layout />}>
@@ -77,6 +80,7 @@ function App() {
 
           <Route path="/plants/level4" element={<FlowerLesson />} />
           <Route path="/plants/level4/quiz" element={<FlowerQuiz />} />
+
         </Route>
       </Routes>
     </BrowserRouter>

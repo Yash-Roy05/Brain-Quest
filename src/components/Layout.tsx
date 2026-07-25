@@ -21,6 +21,7 @@ const hideFooterRoutes = [
   "/speedmath-game",
   "/parent-login",
   "/parent-dashboard",
+  "/auth",
 ];
 
 export default function Layout() {

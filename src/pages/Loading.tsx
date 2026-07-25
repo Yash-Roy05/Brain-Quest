@@ -18,7 +18,7 @@ export default function Loading() {
   useEffect(() => {
     if (currentText === loadingTexts.length - 1) {
       setTimeout(() => {
-        navigate("/create-profile");
+        navigate("/auth");
       }, 1000);
     }
   }, [currentText, navigate]);
