@@ -36,6 +36,8 @@ import FlowerLesson from "./pages/Plants/level4/FlowerLesson.tsx";
 import FlowerQuiz from "./pages/Plants/level4/FlowerQuiz.tsx";
 
 import Auth from "./pages/Auth.tsx";
+import Login from "./pages/Login.tsx";
+import Register from "./pages/Register.tsx";
 
 function App() {
   return (
@@ -46,6 +48,8 @@ function App() {
         <Route path="/loading" element={<Loading />} />
         <Route path="/create-profile" element={<CreateProfile />} />
         <Route path="/auth" element={<Auth />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
 
         {/* All Other Pages WITH Header/Footer */}
         <Route element={<Layout />}>

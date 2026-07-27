@@ -1,0 +1,255 @@
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { Eye, EyeOff } from "lucide-react";
+import { motion } from "framer-motion";
+
+import logo from "../assets/owl.png";
+
+export default function Register() {
+  const navigate = useNavigate();
+
+  const [showPassword, setShowPassword] = useState(false);
+
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  return (
+    <div
+      className="
+      min-h-screen
+      flex
+      items-center
+      justify-center
+      bg-gradient-to-b
+      from-sky-300
+      via-blue-300
+      to-purple-300
+      dark:from-gray-900
+      dark:via-gray-900
+      dark:to-black
+      px-4
+      py-6
+      "
+    >
+      <motion.div
+        initial={{ opacity: 0, y: 35 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+        className="
+        bg-white
+        dark:bg-gray-800
+        rounded-[32px]
+        shadow-2xl
+        w-full
+        max-w-md
+        px-6
+        py-8
+        sm:px-8
+        "
+      >
+        {/* Logo */}
+
+        <img
+          src={logo}
+          alt="Brain Quest"
+          className="w-24 h-24 mx-auto mb-4"
+        />
+
+        <h1 className="text-4xl font-black text-center text-purple-700">
+          Create Account
+        </h1>
+
+        <p className="text-center text-gray-500 dark:text-gray-300 mt-2 mb-8">
+          Join Brain Quest and start your learning adventure.
+        </p>
+
+        {/* First Name */}
+
+        <label className="font-bold text-gray-700 dark:text-white">
+          First Name
+        </label>
+
+        <input
+          type="text"
+          placeholder="Enter First Name"
+          value={firstName}
+          onChange={(e) => setFirstName(e.target.value)}
+          className="
+          w-full
+          mt-2
+          mb-5
+          p-4
+          rounded-2xl
+          border-2
+          border-gray-200
+          focus:border-purple-500
+          outline-none
+          dark:bg-gray-700
+          dark:text-white
+          "
+        />
+
+        {/* Last Name */}
+
+        <label className="font-bold text-gray-700 dark:text-white">
+          Last Name
+        </label>
+
+        <input
+          type="text"
+          placeholder="Enter Last Name"
+          value={lastName}
+          onChange={(e) => setLastName(e.target.value)}
+          className="
+          w-full
+          mt-2
+          mb-5
+          p-4
+          rounded-2xl
+          border-2
+          border-gray-200
+          focus:border-purple-500
+          outline-none
+          dark:bg-gray-700
+          dark:text-white
+          "
+        />
+
+        {/* Email */}
+
+        <label className="font-bold text-gray-700 dark:text-white">
+          Email Address
+        </label>
+
+        <input
+          type="email"
+          placeholder="Enter Email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          className="
+          w-full
+          mt-2
+          mb-5
+          p-4
+          rounded-2xl
+          border-2
+          border-gray-200
+          focus:border-purple-500
+          outline-none
+          dark:bg-gray-700
+          dark:text-white
+          "
+        />
+
+        {/* Password */}
+
+        <label className="font-bold text-gray-700 dark:text-white">
+          Password
+        </label>
+
+        <div className="relative mt-2">
+
+          <input
+            type={showPassword ? "text" : "password"}
+            placeholder="Create Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            className="
+            w-full
+            p-4
+            rounded-2xl
+            border-2
+            border-gray-200
+            focus:border-purple-500
+            outline-none
+            pr-12
+            dark:bg-gray-700
+            dark:text-white
+            "
+          />
+
+          <button
+            type="button"
+            onClick={() => setShowPassword(!showPassword)}
+            className="
+            absolute
+            right-4
+            top-1/2
+            -translate-y-1/2
+            text-gray-500
+            "
+          >
+            {showPassword ? (
+              <EyeOff size={20} />
+            ) : (
+              <Eye size={20} />
+            )}
+          </button>
+
+        </div>
+
+        {/* Register */}
+
+        <motion.button
+          whileHover={{ scale: 1.03 }}
+          whileTap={{ scale: 0.97 }}
+          className="
+          w-full
+          mt-8
+          bg-gradient-to-r
+          from-green-500
+          to-emerald-600
+          text-white
+          py-4
+          rounded-2xl
+          font-black
+          text-lg
+          shadow-xl
+          "
+        >
+          CREATE ACCOUNT
+        </motion.button>
+
+        {/* Divider */}
+
+        <div className="flex items-center my-7">
+
+          <div className="flex-1 h-px bg-gray-300"></div>
+
+          <span className="mx-3 text-gray-500">
+            OR
+          </span>
+
+          <div className="flex-1 h-px bg-gray-300"></div>
+
+        </div>
+
+        {/* Login */}
+
+        <div className="text-center text-sm">
+
+          <span className="text-gray-500 dark:text-gray-300">
+            Already have an account?
+          </span>
+
+          <button
+            onClick={() => navigate("/login")}
+            className="
+            ml-2
+            font-bold
+            text-purple-600
+            hover:text-purple-700
+            hover:underline
+            transition
+            "
+          >
+            Login
+          </button>
+
+        </div>
+      </motion.div>
+    </div>
+  );
+}
