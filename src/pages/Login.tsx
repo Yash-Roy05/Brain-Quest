@@ -2,6 +2,8 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Eye, EyeOff } from "lucide-react";
 import { motion } from "framer-motion";
+import axios from "axios";
+import toast from "react-hot-toast";
 
 import logo from "../assets/owl.png";
 
@@ -12,6 +14,46 @@ export default function Login() {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  const [loading, setLoading] = useState(false);
+  const [errors, setErrors] = useState<Record<string, string[]>>({});
+
+  const handleLogin = async () => {
+    setErrors({});
+    setLoading(true);
+
+    try {
+      const response = await axios.post(
+        "https://kids-api.test/api/auth/login",
+        {
+          email: email.trim(),
+          password,
+        },
+      );
+
+      console.log(response.data);
+
+      // Save token
+      localStorage.setItem("token", response.data.data.token);
+
+      // Save user
+      localStorage.setItem("user", JSON.stringify(response.data.data.user));
+
+      toast.success("Login Successful!");
+
+      setTimeout(() => {
+        navigate("/dashboard");
+      }, 1000);
+    } catch (error: any) {
+      if (error.response?.data?.errors) {
+        setErrors(error.response.data.errors);
+      } else {
+        alert(error.response?.data?.message || "Login Failed");
+      }
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-sky-300 via-blue-300 to-purple-300 dark:from-gray-900 dark:via-gray-900 dark:to-black px-4 sm:px-6 md:px-8 py-6 md:py-10">
@@ -48,6 +90,9 @@ export default function Login() {
           onChange={(e) => setEmail(e.target.value)}
           className="w-full mt-2 mb-5 p-3 sm:p-4 rounded-2xl border-2 border-gray-200 focus:border-purple-500 outline-none text-sm sm:text-base dark:bg-gray-700 dark:text-white"
         />
+        {errors.email && (
+          <p className="text-red-500 text-sm mt-1">{errors.email[0]}</p>
+        )}
 
         {/* Password */}
 
@@ -63,6 +108,9 @@ export default function Login() {
             onChange={(e) => setPassword(e.target.value)}
             className="w-full p-4 rounded-2xl border-2 border-gray-200 focus:border-purple-500 outline-none pr-12 dark:bg-gray-700 dark:text-white"
           />
+          {errors.password && (
+            <p className="text-red-500 text-sm mt-1">{errors.password[0]}</p>
+          )}
 
           <button
             type="button"
@@ -87,11 +135,28 @@ export default function Login() {
         {/* Login */}
 
         <motion.button
+          disabled={loading}
           whileHover={{ scale: 1.03 }}
           whileTap={{ scale: 0.97 }}
-          className="w-full mt-8 bg-gradient-to-r from-blue-500 to-purple-600 text-white py-3 sm:py-4 rounded-2xl font-black text-base sm:text-lg shadow-xl hover:shadow-2xl transition"
+          onClick={handleLogin}
+          className={`
+    w-full
+    mt-8
+    py-4
+    rounded-2xl
+    font-black
+    text-lg
+    shadow-xl
+    transition
+    ${
+      loading
+        ? "bg-gray-400 cursor-not-allowed"
+        : "bg-gradient-to-r from-blue-500 to-purple-600 hover:scale-105"
+    }
+    text-white
+  `}
         >
-          LOGIN
+          {loading ? "Logging in..." : "LOGIN"}
         </motion.button>
 
         <div className="flex items-center my-6 sm:my-7">
@@ -99,7 +164,7 @@ export default function Login() {
 
           <span className="mx-3 text-gray-500">OR</span>
 
-          <div className="flex-1 h-px bg-gray-300"/>
+          <div className="flex-1 h-px bg-gray-300" />
         </div>
 
         <div className="text-center mt-6 text-sm sm:text-base">

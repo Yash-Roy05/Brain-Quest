@@ -2,6 +2,8 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Eye, EyeOff } from "lucide-react";
 import { motion } from "framer-motion";
+import axios from "axios";
+import toast from "react-hot-toast";
 
 import logo from "../assets/owl.png";
 
@@ -14,6 +16,49 @@ export default function Register() {
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [confirmPasswordError, setConfirmPasswordError] = useState("");
+
+  const [loading, setLoading] = useState(false);
+  const [errors, setErrors] = useState<Record<string, string[]>>({});
+
+  const handleRegister = async () => {
+    if (password !== confirmPassword) {
+      setConfirmPasswordError("Passwords do not match");
+      return;
+    }
+
+    setConfirmPasswordError("");
+    setErrors({});
+    setLoading(true);
+
+    try {
+      const response = await axios.post(
+         "https://kids-api.test/api/auth/register",
+        {
+          first_name: firstName.trim(),
+          last_name: lastName.trim(),
+          email: email.trim(),
+          password,
+          password_confirmation: confirmPassword,
+        },
+      );
+
+      console.log(response.data);
+
+      toast.success("Account Created Successfully!");
+
+      navigate("/login");
+    } catch (error: any) {
+      if (error.response?.data?.errors) {
+        setErrors(error.response.data.errors);
+      } else {
+        toast.error("Something went wrong.");
+      }
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <div
@@ -51,11 +96,7 @@ export default function Register() {
       >
         {/* Logo */}
 
-        <img
-          src={logo}
-          alt="Brain Quest"
-          className="w-24 h-24 mx-auto mb-4"
-        />
+        <img src={logo} alt="Brain Quest" className="w-24 h-24 mx-auto mb-4" />
 
         <h1 className="text-4xl font-black text-center text-purple-700">
           Create Account
@@ -90,6 +131,9 @@ export default function Register() {
           dark:text-white
           "
         />
+        {errors.first_name && (
+          <p className="text-red-500 text-sm mt-1">{errors.first_name[0]}</p>
+        )}
 
         {/* Last Name */}
 
@@ -116,6 +160,9 @@ export default function Register() {
           dark:text-white
           "
         />
+        {errors.last_name && (
+          <p className="text-red-500 text-sm mt-1">{errors.last_name[0]}</p>
+        )}
 
         {/* Email */}
 
@@ -142,6 +189,9 @@ export default function Register() {
           dark:text-white
           "
         />
+        {errors.email && (
+          <p className="text-red-500 text-sm mt-1">{errors.email[0]}</p>
+        )}
 
         {/* Password */}
 
@@ -150,7 +200,6 @@ export default function Register() {
         </label>
 
         <div className="relative mt-2">
-
           <input
             type={showPassword ? "text" : "password"}
             placeholder="Create Password"
@@ -169,6 +218,9 @@ export default function Register() {
             dark:text-white
             "
           />
+          {errors.password && (
+            <p className="text-red-500 text-sm mt-1">{errors.password[0]}</p>
+          )}
 
           <button
             type="button"
@@ -181,55 +233,95 @@ export default function Register() {
             text-gray-500
             "
           >
-            {showPassword ? (
-              <EyeOff size={20} />
-            ) : (
-              <Eye size={20} />
-            )}
+            {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
           </button>
+        </div>
 
+        {/* Confirm Password */}
+
+        <label className="font-bold text-gray-700 dark:text-white mt-5 block">
+          Confirm Password
+        </label>
+
+        <div className="relative mt-2">
+          <input
+            type={showPassword ? "text" : "password"}
+            placeholder="Confirm Password"
+            value={confirmPassword}
+            onChange={(e) => setConfirmPassword(e.target.value)}
+            className="
+      w-full
+      p-4
+      rounded-2xl
+      border-2
+      border-gray-200
+      focus:border-purple-500
+      outline-none
+      pr-12
+      dark:bg-gray-700
+      dark:text-white
+    "
+          />
+
+          {confirmPasswordError && (
+            <p className="text-red-500 text-sm mt-2">{confirmPasswordError}</p>
+          )}
+
+          {errors.password_confirmation && (
+            <p className="text-red-500 text-sm mt-2">
+              {errors.password_confirmation[0]}
+            </p>
+          )}
+
+          <button
+            type="button"
+            onClick={() => setShowPassword(!showPassword)}
+            className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-500"
+          >
+            {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+          </button>
         </div>
 
         {/* Register */}
 
         <motion.button
+          disabled={loading}
           whileHover={{ scale: 1.03 }}
           whileTap={{ scale: 0.97 }}
-          className="
-          w-full
-          mt-8
-          bg-gradient-to-r
-          from-green-500
-          to-emerald-600
-          text-white
-          py-4
-          rounded-2xl
-          font-black
-          text-lg
-          shadow-xl
-          "
+          onClick={handleRegister}
+          className={`
+w-full
+mt-8
+py-4
+rounded-2xl
+font-black
+text-lg
+shadow-xl
+transition
+${
+  loading
+    ? "bg-gray-400 cursor-not-allowed"
+    : "bg-gradient-to-r from-green-500 to-emerald-600 hover:scale-105"
+}
+text-white
+`}
         >
-          CREATE ACCOUNT
+          {loading ? "Creating Account..." : "CREATE ACCOUNT"}
         </motion.button>
 
         {/* Divider */}
 
         <div className="flex items-center my-7">
-
           <div className="flex-1 h-px bg-gray-300"></div>
 
-          <span className="mx-3 text-gray-500">
-            OR
-          </span>
+          <span className="mx-3 text-gray-500">OR</span>
 
           <div className="flex-1 h-px bg-gray-300"></div>
-
         </div>
 
         {/* Login */}
 
         <div className="text-center text-sm">
-
           <span className="text-gray-500 dark:text-gray-300">
             Already have an account?
           </span>
@@ -247,7 +339,6 @@ export default function Register() {
           >
             Login
           </button>
-
         </div>
       </motion.div>
     </div>
