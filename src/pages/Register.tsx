@@ -34,7 +34,7 @@ export default function Register() {
 
     try {
       const response = await axios.post(
-         "https://kids-api.test/api/auth/register",
+        "https://kids-api.test/api/auth/register",
         {
           first_name: firstName.trim(),
           last_name: lastName.trim(),
@@ -46,9 +46,18 @@ export default function Register() {
 
       console.log(response.data);
 
-      toast.success("Account Created Successfully!");
+      const token = response.data.data.token;
+      const user = response.data.data.user;
 
-      navigate("/login");
+      // Save login session
+      localStorage.setItem("token", token);
+      localStorage.setItem("user", JSON.stringify(user));
+
+      toast.success(`Welcome ${user.first_name}!`);
+
+      setTimeout(() => {
+        navigate("/dashboard");
+      }, 1000);
     } catch (error: any) {
       if (error.response?.data?.errors) {
         setErrors(error.response.data.errors);
