@@ -56,13 +56,16 @@ export default function Register() {
       toast.success(`Welcome ${user.first_name}!`);
 
       setTimeout(() => {
-        navigate("/dashboard");
+        navigate("/create-profile");
       }, 1000);
     } catch (error: any) {
+      console.log(error.response);
+
       if (error.response?.data?.errors) {
         setErrors(error.response.data.errors);
       } else {
-        toast.error("Something went wrong.");
+        console.log(error.response?.data);
+        toast.error(error.response?.data?.message || "Something went wrong.");
       }
     } finally {
       setLoading(false);

@@ -4,6 +4,7 @@ import { useUser } from "../context/UserContext.tsx";
 import PageWrapper from "../components/PageWrapper.tsx";
 import { Eye, EyeOff } from "lucide-react";
 import axios from "axios";
+import toast from "react-hot-toast";
 
 import panda from "../assets/avatars/panda.png";
 import fox from "../assets/avatars/fox.png";
@@ -46,6 +47,7 @@ export default function Profile() {
 
   const [nameError, setNameError] = useState(false);
   const [ageError, setAgeError] = useState(false);
+  const [errors, setErrors] = useState<Record<string, string[]>>({});
 
   const handleStart = async () => {
     if (!name.trim()) {
@@ -77,45 +79,80 @@ export default function Profile() {
     }
 
     try {
-      const response = await axios.post("http://127.0.0.1:8000/api/children", {
+      const token = localStorage.getItem("token");
+
+      // Create FormData
+      const formData = new FormData();
+
+      formData.append("name", name);
+      formData.append("age", age.toString());
+      formData.append("gender", gender);
+      formData.append("parent_pin", parentPin);
+
+      // Convert selected avatar image to File
+      const selectedAvatar = avatars.find((a) => a.id === avatar);
+
+      if (selectedAvatar) {
+        const imageResponse = await fetch(selectedAvatar.image);
+        const blob = await imageResponse.blob();
+
+        formData.append("avatar", blob, `${avatar}.png`);
+      }
+
+      // API Call
+      const response = await axios.post(
+        "https://kids-api.test/api/children",
+        formData,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "multipart/form-data",
+          },
+        },
+      );
+
+      console.log(response.data);
+
+      toast.success("Profile Created Successfully!");
+
+      let ageGroup = "";
+
+      if (age >= 5 && age <= 10) {
+        ageGroup = "8-10";
+      } else if (age >= 11 && age <= 13) {
+        ageGroup = "11-13";
+      } else {
+        ageGroup = "14-15";
+      }
+
+      setUser({
         name,
         age,
+        ageGroup,
         gender,
         avatar,
+        coins: 0,
+        xp: 0,
+        level: 1,
+        completedMissions: [],
+        streak: 1,
+        lastLoginDate: new Date().toDateString(),
+        parentPin,
+        savedProfiles: {},
+        screenTimeToday: 0,
+        screenTimeTotal: 0,
       });
-    } catch (error) {
-      console.error(error);
+
+      navigate("/dashboard");
+    } catch (error: any) {
+      console.log(error.response);
+
+      if (error.response?.data?.errors) {
+        setErrors(error.response.data.errors);
+      } else {
+        toast.error(error.response?.data?.message || "Something went wrong.");
+      }
     }
-
-    let ageGroup = "";
-
-    if (age >= 5 && age <= 10) {
-      ageGroup = "8-10";
-    } else if (age >= 11 && age <= 13) {
-      ageGroup = "11-13";
-    } else {
-      ageGroup = "14-15";
-    }
-
-    setUser({
-      name,
-      age,
-      ageGroup,
-      gender,
-      avatar,
-      coins: 0,
-      xp: 0,
-      level: 1,
-      completedMissions: [],
-      streak: 1,
-      lastLoginDate: new Date().toDateString(),
-      parentPin,
-      savedProfiles: {},
-      screenTimeToday: 0,
-      screenTimeTotal: 0,
-    });
-
-    navigate("/dashboard");
   };
 
   return (

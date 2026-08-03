@@ -18,6 +18,8 @@ export default function Login() {
   const [loading, setLoading] = useState(false);
   const [errors, setErrors] = useState<Record<string, string[]>>({});
 
+  const [loginError, setLoginError] = useState("");
+
   const handleLogin = async () => {
     setErrors({});
     setLoading(true);
@@ -45,10 +47,18 @@ export default function Login() {
         navigate("/dashboard");
       }, 1000);
     } catch (error: any) {
+      console.log(error.response?.data);
+
       if (error.response?.data?.errors) {
         setErrors(error.response.data.errors);
+
+        setLoginError(
+          error.response.data.message || "Incorrect email or password.",
+        );
       } else {
-        alert(error.response?.data?.message || "Login Failed");
+        setLoginError(
+          error.response?.data?.message || "Login failed. Please try again.",
+        );
       }
     } finally {
       setLoading(false);
@@ -87,7 +97,10 @@ export default function Login() {
           type="email"
           placeholder="Enter Email"
           value={email}
-          onChange={(e) => setEmail(e.target.value)}
+          onChange={(e) => {
+            setEmail(e.target.value);
+            setLoginError("");
+          }}
           className="w-full mt-2 mb-5 p-3 sm:p-4 rounded-2xl border-2 border-gray-200 focus:border-purple-500 outline-none text-sm sm:text-base dark:bg-gray-700 dark:text-white"
         />
         {errors.email && (
@@ -105,7 +118,10 @@ export default function Login() {
             type={showPassword ? "text" : "password"}
             placeholder="Enter Password"
             value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            onChange={(e) => {
+              setPassword(e.target.value);
+              setLoginError("");
+            }}
             className="w-full p-4 rounded-2xl border-2 border-gray-200 focus:border-purple-500 outline-none pr-12 dark:bg-gray-700 dark:text-white"
           />
           {errors.password && (
@@ -120,6 +136,10 @@ export default function Login() {
             {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
           </button>
         </div>
+
+        {loginError && (
+          <p className="mt-2 text-sm text-red-500 font-medium">{loginError}</p>
+        )}
 
         {/* Forgot Password */}
 
