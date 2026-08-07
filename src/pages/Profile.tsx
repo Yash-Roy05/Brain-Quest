@@ -4,6 +4,7 @@ import PageWrapper from "../components/PageWrapper.tsx";
 import { useState, useEffect } from "react";
 import { useTheme } from "../context/ThemeContext.tsx";
 import type { SavedProfile } from "../context/UserContext";
+import axios from "axios";
 
 import panda from "../assets/avatars/panda.png";
 import fox from "../assets/avatars/fox.png";
@@ -38,6 +39,9 @@ export default function Profile() {
   const [newAvatar, setNewAvatar] = useState(user.avatar);
   const [newAge, setNewAge] = useState<number>(user.age);
 
+  const [newGender, setNewGender] = useState(user.gender);
+  const [newAgeError, setNewAgeError] = useState("");
+
   // dark/light mode
   const { darkMode, setDarkMode } = useTheme();
 
@@ -65,10 +69,18 @@ export default function Profile() {
 
   const avatars = ["panda", "fox", "lion", "frog", "monkey", "tiger"];
 
-  const handleSaveProfile = () => {
+  const handleSaveProfile = async () => {
     setIsSaving(true);
+    const token = localStorage.getItem("token");
 
-    setTimeout(() => {
+    const formData = new FormData();
+
+    formData.append("name", newName);
+    formData.append("age", newAge.toString());
+    formData.append("gender", newGender);
+
+    formData.append("_method", "PUT");
+    setTimeout(async () => {
       setUser((prev) => {
         const updatedProfiles: Record<string, SavedProfile> = {
           ...prev.savedProfiles,
@@ -100,6 +112,7 @@ export default function Profile() {
           avatar: newAvatar,
           age: newAge,
           ageGroup: newAgeGroup,
+          gender: newGender,
 
           coins: newAgeProfile?.coins ?? 0,
           xp: newAgeProfile?.xp ?? 0,
@@ -261,6 +274,7 @@ export default function Profile() {
                   setNewName(user.name);
                   setNewAge(user.age);
                   setNewAvatar(user.avatar);
+                  setNewGender(user.gender);
 
                   setShowEditProfile(true);
                   setShowSettings(false);
@@ -338,18 +352,41 @@ export default function Profile() {
                 className="w-full border-2 border-gray-200 rounded-2xl p-3 mb-6 dark:text-whit dark:bg-gray-800 dark:text-white"
               />
 
-              <select
+              <input
+                type="number"
+                min={5}
+                max={18}
+                placeholder="Enter Age (5-18)"
                 value={newAge}
-                onChange={(e) => setNewAge(Number(e.target.value))}
+                onChange={(e) => {
+                  const value = Number(e.target.value);
+
+                  setNewAge(value);
+
+                  if (value < 5 || value > 18) {
+                    setNewAgeError("Age must be between 5 and 18");
+                  } else {
+                    setNewAgeError("");
+                  }
+                }}
+                className={`w-full border-2 rounded-2xl p-3 mb-2 dark:bg-gray-800 dark:text-white ${
+                  newAgeError ? "border-red-500" : "border-gray-200"
+                }`}
+              />
+
+              {newAgeError && (
+                <p className="text-red-500 text-sm text-left mb-4">
+                  {newAgeError}
+                </p>
+              )}
+
+              <select
+                value={newGender}
+                onChange={(e) => setNewGender(e.target.value)}
                 className="w-full border-2 border-gray-200 rounded-2xl p-3 mb-6 dark:bg-gray-800 dark:text-white"
               >
-                {[5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18].map(
-                  (age) => (
-                    <option key={age} value={age}>
-                      {age}
-                    </option>
-                  ),
-                )}
+                <option value="male">Male</option>
+                <option value="female">Female</option>
               </select>
 
               <div className="flex justify-center gap-3 flex-wrap mb-6">

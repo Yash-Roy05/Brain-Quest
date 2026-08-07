@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useUser } from "../context/UserContext.tsx";
+import { useTheme } from "../context/ThemeContext.tsx";
 import PageWrapper from "../components/PageWrapper.tsx";
 import Confetti from "react-confetti";
 
@@ -26,6 +27,8 @@ export default function WordPuzzleGame() {
 
   // 🎯 Selected Word
   const [selected, setSelected] = useState("");
+
+  const { darkMode } = useTheme();
 
   // ✨ Selected Cells
   const [selectedCells, setSelectedCells] = useState<
@@ -357,7 +360,7 @@ export default function WordPuzzleGame() {
           <div className="bg-white rounded-[30px] md:rounded-[40px] p-6 md:p-10 text-center shadow-2xl w-full max-w-[90%] md:max-w-md animate-[popup_0.4s_ease] dark:bg-gray-700">
             <div className="text-5xl md:text-7xl mb-4">😢</div>
 
-            <h1 className="text-3xl md:text-5xl font-black text-red-600 mb-4 dark:text-white">
+            <h1 className="text-3xl md:text-5xl font-black text-purple-700 dark:text-white mb-1 md:mb-3">
               GAME OVER
             </h1>
 
@@ -422,10 +425,12 @@ export default function WordPuzzleGame() {
       <PageWrapper>
         {score >= 70 && <Confetti />}
 
-        <div className="min-h-screen pb-6 md:pb-8 overflow-x-hidden bg-gradient-to-b from-pink-300 via-purple-300 to-blue-300 flex items-center justify-center p-3 md:p-6">
-          <div className="bg-white rounded-[25px] md:rounded-[40px] shadow-2xl p-4 md:p-10 w-full max-w-4xl text-center mb-0 md:mb-0">
+        <div className="min-h-screen pb-6 md:pb-8 overflow-x-hidden bg-gradient-to-b from-pink-300 via-purple-300 to-blue-300 flex items-center justify-center p-3 md:p-6 dark:from-gray-900 dark:via-gray-900 dark:to-black">
+          <div className="bg-white dark:bg-gray-700 rounded-[25px] md:rounded-[40px] shadow-2xl p-4 md:p-10 w-full max-w-4xl text-center mb-0 md:mb-0">
             {/* Title */}
-            <h1 className="text-3xl md:text-5xl font-black text-purple-700 mb-1 md:mb-3 dark:text-white">
+            <h1
+  className="text-3xl md:text-5xl font-black mb-1 md:mb-3 text-purple-700 dark:text-white"
+>
               Word Search 
             </h1>
 
@@ -448,7 +453,9 @@ export default function WordPuzzleGame() {
             </div>
 
             {/* Target */}
-            <h2 className="text-xl md:text-3xl font-black mb-6 md:mb-8 text-blue-700 break-words mb-1 dark:text-white">
+           <h2
+  className="text-xl md:text-3xl font-black break-words mb-6 md:mb-8 text-blue-700 dark:text-white"
+>
               Find: {targetWord}
             </h2>
 

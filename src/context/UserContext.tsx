@@ -8,14 +8,19 @@ export type SavedProfile = {
 };
 
 type User = {
+  id: number;
+
   name: string;
   age: number;
   ageGroup: string;
   gender: string;
+
   coins: number;
   xp: number;
   level: number;
+
   completedMissions: number[];
+
   avatar: string;
 
   streak: number;
@@ -46,10 +51,12 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
   // ✅ Load saved user from localStorage
   const [user, setUser] = useState<User>(() => {
     const savedUser = localStorage.getItem("brainquest-user");
+    console.log(savedUser);
 
     return savedUser
       ? JSON.parse(savedUser)
       : {
+          id: 0,
           name: "",
           age: 0,
           ageGroup: "",
@@ -59,14 +66,10 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
           level: 1,
           completedMissions: [],
           avatar: "🐼",
-
           streak: 0,
           lastLoginDate: "",
-
           parentPin: "",
-
           savedProfiles: {},
-
           screenTimeToday: 0,
           screenTimeTotal: 0,
         };

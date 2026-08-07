@@ -113,6 +113,10 @@ export default function Profile() {
 
       console.log(response.data);
 
+      console.log("Full Response:", response.data);
+      console.log("Child Data:", response.data.data);
+      console.log("Child ID:", response.data.data.id);
+
       toast.success("Profile Created Successfully!");
 
       let ageGroup = "";
@@ -126,18 +130,24 @@ export default function Profile() {
       }
 
       setUser({
+        id: response.data.data.id,
+
         name,
         age,
         ageGroup,
         gender,
         avatar,
+
         coins: 0,
         xp: 0,
         level: 1,
+
         completedMissions: [],
         streak: 1,
         lastLoginDate: new Date().toDateString(),
+
         parentPin,
+
         savedProfiles: {},
         screenTimeToday: 0,
         screenTimeTotal: 0,
