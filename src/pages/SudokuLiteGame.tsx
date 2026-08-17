@@ -110,21 +110,21 @@ export default function SudokuLiteGame() {
     );
 
     if (solved && !won) {
-  addCoins(80);
-  addXP(40);
+      addCoins(80);
+      addXP(40);
 
-  setUser((prev) => ({
-    ...prev,
-    completedMissions: [
-      ...prev.completedMissions,
-      302, // use your actual Sudoku mission id
-    ],
-  }));
+      setUser((prev) => ({
+        ...prev,
+        completedMissions: [
+          ...prev.completedMissions,
+          302, // use your actual Sudoku mission id
+        ],
+      }));
 
-  setTimeout(() => {
-    setWon(true);
-  }, 100);
-}
+      setTimeout(() => {
+        setWon(true);
+      }, 100);
+    }
   };
 
   return (

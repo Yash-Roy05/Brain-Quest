@@ -9,6 +9,12 @@ export default function PlantDashboard() {
   const level2Completed =
     localStorage.getItem("plantLevel2Completed") === "true";
 
+  const level3Completed =
+    localStorage.getItem("plantLevel3Completed") === "true";
+
+  const level4Completed =
+    localStorage.getItem("plantLevel4Completed") === "true";
+
   const levels = [
     {
       id: 1,
@@ -28,12 +34,12 @@ export default function PlantDashboard() {
     {
       id: 4,
       title: "Parts of Flower",
-      unlocked: level2Completed,
+      unlocked: level3Completed,
     },
     {
       id: 5,
       title: "Fruits & Vegetables",
-      unlocked: false,
+      unlocked: level4Completed,
     },
     {
       id: 6,

@@ -307,9 +307,9 @@ text-lg md:text-xl
 
           <button
             onClick={() => {
-              localStorage.setItem("flowerQuizCompleted", "true");
-              navigate("/plants");
-            }}
+  localStorage.setItem("plantLevel4Completed", "true");
+  navigate("/plants");
+}}
             className="
 mt-8
 w-full
