@@ -39,9 +39,12 @@ import FlowerQuiz from "./pages/Plants/level4/FlowerQuiz.tsx";
 import Auth from "./pages/Auth.tsx";
 import Login from "./pages/Login.tsx";
 import Register from "./pages/Register.tsx";
-  
+
 import FruitVegetableLesson from "./pages/Plants/level5/FruitVegetableLesson.tsx";
 import FruitVegetableQuiz from "./pages/Plants/level5/FruitVegetableQuiz.tsx";
+
+import WherePlantsGrowLesson from "./pages/Plants/level6/WherePlantsGrowLesson.tsx";
+import WherePlantsGrowQuiz from "./pages/Plants/level6/WherePlantsGrowQuiz.tsx";
 
 function App() {
   return (
@@ -91,6 +94,10 @@ function App() {
 
           <Route path="/plants/level5" element={<FruitVegetableLesson />} />
           <Route path="/plants/level5/quiz" element={<FruitVegetableQuiz />} />
+
+          <Route path="/plants/level6" element={<WherePlantsGrowLesson />} />
+          <Route path="/plants/level6/quiz" element={<WherePlantsGrowQuiz />} />
+
 
         </Route>
       </Routes>

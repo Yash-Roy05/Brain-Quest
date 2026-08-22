@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useUser } from "../../../context/UserContext.tsx";
@@ -11,33 +10,38 @@ type Question = {
 
 const questions: Question[] = [
   {
-    question: "Which one is a fruit?",
-    options: ["Carrot", "Apple", "Spinach", "Potato"],
-    answer: "Apple",
+    question: "Where do many trees and ferns grow?",
+    options: ["Desert", "Forest", "Ocean", "Ice"],
+    answer: "Forest",
   },
   {
-    question: "Which one is a vegetable?",
-    options: ["Apple", "Banana", "Carrot", "Mango"],
-    answer: "Carrot",
+    question: "Which plant is commonly adapted to the desert?",
+    options: ["Cactus", "Water Lily", "Fern", "Rice"],
+    answer: "Cactus",
   },
   {
-    question: "Which one is botanically a fruit?",
-    options: ["Spinach", "Tomato", "Carrot", "Potato"],
-    answer: "Tomato",
+    question: "Where do farmers grow crops?",
+    options: ["Ocean", "Farm", "Iceberg", "Road"],
+    answer: "Farm",
   },
   {
-    question: "Which one is a leafy green vegetable?",
-    options: ["Apple", "Spinach", "Orange", "Mango"],
-    answer: "Spinach",
+    question: "Where can water lilies grow?",
+    options: ["Desert", "Pond", "Dry Road", "Mountain"],
+    answer: "Pond",
   },
   {
-    question: "Which food is commonly known as a fruit?",
-    options: ["Carrot", "Spinach", "Apple", "Potato"],
-    answer: "Apple",
+    question: "Why do different plants grow in different places?",
+    options: [
+      "Plants need suitable conditions",
+      "Plants need no water",
+      "Every place is the same",
+      "Plants cannot grow outside",
+    ],
+    answer: "Plants need suitable conditions",
   },
 ];
 
-export default function FruitVegetableQuiz() {
+export default function WherePlantsGrowQuiz() {
   const navigate = useNavigate();
 
   const { addCoins, addXP, setUser } = useUser();
@@ -50,6 +54,9 @@ export default function FruitVegetableQuiz() {
 
   const question = questions[currentQuestion];
 
+  // --------------------------------
+  // Select answer
+  // --------------------------------
   const handleAnswer = (answer: string) => {
     if (isAnswered) {
       return;
@@ -57,23 +64,32 @@ export default function FruitVegetableQuiz() {
 
     setSelectedAnswer(answer);
     setIsAnswered(true);
-
-    if (answer === question.answer) {
-      setScore((prev) => prev + 1);
-    }
   };
 
+  // --------------------------------
+  // Next question / Finish quiz
+  // --------------------------------
   const handleNext = () => {
     if (!selectedAnswer || !isAnswered) {
       return;
     }
 
-    // Last question
-    if (currentQuestion === questions.length - 1) {
-      const finalScore = score;
+    const isCorrect = selectedAnswer === question.answer;
 
-      const coins = finalScore === questions.length ? 100 : 50;
-      const xp = finalScore === questions.length ? 50 : 25;
+    // Calculate score including current question
+    const newScore = isCorrect ? score + 1 : score;
+
+    setScore(newScore);
+
+    // --------------------------------
+    // Last question
+    // --------------------------------
+    if (currentQuestion === questions.length - 1) {
+      const coins =
+        newScore === questions.length ? 100 : 50;
+
+      const xp =
+        newScore === questions.length ? 50 : 25;
 
       addCoins(coins);
       addXP(xp);
@@ -82,13 +98,13 @@ export default function FruitVegetableQuiz() {
         ...prev,
         completedMissions: [
           ...prev.completedMissions,
-          205,
+          206,
         ],
       }));
 
       localStorage.setItem(
-        "plantLevel5Completed",
-        "true",
+        "plantLevel6Completed",
+        "true"
       );
 
       setShowResult(true);
@@ -96,12 +112,17 @@ export default function FruitVegetableQuiz() {
       return;
     }
 
+    // --------------------------------
     // Move to next question
+    // --------------------------------
     setCurrentQuestion((prev) => prev + 1);
     setSelectedAnswer("");
     setIsAnswered(false);
   };
 
+  // --------------------------------
+  // Result screen
+  // --------------------------------
   if (showResult) {
     return (
       <div
@@ -141,13 +162,14 @@ export default function FruitVegetableQuiz() {
               sm:text-6xl
               md:text-7xl
               mb-4
-              sm:mb-5
             "
           >
-            {score === questions.length ? "🏆" : "🌱"}
+            {score === questions.length
+              ? "🏆"
+              : "🌱"}
           </div>
 
-          {/* Result Heading */}
+          {/* Result Title */}
           <h1
             className="
               text-3xl
@@ -172,7 +194,6 @@ export default function FruitVegetableQuiz() {
               font-bold
               text-gray-700
               mb-2
-              sm:mb-3
             "
           >
             Your Score
@@ -206,7 +227,8 @@ export default function FruitVegetableQuiz() {
               sm:mb-8
             "
           >
-            Great job learning about fruits and vegetables!
+            Great job learning where plants grow!
+            🌱🌳🏜️
           </p>
 
           {/* Back Button */}
@@ -239,6 +261,9 @@ export default function FruitVegetableQuiz() {
     );
   }
 
+  // --------------------------------
+  // Quiz screen
+  // --------------------------------
   return (
     <div
       className="
@@ -286,7 +311,7 @@ export default function FruitVegetableQuiz() {
               leading-tight
             "
           >
-            Fruits & Vegetables
+            Where Plants Grow 
           </h1>
 
           <p
@@ -303,7 +328,21 @@ export default function FruitVegetableQuiz() {
             {questions.length}
           </p>
 
-          {/* Progress */}
+          {/* Score */}
+          <p
+            className="
+              mt-2
+              text-sm
+              sm:text-base
+              md:text-lg
+              font-bold
+              text-white
+            "
+          >
+            Score: {score}
+          </p>
+
+          {/* Progress Bar */}
           <div
             className="
               mt-3
@@ -394,32 +433,40 @@ export default function FruitVegetableQuiz() {
               return (
                 <button
                   key={option}
-                  onClick={() =>
-                    handleAnswer(option)
-                  }
+                  onClick={() => handleAnswer(option)}
                   disabled={isAnswered}
                   className={`
                     w-full
                     min-h-[64px]
                     sm:min-h-[72px]
                     md:min-h-[80px]
+
                     px-4
                     sm:px-5
+
                     py-3
                     sm:py-4
+
                     rounded-xl
                     sm:rounded-2xl
+
                     font-black
+
                     text-base
                     sm:text-lg
                     md:text-xl
+
                     transition-all
                     duration-300
+
                     shadow-lg
+
                     flex
                     items-center
                     justify-center
+
                     text-center
+
                     break-words
 
                     ${
@@ -441,16 +488,28 @@ export default function FruitVegetableQuiz() {
                 >
                   <span>{option}</span>
 
-                  {/* Correct indicator */}
+                  {/* Correct */}
                   {isAnswered && isCorrect && (
-                    <span className="ml-2 text-xl sm:text-2xl">
+                    <span
+                      className="
+                        ml-2
+                        text-xl
+                        sm:text-2xl
+                      "
+                    >
                       ✅
                     </span>
                   )}
 
-                  {/* Wrong indicator */}
+                  {/* Wrong */}
                   {isWrong && (
-                    <span className="ml-2 text-xl sm:text-2xl">
+                    <span
+                      className="
+                        ml-2
+                        text-xl
+                        sm:text-2xl
+                      "
+                    >
                       ❌
                     </span>
                   )}
@@ -459,23 +518,29 @@ export default function FruitVegetableQuiz() {
             })}
           </div>
 
-          {/* Explanation */}
+          {/* Feedback */}
           {isAnswered && (
             <div
               className={`
                 mt-4
                 sm:mt-5
                 md:mt-6
+
                 p-3
                 sm:p-4
                 md:p-5
+
                 rounded-xl
                 sm:rounded-2xl
+
                 text-center
+
                 font-bold
+
                 text-sm
                 sm:text-base
                 md:text-lg
+
                 leading-6
                 sm:leading-7
 
@@ -487,7 +552,7 @@ export default function FruitVegetableQuiz() {
               `}
             >
               {selectedAnswer === question.answer
-                ? "Correct! Great job!"
+                ? "🎉 Correct! Great job!"
                 : `❌ Wrong! The correct answer is ${question.answer}.`}
             </div>
           )}
@@ -508,18 +573,25 @@ export default function FruitVegetableQuiz() {
               className={`
                 w-full
                 sm:w-auto
+
                 min-w-0
                 sm:min-w-[180px]
+
                 px-6
                 sm:px-8
+
                 py-3
                 sm:py-4
+
                 rounded-xl
                 sm:rounded-2xl
+
                 text-base
                 sm:text-lg
                 md:text-xl
+
                 font-black
+
                 transition-all
                 duration-300
 
@@ -530,10 +602,9 @@ export default function FruitVegetableQuiz() {
                 }
               `}
             >
-              {currentQuestion ===
-              questions.length - 1
+              {currentQuestion === questions.length - 1
                 ? "Finish Quiz 🏆"
-                : "Next "}
+                : "Next ➡️"}
             </button>
           </div>
         </div>

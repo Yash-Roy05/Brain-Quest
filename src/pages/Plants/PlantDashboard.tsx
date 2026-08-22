@@ -15,6 +15,9 @@ export default function PlantDashboard() {
   const level4Completed =
     localStorage.getItem("plantLevel4Completed") === "true";
 
+  const level5Completed =
+    localStorage.getItem("plantLevel5Completed") === "true";
+
   const levels = [
     {
       id: 1,
@@ -44,7 +47,7 @@ export default function PlantDashboard() {
     {
       id: 6,
       title: "Where Plants Grow",
-      unlocked: false,
+      unlocked: level5Completed,
     },
     {
       id: 7,
